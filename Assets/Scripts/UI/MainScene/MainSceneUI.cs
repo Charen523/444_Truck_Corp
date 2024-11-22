@@ -7,7 +7,7 @@ public class MainSceneUI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        goldText.text = DataManager.Instance.MainData.Gold.ToString();
+        //goldText.text = DataManager.Instance.MainData.Gold.ToString();
     }
 
     public void OnClickPlannerButton()
