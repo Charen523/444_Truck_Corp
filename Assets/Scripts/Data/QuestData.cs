@@ -3,7 +3,6 @@ using System;
 [Serializable]
 public class QuestData
 {
-    public string id;
     public int difficulty;
     public string description;
     public string target;

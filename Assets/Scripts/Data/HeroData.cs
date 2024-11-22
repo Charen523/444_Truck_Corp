@@ -25,6 +25,7 @@ public class Status
 [Serializable]
 public class HeroData
 {
+    private static int characterCount = 0;
     private readonly List<string> names = new()
     {
             "에이다", "아델", "아가사", "아이다", "앨리쉬", "에이미", "알렉산드라", "앨리스", "앨리카", "앨리",
@@ -45,7 +46,8 @@ public class HeroData
             "사샤", "쉐리", "실키", "소니아", "소피", "스텔라", "써니", "슈가", "실비아", "트리샤",
             "트루디아", "바네사", "벨리카", "베라", "베로니카", "빅토리아", "바이올렛", "제키", "제나", "지나"
         };
-    
+
+    public int id;
     public string name;
     public bool spriteType;
     public ClassData classData;
@@ -55,6 +57,7 @@ public class HeroData
 
     public HeroData()
     {
+        id = characterCount++;
         name = names[UnityEngine.Random.Range(0, 170)];
         classData = (ClassData)DataManager.GetData("ClassData", UnityEngine.Random.Range(0, 8));
         status = new(classData.baseStr, classData.baseDex, classData.baseInt, classData.baseCon, classData.baseLuk);
