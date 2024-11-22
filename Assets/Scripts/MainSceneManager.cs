@@ -5,7 +5,7 @@ public class MainSceneManager : Singleton<MainSceneManager>
 {
     [SerializeField] private TileMapData wallTileMap;
     [SerializeField] private TileMapData locationTileMap;
-    [SerializeField] private TileMapData heroTileMap;
+    [SerializeField] private Transform heroParent;
     [SerializeField] private GameObject entryPointObject;
 
     private float time;
@@ -59,9 +59,8 @@ public class MainSceneManager : Singleton<MainSceneManager>
         var location = GetEmptyLocation();
         if (location.x == 0 && location.y == 0) return;
 
-        var hero = PoolManager.Instance.Get<SampleHeroPresenter>("Prefabs/SampleHero", heroTileMap.transform, entryPointObject.transform.localPosition);
+        var hero = PoolManager.Instance.Get<SampleHeroPresenter>("Prefabs/SampleHero", heroParent, entryPointObject.transform.localPosition);
         Debug.Log($"이동할 위치는 {location.x}, {location.y}");
-        Vector2 position = entryPoint;
         var route = astar.GetRouteMovementValue(entryPoint, location);
         string routeString = "";
         for (int index = 0; index < route.Count; index++)

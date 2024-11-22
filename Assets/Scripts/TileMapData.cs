@@ -12,7 +12,7 @@ public class TileMapData : MonoBehaviour
 
     private void Awake()
     {
-        Tiles = GetTileArray(new Vector3Int(0, 0), new Vector3Int(width, height));
+        Tiles = GetTileArray(new Vector3Int(0, 0));
         ShowTiles(Tiles);
     }
 
@@ -32,7 +32,7 @@ public class TileMapData : MonoBehaviour
         Debug.Log(tileString);
     }
 
-    public bool[,] GetTileArray(Vector3Int start, Vector3Int end)
+    public bool[,] GetTileArray(Vector3Int start)
     {
         bool[,] tilePresenceArray = new bool[width, height];
 
