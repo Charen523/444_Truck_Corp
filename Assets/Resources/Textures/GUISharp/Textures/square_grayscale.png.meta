@@ -1,28 +1,14 @@
 fileFormatVersion: 2
-guid: 2cb0e24a3f262de43a5cde5019e92371
+guid: 4037f1d5675a198458a8fa101437438b
+AssetOrigin:
+  serializedVersion: 1
+  productId: 195933
+  packageName: SharpUI GUI
+  packageVersion: 1.0
+  assetPath: Assets/SharpUI/Textures/square_grayscale.png
+  uploadId: 452711
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -2701272435505640833
-    second: "\uD45C\uC900\uC804\uC2E0_0"
-  - first:
-      213: 1409221596228248040
-    second: "\uD45C\uC900\uC804\uC2E0_1"
-  - first:
-      213: -6757236643851117676
-    second: "\uD45C\uC900\uC804\uC2E0_2"
-  - first:
-      213: 35218198921948858
-    second: "\uD45C\uC900\uC804\uC2E0_3"
-  - first:
-      213: 1536894475739009350
-    second: "\uD45C\uC900\uC804\uC2E0_4"
-  - first:
-      213: -4998945844780535984
-    second: "\uD45C\uC900\uC804\uC2E0_5"
-  - first:
-      213: 2826227470259818968
-    second: "\uD45C\uC900\uC804\uC2E0_6"
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,16 +41,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -84,16 +70,16 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,7 +92,33 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,7 +131,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -132,7 +144,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -142,29 +154,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: "\uD45C\uC900\uC804\uC2E0_4"
-      rect:
-        serializedVersion: 2
-        x: 504
-        y: 557
-        width: 886
-        height: 2468
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6411fa30265245510800000000000000
-      internalID: 1536894475739009350
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     customData: 
     physicsShape: []
@@ -178,15 +168,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      "\uD45C\uC900\uC804\uC2E0_0": -2701272435505640833
-      "\uD45C\uC900\uC804\uC2E0_1": 1409221596228248040
-      "\uD45C\uC900\uC804\uC2E0_2": -6757236643851117676
-      "\uD45C\uC900\uC804\uC2E0_3": 35218198921948858
-      "\uD45C\uC900\uC804\uC2E0_4": 1536894475739009350
-      "\uD45C\uC900\uC804\uC2E0_5": -4998945844780535984
-      "\uD45C\uC900\uC804\uC2E0_6": 2826227470259818968
-      "\uD45C\uC900\uC804\uC2E0_7": 206781126
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
