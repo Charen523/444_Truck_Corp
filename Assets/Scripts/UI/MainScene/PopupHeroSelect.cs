@@ -12,7 +12,7 @@ public class PopupHeroSelect : MonoBehaviour
     [SerializeField] private GameObject ListPrefab;
     public Button heroSelectBtn;
 
-    private List<HeroSelectSlot> HeroSlots = new(); //영웅 슬롯 캐싱.
+    private List<SlotHeroListBtn> HeroSlots = new(); //영웅 슬롯 캐싱.
     public int selectedHeroIdx; //초기값 : 0
     private bool isToggleOn;
 
@@ -25,7 +25,7 @@ public class PopupHeroSelect : MonoBehaviour
         {
             if (i >= HeroSlots.Count)
             {//신규 slot
-                HeroSelectSlot newSlot = Instantiate(ListPrefab, ListParent).GetComponent<HeroSelectSlot>();
+                SlotHeroListBtn newSlot = Instantiate(ListPrefab, ListParent).GetComponent<SlotHeroListBtn>();
                 HeroSlots.Add(newSlot);
                 newSlot.InitHeroSlot(i, this, HeroManager.Instance.GetHero(i));
             }

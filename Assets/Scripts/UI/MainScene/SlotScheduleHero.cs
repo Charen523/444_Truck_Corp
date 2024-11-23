@@ -2,13 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScheduleHeroSlot : MonoBehaviour
+public class SlotScheduleHero : MonoBehaviour
 {
     [SerializeField] private GameObject nullBtn;
     [SerializeField] private GameObject info;
 
     [SerializeField] private Image img;
-    [SerializeField] private TextMeshProUGUI className;
     [SerializeField] private TextMeshProUGUI heroName;
     [SerializeField] private TextMeshProUGUI strTxt;
     [SerializeField] private TextMeshProUGUI dexTxt;
@@ -28,12 +27,11 @@ public class ScheduleHeroSlot : MonoBehaviour
         info.SetActive(true);
 
         img.sprite = DataManager.Instance.GetSprites(true, hero.spriteIdx);
-        className.text = hero.classData.className;
         heroName.text = hero.name;
-        strTxt.text = $"STR : {hero.status.STR}";
-        dexTxt.text = $"DEX : {hero.status.DEX}";
-        intTxt.text = $"INT : {hero.status.INT}";
-        conTxt.text = $"CON : {hero.status.CON}";
-        lukTxt.text = $"LUK : {hero.status.LUK}";
+        strTxt.text = $"<size=14>STR</size> {hero.status.STR}";
+        dexTxt.text = $"<size=14>DEX</size> {hero.status.DEX}";
+        intTxt.text = $"<size=14>INT</size> {hero.status.INT}";
+        conTxt.text = $"<size=14>CON</size> {hero.status.CON}";
+        lukTxt.text = $"<size=14>LUK</size> {hero.status.LUK}";
     }
 }

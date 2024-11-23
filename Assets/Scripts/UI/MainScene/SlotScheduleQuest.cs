@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
-public class ScheduledQuestSlot : MonoBehaviour
+public class SlotScheduleQuest : MonoBehaviour
 {
     [SerializeField] private GameObject nullBtn;
     [SerializeField] private GameObject info;
@@ -18,9 +18,10 @@ public class ScheduledQuestSlot : MonoBehaviour
     private int successRate;
 
     public void InitSlot()
-    {//초기화 (UISChedule OnEnable)
+    {//초기화 (NavSChedule OnEnable)
         nullBtn.SetActive(false); //빈 퀘스트 선택 버튼.
         info.SetActive(false); //내용UI + 퀘스트 선택 버튼.
+
         for (int i = 0; i < selectedHero.Length; i++)
         {//데이터 초기화.
             selectedHero[i] = null;

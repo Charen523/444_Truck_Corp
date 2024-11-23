@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeroSelectSlot : MonoBehaviour
+public class SlotHeroListBtn : MonoBehaviour
 {
     public PopupHeroSelect popupClassSelect;
     public int listIdx;
