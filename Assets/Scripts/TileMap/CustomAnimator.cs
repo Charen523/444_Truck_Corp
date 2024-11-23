@@ -31,7 +31,9 @@ public class CustomAnimator
         this.isLooping = isLooping; 
         this.onEndAnimation = onEndAnimation;
         frameDuration = 1.0f / framePerSecond;
+        direction = 0;
         sprites = Resources.LoadAll<Sprite>(path);
+        if (sprites == null) return;
         maxFrame = isDirectional ? (sprites.Length >> 2) : sprites.Length;
     }
 
@@ -51,6 +53,8 @@ public class CustomAnimator
 
     public Sprite GetSprite(float deltaTime)
     {
+        if (sprites == null) return null;
+
         currentDuration += deltaTime;
         int addFrame = (int)(currentDuration * framePerSecond);
         if (addFrame > 0)
@@ -71,6 +75,7 @@ public class CustomAnimator
             currentDuration -= addFrame * frameDuration;
         }
         currentFrame = (isPlaying) ? currentFrame : 0;
+        //Debug.Log($"currentFrame : {currentFrame}\n 현재프레임 : {direction * maxFrame + currentFrame}\n 방향 : {direction} \n 최대프레임 : {maxFrame}");
         return sprites[direction * maxFrame + currentFrame];
     }
 }

@@ -15,7 +15,6 @@ public class HeroPresenter : Poolable
     [SerializeField] private string texturePath;
     [SerializeField] private CustomAnimator animator;
 
-    private bool[,] tiles;
     private Action onMoveComplete;
 
     public Vector2Int Position
@@ -27,20 +26,28 @@ public class HeroPresenter : Poolable
     }
 
     private float movementProgress;
+    private DirectionType direction;
     private Vector3 lastPosition;
     private Vector3 targetPosition;
-    private DirectionType direction;
+    private EventLocation targetLocation;
 
-    public void Initialize(string texturePath, bool[,] tiles)
+    public void Initialize(string texturePath)
     {
         this.texturePath = texturePath;
-        this.tiles = tiles;
 
         animator = new CustomAnimator(texturePath, 9, true, true, null);
+        direction = DirectionType.Down;
+        targetPosition = transform.localPosition;
+        UpdateAnimation();
     }
 
     public void SetMoveCommand(List<Vector2Int> route, Action onMoveComplete = null)
     {
+        if (targetLocation != null)
+        {
+            TileMapManager.Instance.ReturnLocation(targetLocation);
+            targetLocation = null;
+        }
         moveCommand = route;
         time = movementFrequency;
         this.onMoveComplete = onMoveComplete;
@@ -54,7 +61,6 @@ public class HeroPresenter : Poolable
         {
             movementProgress += movementSpeed * Time.fixedDeltaTime;
             transform.localPosition = Vector3.Lerp(lastPosition, targetPosition, movementProgress);
-            UpdateAnimation();
             if (movementProgress > 1.0f)
             {
                 transform.localPosition = targetPosition;
@@ -65,30 +71,55 @@ public class HeroPresenter : Poolable
         }
         else
         {
-            if (moveCommand != null && moveCommand.Count > 0)
+            if ((moveCommand == null || moveCommand.Count == 0) && targetLocation == null)
             {
-                if (time > 0)
-                {
-                    time -= Time.fixedDeltaTime;
-                    return;
-                }
-                else
-                {
-                    time = movementFrequency;
-                    movementProgress = 0;
-                    lastPosition = transform.localPosition;
-                    Vector2Int delta = moveCommand[0];
-                    animator.SetDirection(directionDictionary[delta]);
-                    targetPosition = transform.localPosition + (Vector3)(Vector2)delta;
-                    moveCommand.RemoveAt(0);
-                    isMoving = true;
-                }
+                FindNewTargetLocation();
+            }
+            else if (moveCommand != null && moveCommand.Count > 0)
+            {
+                UpdateStep();
             }
             else
             {
-                UpdateAnimation();
+                animator.SetPlaying(false);
             }
         }
+        UpdateAnimation();
+    }
+
+    private void UpdateStep()
+    {
+        if (time > 0)
+        {
+            time -= Time.fixedDeltaTime;
+            return;
+        }
+
+        time = movementFrequency;
+        movementProgress = 0;
+        lastPosition = transform.localPosition;
+        direction = directionDictionary[moveCommand[0]];
+        targetPosition = transform.localPosition + (Vector3)(Vector2)moveCommand[0];
+        moveCommand.RemoveAt(0);
+        isMoving = true;
+        animator.SetPlaying(true);
+    }
+
+    private void FindNewTargetLocation()
+    {
+        var target = TileMapManager.Instance.GetEmptyLocation();
+        if (target != null)
+        {
+            Vector2Int position = new Vector2Int((int)target.transform.localPosition.x, -(int)target.transform.localPosition.y);
+            var route = TileMapManager.Instance.GetRoute(Position, position);
+            SetMoveCommand(route, OnMoveToTargetLocationComplete);
+            targetLocation = target;
+        }
+    }
+
+    private void OnMoveToTargetLocationComplete()
+    {
+        direction = targetLocation.Direction;
     }
 
     private static readonly Dictionary<Vector2Int, DirectionType> directionDictionary = new Dictionary<Vector2Int, DirectionType>()
@@ -101,7 +132,7 @@ public class HeroPresenter : Poolable
 
     private void UpdateAnimation()
     {
-        animator.SetPlaying(isMoving);
+        animator.SetDirection(direction);
         spriteRenderer.sprite = animator.GetSprite(Time.fixedDeltaTime);
     }
 }

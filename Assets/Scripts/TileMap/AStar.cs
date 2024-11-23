@@ -164,13 +164,14 @@ public class AStar
     public List<Vector2Int> GetRouteMovementValue(Vector2Int start, Vector2Int end)
     {
         List<Node> route = Find(start, end);
-        Debug.Log($"루트의 길이는 {route.Count}");
-        string routeString = "";
-        for (int index = 0; index < route.Count; index++)
-        {
-            routeString += $"{route[index].X}, {route[index].Y} => ";
-        }
-        Debug.Log(routeString);
+        //Debug.Log($"{start.x}, {start.y} => {end.x}, {end.y}의 루트를 탐색합니다.");
+        //Debug.Log($"루트의 길이는 {route.Count}");
+        //string routeString = "";
+        //for (int index = 0; index < route.Count; index++)
+        //{
+        //    routeString += $"{route[index].X}, {route[index].Y} => ";
+        //}
+        //Debug.Log(routeString);
         List<Vector2Int> routeMovement = new List<Vector2Int>();
         for (int index = 1; index < route.Count; index++)
         {

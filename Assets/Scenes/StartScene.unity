@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupWarning: {fileID: 8526253656191586614, guid: f182b092d77f3c147903a630ea9bfb65, type: 3}
-  popupDialog: {fileID: 2135330744960611679, guid: d16597692efdf4a45a22dc4389b5bc70, type: 3}
+  popupDialog: {fileID: 1094599017116188844, guid: d16597692efdf4a45a22dc4389b5bc70, type: 3}
 --- !u!1 &924644482
 GameObject:
   m_ObjectHideFlags: 0

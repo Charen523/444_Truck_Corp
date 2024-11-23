@@ -53,6 +53,7 @@ public class HeroData
     public int level;
     public int exp;
     public int spriteIdx;
+    public int[] remainDay; // 훈련 후 남은 누적일. 방 4개가 상이
 
     public HeroData()
     {
@@ -64,6 +65,7 @@ public class HeroData
         level = 1;
         exp = 0;
         spriteIdx = 0;
+        remainDay = new int[4];
     }
 
     public void Initialize(int characterCount)

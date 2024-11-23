@@ -31,7 +31,7 @@ public class HeroManager : Singleton<HeroManager>
         heroStates.Add(eHeroState.FREE);
 
         // 타일맵에 등장
-        MainSceneManager.Instance.OnHeroEntered(data);
+        TileMapManager.Instance.OnHeroEntered(data);
         return data;
     }
 
@@ -56,7 +56,7 @@ public class HeroManager : Singleton<HeroManager>
             heroStates[idx] = eHeroState.QUEST;
 
             // 타일맵 퇴장
-            MainSceneManager.Instance.OnHeroExit(heroList[idx]);
+            TileMapManager.Instance.OnHeroExit(heroList[idx]);
         }
 
         int leftHeroCount = 0;
@@ -71,18 +71,23 @@ public class HeroManager : Singleton<HeroManager>
         GameManager.Instance.OnFoodChangeEvent(leftHeroCount);
     }
 
-    public void AddTrainingSchedule(int heroIdx, int dDay, int successRate)
+    // 실제로는 스케쥴링 하지 않음
+    public void AddTrainingSchedule(int heroIdx, int startDay)
     {
         Schedule newS = new()
         {
             scheduleType = -1,
             heroIdxs = new() { heroIdx },
-            dDay = dDay,
-            successRate = successRate
+            dDay = startDay,
         };
         scheduleList.Add(newS);
 
         heroStates[heroIdx] = eHeroState.TRAINING;
+    }
+
+    public void CheckTrainingScheduleDone(int heroIdx)
+    {
+        heroStates[heroIdx] = eHeroState.FREE;
     }
 
     //TODO: 날짜 스킵과 연결.
@@ -122,7 +127,7 @@ public class HeroManager : Singleton<HeroManager>
             {
                 heroStates[s.heroIdxs[i]] = eHeroState.FREE;
                 // 타일맵에 재입장
-                MainSceneManager.Instance.OnHeroEntered(heroList[s.heroIdxs[i]]);
+                TileMapManager.Instance.OnHeroEntered(heroList[s.heroIdxs[i]]);
             }
             scheduleList.Remove(s);
         }

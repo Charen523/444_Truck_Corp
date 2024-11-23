@@ -4,10 +4,11 @@ public enum GuildLocationEventType
 {
     None,
     QuestBoard,
+    Chair,
 }
 
 public class EventLocation : MonoBehaviour
 {
-    [SerializeField] private DirectionType direction;
-    [SerializeField] private GuildLocationEventType eventType;
+    public DirectionType Direction;
+    public GuildLocationEventType EventType;
 }

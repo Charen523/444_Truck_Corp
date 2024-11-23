@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
-public class MainSceneManager : Singleton<MainSceneManager>
+public class TileMapManager : Singleton<TileMapManager>
 {
     [SerializeField] private TileMapData wallTileMap;
     [SerializeField] private TileMapData locationTileMap;
@@ -10,35 +12,49 @@ public class MainSceneManager : Singleton<MainSceneManager>
 
     private Vector2Int doorPosition;
     private AStar astar;
-    private List<Vector2Int> locations;
     private Dictionary<int, HeroPresenter> heroes;
+    private List<EventLocation> locations;
 
     protected override void Awake()
     {
         base.Awake();
         astar = new AStar();
         doorPosition = new Vector2Int((int)entryPointObject.transform.localPosition.x, -(int)entryPointObject.transform.localPosition.y);
-        locations = new List<Vector2Int>();
         heroes = new Dictionary<int, HeroPresenter>();
     }
 
     private void Start()
     {
+        InitializeEventLocations();
         astar.SetTiles(wallTileMap.Tiles);
-        locations = locationTileMap.GetTileVectorList();
     }
 
-    public Vector2Int GetEmptyLocation()
+    private void InitializeEventLocations()
+    {
+        locations = FindObjectsByType<EventLocation>(FindObjectsSortMode.None).ToList();
+    }
+
+    public EventLocation GetEmptyLocation()
     {
         int count = locations.Count;
         if (count > 0)
         {
             int random = Random.Range(0, count);
-            Vector2Int location = locations[random];
+            EventLocation location = locations[random];
             locations.RemoveAt(random);
             return location;
         }
-        return new Vector2Int(0, 0);
+        return null;
+    }
+
+    public void ReturnLocation(EventLocation location)
+    {
+        locations.Add(location);
+    }
+
+    public List<Vector2Int> GetRoute(Vector2Int start, Vector2Int end)
+    {
+        return astar.GetRouteMovementValue(start, end);
     }
 
     public void OnHeroEntered(HeroData heroData)
@@ -48,15 +64,11 @@ public class MainSceneManager : Singleton<MainSceneManager>
         {
             hero = PoolManager.Instance.Get<HeroPresenter>("Prefabs/HeroPresenter", heroParent, entryPointObject.transform.localPosition);
             string path = DataManager.Instance.GetCharacterSheetPath(heroData.spriteIdx);
-            hero.Initialize(path, null);
+            hero.Initialize(path);
             heroes[heroData.id] = hero;
         }
 
         hero.gameObject.SetActive(true);
-        Vector2Int location = GetEmptyLocation();
-        if (location.x == 0 && location.y == 0) return;
-        List<Vector2Int> route = astar.GetRouteMovementValue(doorPosition, location);
-        hero.SetMoveCommand(route);
     }
 
     public void OnHeroExit(HeroData heroData)

@@ -37,6 +37,7 @@ public class UIMain : MonoBehaviour
         GameManager.Instance.DayChangeAction += OnDayChange;
 
         GameManager.Instance.SetWarnParent(warningParent);
+        GameManager.Instance.SetDialogParent(warningParent);
 
         // AudioManager에 Slider 등록
         if (AudioManager.Instance != null)
