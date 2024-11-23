@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,10 +87,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,20 +118,20 @@ TextureImporter:
       name: "\uC804\uC0AC2_Attack_0"
       rect:
         serializedVersion: 2
-        x: 72
+        x: 0
         y: 0
-        width: 47
-        height: 50
+        width: 192
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 78a4f9124b77acd30800000000000000
-      internalID: 4452502797151062663
+      spriteID: bf8367be984a4bb4281dab8d6c977023
+      internalID: 1837776970
       vertices: []
       indices: 
       edges: []
@@ -140,20 +140,20 @@ TextureImporter:
       name: "\uC804\uC0AC2_Attack_1"
       rect:
         serializedVersion: 2
-        x: 276
+        x: 192
         y: 0
-        width: 32
-        height: 48
+        width: 192
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3c16860432eceb6e0800000000000000
-      internalID: -1819790548611341885
+      spriteID: 5f7e7d85be74b164fbb14c15f2675e18
+      internalID: -1153162330
       vertices: []
       indices: 
       edges: []
@@ -162,20 +162,20 @@ TextureImporter:
       name: "\uC804\uC0AC2_Attack_2"
       rect:
         serializedVersion: 2
-        x: 459
+        x: 384
         y: 0
-        width: 41
-        height: 50
+        width: 192
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e888f215a1456e630800000000000000
-      internalID: 3955941794699511950
+      spriteID: 258d6581b8bf21943acc8784bb987135
+      internalID: 1372984077
       vertices: []
       indices: 
       edges: []
@@ -184,20 +184,20 @@ TextureImporter:
       name: "\uC804\uC0AC2_Attack_3"
       rect:
         serializedVersion: 2
-        x: 655
+        x: 576
         y: 0
-        width: 58
-        height: 50
+        width: 192
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 056d56d1b175fadf0800000000000000
-      internalID: -166818887220472240
+      spriteID: cdd072d6f7c6ffb4081e65cc655edf97
+      internalID: 5308701
       vertices: []
       indices: 
       edges: []
@@ -206,20 +206,20 @@ TextureImporter:
       name: "\uC804\uC0AC2_Attack_4"
       rect:
         serializedVersion: 2
-        x: 851
+        x: 768
         y: 0
-        width: 58
-        height: 50
+        width: 192
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 40ebd92d187d25350800000000000000
-      internalID: 6004098205822598660
+      spriteID: ee9b16ddbed45d04ea716b3db2f65222
+      internalID: -1838858208
       vertices: []
       indices: 
       edges: []
@@ -228,20 +228,20 @@ TextureImporter:
       name: "\uC804\uC0AC2_Attack_5"
       rect:
         serializedVersion: 2
-        x: 1043
+        x: 960
         y: 0
-        width: 58
-        height: 50
+        width: 192
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 62fa132fe83ebd570800000000000000
-      internalID: 8492631725425405734
+      spriteID: a52e9c0d2c0b7d54fb09423c8d6cc2b1
+      internalID: -61411653
       vertices: []
       indices: 
       edges: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 569197b8537d4a648baff8a314459efa
     internalID: 0
     vertices: []
     indices: 
@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\uC804\uC0AC2_Attack_0": 1837776970
+      "\uC804\uC0AC2_Attack_1": -1153162330
+      "\uC804\uC0AC2_Attack_2": 1372984077
+      "\uC804\uC0AC2_Attack_3": 5308701
+      "\uC804\uC0AC2_Attack_4": -1838858208
+      "\uC804\uC0AC2_Attack_5": -61411653
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
