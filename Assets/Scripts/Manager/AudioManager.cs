@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AudioManager : Singleton<AudioManager>
@@ -14,6 +17,8 @@ public class AudioManager : Singleton<AudioManager>
 
     private Slider volumeSlider;
 
+    private int lastPlayedIndex = -1;
+
     private void Start()
     {
         SetVolume();
@@ -22,12 +27,30 @@ public class AudioManager : Singleton<AudioManager>
         {
             PlayBGM(0);
         }
+        StartCoroutine(WaitForMainSceneAndPlayBGM());
+    }
+
+    private IEnumerator WaitForMainSceneAndPlayBGM()
+    {
+        WaitForSeconds wait = new(0.5f);
+
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "MainScene");
+        PlayRandomBGM();
+
+        while (true)
+        {
+            if (!bgmSource.isPlaying)
+            {
+                PlayRandomBGM();
+            }
+            yield return wait;
+        }
     }
 
     public void SetVolume()
     {
         float volume = (volumeSlider == null)? 1f : volumeSlider.value;
-        myMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        myMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     }
 
     public void RegisterSlider(Slider slider)
@@ -48,6 +71,23 @@ public class AudioManager : Singleton<AudioManager>
         bgmSource.clip = bgmClips[clipIndex];
         bgmSource.loop = true;
         bgmSource.Play();
+    }
+
+    private void PlayRandomBGM()
+    {
+        if (bgmClips.Length == 0) return;
+
+        int randomIndex;
+
+        do
+        {
+            randomIndex = UnityEngine.Random.Range(0, bgmClips.Length);
+        } while (randomIndex == lastPlayedIndex);
+
+        bgmSource.clip = bgmClips[randomIndex];
+        bgmSource.Play();
+
+        lastPlayedIndex = randomIndex;
     }
 
     public void PlaySFX(int clipIndex)
