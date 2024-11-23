@@ -1,8 +1,12 @@
-
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+public enum eEnding {
+    Bankrupt,
+    Lose,
+    Win
+}
 
 public class GameManager : Singleton<GameManager>
 {
@@ -14,8 +18,10 @@ public class GameManager : Singleton<GameManager>
     private Transform warnParent;
     [SerializeField] private GameObject popupWarning;
 
+
     public int Day { get; private set; }
     public int Gold { get; private set; }
+    public eEnding Ending { get; set; }
 
     private void Start()
     {
@@ -44,6 +50,13 @@ public class GameManager : Singleton<GameManager>
     {
         Day += delta;
         DayChangeAction?.Invoke(Day);
+
+        if (Day == 0)
+        {
+            //TODO: 엔딩 분기 계산
+            Ending = eEnding.Lose;
+            SceneManager.LoadScene(2);
+        }
     }
     #endregion
 
