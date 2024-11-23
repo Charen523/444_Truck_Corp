@@ -449,7 +449,7 @@ RectTransform:
   m_Father: {fileID: 7452802981951689859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -807,12 +807,12 @@ GameObject:
   - component: {fileID: 4876820129812665823}
   - component: {fileID: 4281118553898325877}
   m_Layer: 5
-  m_Name: PopupHeroList
+  m_Name: NavHeroList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3874481876849091153
 RectTransform:
   m_ObjectHideFlags: 0
