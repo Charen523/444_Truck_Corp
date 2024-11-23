@@ -32,6 +32,7 @@ public class UIMain : MonoBehaviour
     {
         GameManager.Instance.GoldChangeAction += OnGoldChange;
         GameManager.Instance.FoodChangeAction += OnFoodChange;
+        GameManager.Instance.DayChangeAction += OnDayChange;
 
         GameManager.Instance.SetWarnParent(warningParent);
 
@@ -44,15 +45,15 @@ public class UIMain : MonoBehaviour
 
     private void Start()
     {
-        OnGoldChange(GameManager.Instance.gold);
+        OnGoldChange(GameManager.Instance.Gold);
         OnFoodChange(0);
-        OnDayChange(GameManager.Instance.day); ;
+        OnDayChange(GameManager.Instance.Day); ;
     }
 
     #region Btns
     public void OnsummonBtn()
     {
-        if (GameManager.Instance.gold < 100)
+        if (GameManager.Instance.Gold < 100)
         {
             GameManager.Instance.InvokeWarning("골드가 부족합니다...");
             return;
@@ -60,7 +61,7 @@ public class UIMain : MonoBehaviour
         else
         {
             HeroManager.Instance.MakeNewHero();
-            GameManager.Instance.OnGoldChangeEvent(100);
+            GameManager.Instance.OnGoldChangeEvent(-100);
         }
     }
 
@@ -100,7 +101,7 @@ public class UIMain : MonoBehaviour
     {
         decreaseBtn.interactable = true;
         skipTxt.text = $"{++skipCount}일";
-        if (skipCount + GameManager.Instance.day == 0)
+        if (skipCount + GameManager.Instance.Day == 0)
         {
             increaseBtn.interactable = false;
         }
@@ -121,6 +122,8 @@ public class UIMain : MonoBehaviour
         GameManager.Instance.OnDayChangeEvent(skipCount);
         skipCount = 1;
         skipTxt.text = $"{skipCount}일";
+        decreaseBtn.interactable = false;
+        increaseBtn.interactable = true;
     }
     #endregion
 

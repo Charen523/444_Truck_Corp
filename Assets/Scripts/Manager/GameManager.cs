@@ -12,15 +12,15 @@ public class GameManager : Singleton<GameManager>
     public Action<int> DayChangeAction;
 
     private Transform warnParent;
-    private GameObject popupWarning;
+    [SerializeField] private GameObject popupWarning;
 
-    public int day;
-    public int gold;
+    public int Day { get; private set; }
+    public int Gold { get; private set; }
 
     private void Start()
     {
-        day = -100;
-        gold = 100;
+        Day = -100;
+        Gold = 100;
     }
 
     #region event invoker
@@ -31,8 +31,8 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGoldChangeEvent(int delta)
     {
-        gold += delta;
-        GoldChangeAction?.Invoke(gold);
+        Gold += delta;
+        GoldChangeAction?.Invoke(Gold);
     }
 
     public void OnFoodChangeEvent(int heroCount)
@@ -42,8 +42,8 @@ public class GameManager : Singleton<GameManager>
 
     public void OnDayChangeEvent(int delta)
     {
-        day += delta;
-        DayChangeAction?.Invoke(day);
+        Day += delta;
+        DayChangeAction?.Invoke(Day);
     }
     #endregion
 

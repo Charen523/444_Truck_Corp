@@ -98,7 +98,8 @@ public class HeroManager : Singleton<HeroManager>
                     QuestData q = (QuestData)DataManager.Instance.GetData("QuestData", s.scheduleType);
 
                     //골드 보상
-                    GameManager.Instance.gold += q.rewardValues[0];
+                    GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
+
                     //경험치 보상
                     if (q.rewardValues.Length == 2)
                     {

@@ -88,7 +88,7 @@ public class UISchedule : MonoBehaviour
     {
         scheduledQuestSlot.ReturnScheduleInfo(out List<int> heroIdx, out QuestData qData, out int successRate);
 
-        HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, GameManager.Instance.day + qData.needTime, successRate);
+        HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, GameManager.Instance.Day + qData.needTime, successRate);
         gameObject.SetActive(false);
     }
     #endregion

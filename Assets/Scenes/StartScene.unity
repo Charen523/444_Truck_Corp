@@ -734,8 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e636b1dbf8fa9754089e7ef6bb7d1f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  day: 0
-  gold: 0
+  popupWarning: {fileID: 8526253656191586614, guid: f182b092d77f3c147903a630ea9bfb65, type: 3}
 --- !u!1 &924644482
 GameObject:
   m_ObjectHideFlags: 0
