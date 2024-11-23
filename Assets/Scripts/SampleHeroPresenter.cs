@@ -68,6 +68,10 @@ public class SampleHeroPresenter : Poolable
                     isMoving = true;
                 }
             }
+            else
+            {
+                UpdateAnimation();
+            }
         }
     }
 
@@ -81,6 +85,7 @@ public class SampleHeroPresenter : Poolable
 
     private void UpdateAnimation()
     {
+        animator.SetMoving(isMoving);
         spriteRenderer.sprite = animator.GetSprite(Time.fixedDeltaTime);
     }
 }
@@ -121,6 +126,11 @@ public class CustomAnimator
         direction = directionDictionary[directionType];
     }
 
+    public void SetMoving(bool value)
+    {
+        isMoving = value;
+    }
+
     public Sprite GetSprite(float deltaTime)
     {
         currentDuration += deltaTime;
@@ -134,4 +144,9 @@ public class CustomAnimator
         CurrentFrame = (isMoving) ? CurrentFrame : 0; 
         return sprites[direction * maxFrame + CurrentFrame];
     }
+}
+
+public class EventLocation : MonoBehaviour
+{
+    [SerializeField] private DirectionType direction;
 }
