@@ -52,6 +52,16 @@ public class HeroManager : Singleton<HeroManager>
         {
             heroStates[idx] = eHeroState.QUEST;
         }
+
+        int leftHeroCount = 0;
+        for (int i = 0; i < heroStates.Count; i++)
+        {
+            if (heroStates[i] != eHeroState.QUEST)
+            {
+                leftHeroCount++;
+            }
+        }
+        GameManager.Instance.OnFoodChangeEvent(leftHeroCount);
     }
 
     public void AddTrainingSchedule(int heroIdx, int dDay, int successRate)

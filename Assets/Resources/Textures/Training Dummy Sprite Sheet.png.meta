@@ -157,6 +157,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -547,7 +560,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Training Dummy Sprite Sheet_0: -4319956433525477183
+      Training Dummy Sprite Sheet_1: -8078623382783839735
+      Training Dummy Sprite Sheet_10: -306198387706585910
+      Training Dummy Sprite Sheet_11: -5244885896047610854
+      Training Dummy Sprite Sheet_12: -8211878391923376212
+      Training Dummy Sprite Sheet_13: -468628377947101943
+      Training Dummy Sprite Sheet_14: -7515377878910065892
+      Training Dummy Sprite Sheet_15: -7140958261237708409
+      Training Dummy Sprite Sheet_16: 8937529952530121073
+      Training Dummy Sprite Sheet_2: -5877150832016035367
+      Training Dummy Sprite Sheet_3: -6006165637625706423
+      Training Dummy Sprite Sheet_4: 2185582127858492009
+      Training Dummy Sprite Sheet_5: -3405260224251948073
+      Training Dummy Sprite Sheet_6: 2687839951636582686
+      Training Dummy Sprite Sheet_7: -492516368699431896
+      Training Dummy Sprite Sheet_8: -4105838211984505623
+      Training Dummy Sprite Sheet_9: -1912074551089425723
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
