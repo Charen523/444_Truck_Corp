@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         Day = -100;
-        Gold = 100;
+        Gold = 500;
     }
 
     #region event invoker

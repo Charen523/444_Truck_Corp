@@ -19,17 +19,22 @@ public class HeroSelectSlot : MonoBehaviour
     {
         popupClassSelect = p;
         listIdx = idx;
-        toggle.group = popupClassSelect.toggleGroup;
+
+        if (toggle != null)
+            toggle.group = popupClassSelect.toggleGroup;
     }
 
     public void SetHeroSlot(HeroData hero, ref bool toggleOn)
     {
-        /*toggle settings*/
-        toggle.interactable = HeroManager.Instance.heroStates[hero.id] == eHeroState.FREE;
-        if (toggle.interactable && !toggleOn)
+        if (toggle != null)
         {
-            toggleOn = true;
-            toggle.isOn = toggleOn;
+            /*toggle settings*/
+            toggle.interactable = HeroManager.Instance.heroStates[hero.id] == eHeroState.FREE;
+            if (toggle.interactable && !toggleOn)
+            {
+                toggleOn = true;
+                toggle.isOn = toggleOn;
+            }
         }
         
         /*ui info*/
