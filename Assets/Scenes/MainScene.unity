@@ -11454,6 +11454,10 @@ PrefabInstance:
       propertyPath: warningParent
       value: 
       objectReference: {fileID: 603264199}
+    - target: {fileID: 7529531095059480295, guid: 882934913889e14499e6546bb793b3f7, type: 3}
+      propertyPath: m_text
+      value: "1\uC77C"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

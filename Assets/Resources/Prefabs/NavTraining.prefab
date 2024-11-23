@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 4849072943761335260}
   - component: {fileID: 4219667317557474762}
   m_Layer: 5
-  m_Name: BackBtn (1)
+  m_Name: BackBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -375,10 +375,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NavSchedule, Assembly-CSharp
-        m_MethodName: OnBackBtn
-        m_Mode: 1
+      - m_Target: {fileID: 8137397447270099653}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -429,10 +429,10 @@ RectTransform:
   - {fileID: 2282394461978764983}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8217100824788647788
 CanvasRenderer:
@@ -654,6 +654,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 699078155557957824}
     m_Modifications:
+    - target: {fileID: 2693028941759634750, guid: 8135fd13cda137646af6e455601914bb, type: 3}
+      propertyPath: RoomId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2846729253027413127, guid: 8135fd13cda137646af6e455601914bb, type: 3}
       propertyPath: m_Name
       value: TrainingRoom2
@@ -760,6 +764,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 699078155557957824}
     m_Modifications:
+    - target: {fileID: 2693028941759634750, guid: 8135fd13cda137646af6e455601914bb, type: 3}
+      propertyPath: RoomId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2846729253027413127, guid: 8135fd13cda137646af6e455601914bb, type: 3}
       propertyPath: m_Name
       value: TrainingRoom3
@@ -866,6 +874,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 699078155557957824}
     m_Modifications:
+    - target: {fileID: 2693028941759634750, guid: 8135fd13cda137646af6e455601914bb, type: 3}
+      propertyPath: RoomId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2846729253027413127, guid: 8135fd13cda137646af6e455601914bb, type: 3}
       propertyPath: m_Name
       value: TrainingRoom4
