@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIMain : MonoBehaviour
@@ -17,7 +18,8 @@ public class UIMain : MonoBehaviour
 
     [Header("Status")]
     [SerializeField] private TextMeshProUGUI curGoldTxt;
-    [SerializeField] private TextMeshProUGUI dailyCostTxt;
+    [SerializeField] private TextMeshProUGUI FoodTxt;
+    private int foodCost = 0;
 
     [Header("Time Skip")]
     [SerializeField] private TextMeshProUGUI skipTxt;
@@ -92,7 +94,8 @@ public class UIMain : MonoBehaviour
 
     private void OnFoodChange(int heroCount)
     {//히어로 스케줄 변화
-        dailyCostTxt.text = heroCount.ToString() + " 골드";
+        foodCost = heroCount * 50;
+        FoodTxt.text = foodCost.ToString() + " 골드";
     }
     #endregion
 
@@ -119,6 +122,13 @@ public class UIMain : MonoBehaviour
 
     public void ChangeDate()
     {
+        GameManager.Instance.OnGoldChangeEvent(-foodCost);
+        if (GameManager.Instance.Gold < 0)
+        {
+            GameManager.Instance.Ending = eEnding.Bankrupt;
+            SceneManager.LoadScene(2);
+        }
+
         GameManager.Instance.OnDayChangeEvent(skipCount);
         skipCount = 1;
         skipTxt.text = $"{skipCount}일";
