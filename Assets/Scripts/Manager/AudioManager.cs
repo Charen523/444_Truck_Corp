@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -26,21 +27,30 @@ public class AudioManager : Singleton<AudioManager>
         {
             PlayBGM(0);
         }
+        StartCoroutine(WaitForMainSceneAndPlayBGM());
     }
 
-    private void Update()
+    private IEnumerator WaitForMainSceneAndPlayBGM()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene" && !bgmSource.isPlaying)
+        WaitForSeconds wait = new(0.5f);
+
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == "MainScene");
+        PlayRandomBGM();
+
+        while (true)
         {
-            PlayRandomBGM();
+            if (!bgmSource.isPlaying)
+            {
+                PlayRandomBGM();
+            }
+            yield return wait;
         }
     }
-
 
     public void SetVolume()
     {
         float volume = (volumeSlider == null)? 1f : volumeSlider.value;
-        myMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        myMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     }
 
     public void RegisterSlider(Slider slider)
