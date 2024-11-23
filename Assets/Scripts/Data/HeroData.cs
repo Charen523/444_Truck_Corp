@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class Status
@@ -45,21 +44,37 @@ public class HeroData
             "사샤", "쉐리", "실키", "소니아", "소피", "스텔라", "써니", "슈가", "실비아", "트리샤",
             "트루디아", "바네사", "벨리카", "베라", "베로니카", "빅토리아", "바이올렛", "제키", "제나", "지나"
         };
-    
+
+    public int id;
     public string name;
     public bool spriteType;
     public ClassData classData;
     public Status status;
     public int level;
     public int exp;
+    public int spriteIdx;
 
     public HeroData()
     {
-        name = names[UnityEngine.Random.Range(0, 170)];
-        classData = (ClassData)DataManager.GetData("ClassData", UnityEngine.Random.Range(0, 8));
-        status = new(classData.baseStr, classData.baseDex, classData.baseInt, classData.baseCon, classData.baseLuk);
-        spriteType = UnityEngine.Random.Range(0, 2) == 0;
+        id = 0;
+        name = "";
+        classData = null;
+        status = null;
+        spriteType = false;
         level = 1;
         exp = 0;
+        spriteIdx = 0;
+    }
+
+    public void Initialize(int characterCount)
+    {
+        id = characterCount;
+        name = names[UnityEngine.Random.Range(0, names.Count)];
+        classData = (ClassData)DataManager.Instance.GetData("ClassData", UnityEngine.Random.Range(0, 8));
+        status = new(classData.baseStr, classData.baseDex, classData.baseInt, classData.baseCon, classData.baseLuk);
+        spriteType = UnityEngine.Random.Range(0, 2) == 0;
+
+        spriteIdx = classData.id * 2;
+        spriteIdx = (spriteType) ? spriteIdx - 1 : spriteIdx - 2;
     }
 }
