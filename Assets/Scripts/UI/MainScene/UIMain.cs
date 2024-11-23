@@ -1,37 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIMain : MonoBehaviour
 {
+    [SerializeField] private Slider volumeSlider;
+
     [SerializeField] private TextMesh goldText;
     [SerializeField] private TextMesh timeText;
 
-    private void FixedUpdate()
+
+    private void Start()
     {
-        //goldText.text = DataManager.Instance.MainData.Gold.ToString();
+        // AudioManager에 Slider 등록
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.RegisterSlider(volumeSlider);
+        }
     }
 
-    public void OnClickPlannerButton()
-    {
-
-    }
-
-    public void OnClickSpawnButton()
-    {
-
-    }
-
-    public void OnClickTrainingRoom()
-    {
-
-    }
-
-    public void OnClickPartyManagement()
-    {
-
-    }
-
-    public void OnClickGuildManagementButton()
-    {
-
-    }
 }
