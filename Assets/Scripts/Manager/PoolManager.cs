@@ -6,6 +6,7 @@ public class PoolManager : Singleton<PoolManager>
     private readonly Dictionary<string, Stack<GameObject>> pools = new Dictionary<string, Stack<GameObject>>();
     private readonly Dictionary<string, GameObject> prefabs = new Dictionary<string, GameObject>();
     private readonly Dictionary<int, GameObject> aliveItems = new Dictionary<int, GameObject>();
+    private int poolId = 0;
 
     public T Get<T>(GameObject prefab, Transform parent, Vector3 position = default) where T : Poolable
     {
@@ -103,6 +104,7 @@ public class PoolManager : Singleton<PoolManager>
         itemObject.transform.localScale = Vector3.one;
         itemObject.SetActive(true);
 
+        item.PoolID = poolId++;
         item.IsUsing = true;
         item.Pool = this;
     }
