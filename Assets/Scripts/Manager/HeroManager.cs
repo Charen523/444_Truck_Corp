@@ -29,6 +29,9 @@ public class HeroManager : Singleton<HeroManager>
         data.Initialize(heroCount++);
         heroList.Add(data);
         heroStates.Add(eHeroState.FREE);
+
+        // 타일맵에 등장
+        MainSceneManager.Instance.OnHeroEntered(data);
         return data;
     }
 
@@ -51,6 +54,9 @@ public class HeroManager : Singleton<HeroManager>
         foreach (int idx in heroIdxs) 
         {
             heroStates[idx] = eHeroState.QUEST;
+
+            // 타일맵 퇴장
+            MainSceneManager.Instance.OnHeroExit(heroList[idx]);
         }
 
         int leftHeroCount = 0;
@@ -61,6 +67,7 @@ public class HeroManager : Singleton<HeroManager>
                 leftHeroCount++;
             }
         }
+
         GameManager.Instance.OnFoodChangeEvent(leftHeroCount);
     }
 
@@ -114,6 +121,8 @@ public class HeroManager : Singleton<HeroManager>
             for (int i = 0; i < s.heroIdxs.Count; i++)
             {
                 heroStates[s.heroIdxs[i]] = eHeroState.FREE;
+                // 타일맵에 재입장
+                MainSceneManager.Instance.OnHeroEntered(heroList[s.heroIdxs[i]]);
             }
             scheduleList.Remove(s);
         }
