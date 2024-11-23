@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainSceneUI : MonoBehaviour
+public class UIMain : MonoBehaviour
 {
     [SerializeField] private TextMesh goldText;
     [SerializeField] private TextMesh timeText;

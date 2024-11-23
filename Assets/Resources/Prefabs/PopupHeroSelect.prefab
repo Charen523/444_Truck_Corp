@@ -900,6 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a8f8d0a0fe4964e9b08c67e6931176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warnParent: {fileID: 0}
   warnPrefab: {fileID: 8526253656191586614, guid: f182b092d77f3c147903a630ea9bfb65, type: 3}
   toggleGroup: {fileID: 7197694590159336058}
   ListParent: {fileID: 2620255109372354020}
