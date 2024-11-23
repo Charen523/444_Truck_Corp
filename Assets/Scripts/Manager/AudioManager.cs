@@ -81,7 +81,7 @@ public class AudioManager : Singleton<AudioManager>
 
         do
         {
-            randomIndex = UnityEngine.Random.Range(0, bgmClips.Length);
+            randomIndex = UnityEngine.Random.Range(1, bgmClips.Length);
         } while (randomIndex == lastPlayedIndex);
 
         bgmSource.clip = bgmClips[randomIndex];

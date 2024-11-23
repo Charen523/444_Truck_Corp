@@ -4,10 +4,6 @@ using UnityEngine.UI;
 
 public class PopupHeroSelect : MonoBehaviour
 {
-    [Header("Warn Popup")]
-    public Transform warnParent;
-    public GameObject warnPrefab;
-
     [Header("My Toggle Group")]
     public ToggleGroup toggleGroup;
 
@@ -46,9 +42,7 @@ public class PopupHeroSelect : MonoBehaviour
 
         if (!isToggleOn)
         {
-            Instantiate(warnPrefab, warnParent)
-                .GetComponent<PopupWarning>()
-                .SetWarnTxt("선택 가능한 영웅이 없습니다.");
+            GameManager.Instance.InvokeWarning("골드가 부족합니다...");
             gameObject.SetActive(false);
         }
     }

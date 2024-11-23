@@ -52,6 +52,16 @@ public class HeroManager : Singleton<HeroManager>
         {
             heroStates[idx] = eHeroState.QUEST;
         }
+
+        int leftHeroCount = 0;
+        for (int i = 0; i < heroStates.Count; i++)
+        {
+            if (heroStates[i] != eHeroState.QUEST)
+            {
+                leftHeroCount++;
+            }
+        }
+        GameManager.Instance.OnFoodChangeEvent(leftHeroCount);
     }
 
     public void AddTrainingSchedule(int heroIdx, int dDay, int successRate)
@@ -88,7 +98,8 @@ public class HeroManager : Singleton<HeroManager>
                     QuestData q = (QuestData)DataManager.Instance.GetData("QuestData", s.scheduleType);
 
                     //골드 보상
-                    GameManager.Instance.gold += q.rewardValues[0];
+                    GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
+
                     //경험치 보상
                     if (q.rewardValues.Length == 2)
                     {
