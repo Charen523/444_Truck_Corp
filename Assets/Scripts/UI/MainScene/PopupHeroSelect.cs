@@ -16,14 +16,6 @@ public class PopupHeroSelect : MonoBehaviour
     public int selectedHeroIdx; //초기값 : 0
     private bool isToggleOn;
 
-    private void Awake()
-    {
-        //테스트 코드
-        HeroManager.Instance.MakeNewHero();
-        HeroManager.Instance.MakeNewHero();
-        HeroManager.Instance.MakeNewHero();
-    }
-
     private void OnEnable()
     {
         selectedHeroIdx = 0;
@@ -40,9 +32,17 @@ public class PopupHeroSelect : MonoBehaviour
             HeroSlots[i].SetHeroSlot(HeroManager.Instance.GetHero(i), ref isToggleOn);
         }
 
-        if (!isToggleOn)
+        if (toggleGroup == null)
         {
-            GameManager.Instance.InvokeWarning("골드가 부족합니다...");
+            if (HeroManager.Instance.heroStates.Count == 0)
+            {
+                GameManager.Instance.InvokeWarning("아직 용사가 없습니다...");
+                gameObject.SetActive(false);
+            }
+        }
+        else if (!isToggleOn)
+        {
+            GameManager.Instance.InvokeWarning("남은 영웅이 없습니다...");
             gameObject.SetActive(false);
         }
     }
