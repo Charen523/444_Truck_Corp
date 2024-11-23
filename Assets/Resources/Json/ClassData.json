@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "C1",
     "className": "총사",
     "baseStr": 2,
     "baseDex": 4,
@@ -14,7 +14,7 @@
     "incLuk": 0
   },
   {
-    "id": 2,
+    "id": "C2",
     "className": "궁사",
     "baseStr": 1,
     "baseDex": 3,
@@ -28,7 +28,7 @@
     "incLuk": 0
   },
   {
-    "id": 3,
+    "id": "C3",
     "className": "도적",
     "baseStr": 1,
     "baseDex": 5,
@@ -42,7 +42,7 @@
     "incLuk": 0
   },
   {
-    "id": 4,
+    "id": "C4",
     "className": "성직자",
     "baseStr": 2,
     "baseDex": 2,
@@ -56,7 +56,7 @@
     "incLuk": 0
   },
   {
-    "id": 5,
+    "id": "C5",
     "className": "기사",
     "baseStr": 3,
     "baseDex": 1,
@@ -70,7 +70,7 @@
     "incLuk": 0
   },
   {
-    "id": 6,
+    "id": "C6",
     "className": "전사",
     "baseStr": 5,
     "baseDex": 1,
@@ -84,7 +84,7 @@
     "incLuk": 0
   },
   {
-    "id": 7,
+    "id": "C7",
     "className": "마법사",
     "baseStr": 1,
     "baseDex": 1,
@@ -98,7 +98,7 @@
     "incLuk": 0
   },
   {
-    "id": 8,
+    "id": "C8",
     "className": "원소술사",
     "baseStr": 1,
     "baseDex": 1,

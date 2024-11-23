@@ -4,10 +4,8 @@ using System;
 [Serializable]
 public class ClassData
 {
-    public int id;
-    public string className;
-
     // 기본 스탯
+    public string className;
     public int baseStr;
     public int baseDex;
     public int baseInt;
