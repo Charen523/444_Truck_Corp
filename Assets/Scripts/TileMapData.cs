@@ -13,7 +13,6 @@ public class TileMapData : MonoBehaviour
     private void Awake()
     {
         Tiles = GetTileArray(new Vector3Int(0, 0));
-        ShowTiles(Tiles);
     }
 
     private void ShowTiles(bool[,] tiles)
