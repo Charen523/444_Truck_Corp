@@ -264,8 +264,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8ccdbe74deeef4ba7949322b54465f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldText: {fileID: 0}
-  timeText: {fileID: 0}
+  volumeSlider: {fileID: 0}
+  curGoldTxt: {fileID: 0}
+  dailyCostTxt: {fileID: 0}
+  skipTxt: {fileID: 0}
+  dDayTxt: {fileID: 0}
 --- !u!1 &724716236796422615
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AudioManager : Singleton<AudioManager>
@@ -14,6 +16,8 @@ public class AudioManager : Singleton<AudioManager>
 
     private Slider volumeSlider;
 
+    private int lastPlayedIndex = -1;
+
     private void Start()
     {
         SetVolume();
@@ -23,6 +27,15 @@ public class AudioManager : Singleton<AudioManager>
             PlayBGM(0);
         }
     }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "MainScene" && !bgmSource.isPlaying)
+        {
+            PlayRandomBGM();
+        }
+    }
+
 
     public void SetVolume()
     {
@@ -48,6 +61,23 @@ public class AudioManager : Singleton<AudioManager>
         bgmSource.clip = bgmClips[clipIndex];
         bgmSource.loop = true;
         bgmSource.Play();
+    }
+
+    private void PlayRandomBGM()
+    {
+        if (bgmClips.Length == 0) return;
+
+        int randomIndex;
+
+        do
+        {
+            randomIndex = UnityEngine.Random.Range(0, bgmClips.Length);
+        } while (randomIndex == lastPlayedIndex);
+
+        bgmSource.clip = bgmClips[randomIndex];
+        bgmSource.Play();
+
+        lastPlayedIndex = randomIndex;
     }
 
     public void PlaySFX(int clipIndex)
