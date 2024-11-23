@@ -26,13 +26,6 @@ public class MainSceneManager : Singleton<MainSceneManager>
     {
         astar.SetTiles(wallTileMap.Tiles);
         locations = locationTileMap.GetTileVectorList();
-        Debug.Log($"할당된 위치는 {locations.Count}개");
-        string locationString = "";
-        for (int index = 0; index < locations.Count; index++)
-        {
-            locationString += $"({locations[index].x}, {locations[index].y}), ";
-        }
-        Debug.Log($"{locationString}");
     }
 
     public Vector2Int GetEmptyLocation()
@@ -47,17 +40,6 @@ public class MainSceneManager : Singleton<MainSceneManager>
         }
         return new Vector2Int(0, 0);
     }
-
-    //private void FixedUpdate()
-    //{
-    //    //Debug.Log($"이동할 위치는 {location.x}, {location.y}");
-    //    //string routeString = "";
-    //    //for (int index = 0; index < route.Count; index++)
-    //    //{
-    //    //    routeString += $"{route[index].x}, {route[index].y} => ";
-    //    //}
-    //    //Debug.Log($"루트는 {routeString}");
-    //}
 
     public void OnHeroEntered(HeroData heroData)
     {

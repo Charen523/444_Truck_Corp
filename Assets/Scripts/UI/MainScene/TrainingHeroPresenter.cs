@@ -5,6 +5,7 @@ public class TrainingHeroPresenter : MonoBehaviour
 {
     [SerializeField] private Image image; 
     [SerializeField] private CustomAnimator animator;
+
     public string Path;
 
     private void Start()
@@ -14,7 +15,7 @@ public class TrainingHeroPresenter : MonoBehaviour
 
     private void Initialize()
     {
-        animator = new CustomAnimator(Path, 6, false);
+        animator = new CustomAnimator(Path, 6, false, false, null);
         animator.SetPlaying(true);
     }
 

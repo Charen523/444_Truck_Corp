@@ -36,7 +36,7 @@ public class HeroPresenter : Poolable
         this.texturePath = texturePath;
         this.tiles = tiles;
 
-        animator = new CustomAnimator(texturePath, 9, true);
+        animator = new CustomAnimator(texturePath, 9, true, true, null);
     }
 
     public void SetMoveCommand(List<Vector2Int> route, Action onMoveComplete = null)
