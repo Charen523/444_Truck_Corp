@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 44b3696bd5132401cafdca8526812f63
+guid: ec7d6099d6a1c6448a45481d3ddc03cb
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
@@ -21,10 +21,3 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 54030
-  packageName: Middle Age - Medieval Action Sound FX Pack
-  packageVersion: 2.0
-  assetPath: Assets/Medieval Action - FX Pack 2.0/Sword 6.wav
-  uploadId: 103098
