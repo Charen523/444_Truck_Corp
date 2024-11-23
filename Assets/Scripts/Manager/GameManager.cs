@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum eEnding {
+public enum eEnding
+{
     Bankrupt,
     Lose,
     Win
@@ -16,8 +17,9 @@ public class GameManager : Singleton<GameManager>
     public Action<int> DayChangeAction;
 
     private Transform warnParent;
+    private Transform dialogParent;
     [SerializeField] private GameObject popupWarning;
-
+    [SerializeField] private GameObject popupDialog;
 
     public int Day { get; private set; }
     public int Gold { get; private set; }
@@ -60,10 +62,15 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
-    #region warning
+    #region warning and dialog
     public void SetWarnParent(Transform t)
     {
         warnParent = t;
+    }
+
+    public void SetDialogParent(Transform t)
+    {
+        dialogParent = t;
     }
 
     public void InvokeWarning(string msg)
@@ -71,6 +78,13 @@ public class GameManager : Singleton<GameManager>
         Instantiate(popupWarning, warnParent)
                 .GetComponent<PopupWarning>()
                 .SetWarnTxt(msg);
+    }
+
+    public void InvokeDialog(string msg, Action<eDialogResult> action)
+    {
+        Instantiate(popupDialog, dialogParent)
+            .GetComponent<PopupDialog>()
+            .SetTextAndAction(msg, action);
     }
     #endregion
 }
