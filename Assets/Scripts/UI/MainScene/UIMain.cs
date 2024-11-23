@@ -9,9 +9,9 @@ public class UIMain : MonoBehaviour
     [SerializeField] Transform warningParent;
     
     [Header("UIs")]
-    [SerializeField] GameObject popupHeroList;
-    [SerializeField] GameObject uiSchedule;
-    [SerializeField] GameObject uiTraining;
+    [SerializeField] GameObject navHeroList;
+    [SerializeField] GameObject navSchedule;
+    [SerializeField] GameObject navTraining;
     
     [Header("volume Setting")]
     [SerializeField] private Slider volumeSlider;
@@ -69,20 +69,20 @@ public class UIMain : MonoBehaviour
 
     public void OnHeroListBtn()
     {
-        if (popupHeroList != null)
-            popupHeroList.SetActive(true);
+        if (navHeroList != null)
+            navHeroList.SetActive(true);
     }
 
     public void OnScheduleBtn()
     {
-        if (uiSchedule != null)
-            uiSchedule.SetActive(true);
+        if (navSchedule != null)
+            navSchedule.SetActive(true);
     }
 
     public void OnTrainingBtn()
     {
-        if (uiTraining != null)
-            uiTraining.SetActive(true);
+        if (navTraining != null)
+            navTraining.SetActive(true);
     }
     #endregion
 

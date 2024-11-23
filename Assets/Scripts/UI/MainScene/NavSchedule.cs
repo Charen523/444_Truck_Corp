@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UISchedule : MonoBehaviour
+public class NavSchedule : MonoBehaviour
 {
     private int clickedSlotIdx = -1; //HeroSelect 이벤트를 적용할 칸.
 
