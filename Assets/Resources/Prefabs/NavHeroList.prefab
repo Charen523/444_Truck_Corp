@@ -884,10 +884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a8f8d0a0fe4964e9b08c67e6931176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleGroup: {fileID: 0}
   ListParent: {fileID: 2620255109372354020}
-  ListPrefab: {fileID: 4353842436943447861, guid: f81b943db5bb84b4eb1ab1729df5ac77, type: 3}
-  heroSelectBtn: {fileID: 0}
+  ListPrefab: {fileID: 4353842436943447861, guid: dd9f670ea0fda3348acef5c725fef0fe, type: 3}
   selectedHeroIdx: 0
 --- !u!1 &7828378854818060017
 GameObject:

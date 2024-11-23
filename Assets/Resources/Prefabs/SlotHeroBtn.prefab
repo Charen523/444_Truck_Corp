@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 1756150369347231710}
   - component: {fileID: 5771227113480729305}
   - component: {fileID: 2828986785693890454}
+  - component: {fileID: 6511588095636500546}
   m_Layer: 5
   m_Name: SlotHeroBtn
   m_TagString: Untagged
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8614695965224299856, guid: a097e2937ab71ff46bf5e713e39c3133, type: 3}
+  m_Sprite: {fileID: 3064968443772919828, guid: 888297e78a6379a4e86d428a8984586d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -399,7 +400,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -410,9 +411,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 8614695965224299856, guid: a097e2937ab71ff46bf5e713e39c3133, type: 3}
+    m_SelectedSprite: {fileID: 8614695965224299856, guid: a097e2937ab71ff46bf5e713e39c3133, type: 3}
+    m_DisabledSprite: {fileID: -516811376060375336, guid: f848221ce732c754db28662a841a84b5, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -423,7 +424,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5771227113480729305}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6511588095636500546}
+        m_TargetAssemblyTypeName: SlotHeroListBtn, Assembly-CSharp
+        m_MethodName: OnSlotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6511588095636500546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4353842436943447861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4748b5cae9442c43aae8827fc251c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBtn: {fileID: 2828986785693890454}
+  listIdx: 0
+  thumbnail: {fileID: 2531594280959999446}
+  nameTxt: {fileID: 8142236186024916928}
+  strTxt: {fileID: 7859822952703629915}
+  dexTxt: {fileID: 2444913027185779645}
+  intTxt: {fileID: 6109211785274058900}
+  conTxt: {fileID: 961434430704057043}
+  lukTxt: {fileID: 7963442804733453969}
 --- !u!1 &4518201727081978337
 GameObject:
   m_ObjectHideFlags: 0

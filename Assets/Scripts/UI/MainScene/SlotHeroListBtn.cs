@@ -4,9 +4,10 @@ using UnityEngine.UI;
 
 public class SlotHeroListBtn : MonoBehaviour
 {
-    public PopupHeroSelect popupClassSelect;
+    public PopupHeroSelect popupHeroSelect;
+    [SerializeField] private Button myBtn;
     public int listIdx;
-    [SerializeField] private Toggle toggle;
+
     [SerializeField] private Image thumbnail;
     [SerializeField] private TextMeshProUGUI nameTxt;
     [SerializeField] private TextMeshProUGUI strTxt;
@@ -15,27 +16,25 @@ public class SlotHeroListBtn : MonoBehaviour
     [SerializeField] private TextMeshProUGUI conTxt;
     [SerializeField] private TextMeshProUGUI lukTxt;
 
-    public void InitHeroSlot(int idx, PopupHeroSelect p, HeroData hero)
+    public void InitHeroSlot(int idx, PopupHeroSelect p)
     {
-        popupClassSelect = p;
+        popupHeroSelect = p;
         listIdx = idx;
-
-        if (toggle != null)
-            toggle.group = popupClassSelect.toggleGroup;
     }
 
-    public void SetHeroSlot(HeroData hero, ref bool toggleOn)
+    public void SetHeroSlot(HeroData hero, ref bool isEnd)
     {
-        if (toggle != null)
+        if (myBtn != null)
         {
-            /*toggle settings*/
-            toggle.interactable = HeroManager.Instance.heroStates[hero.id] == eHeroState.FREE;
-            if (toggle.interactable && !toggleOn)
+            if (HeroManager.Instance.heroStates[hero.id] != eHeroState.FREE)
+                myBtn.interactable = false;
+            else
             {
-                toggleOn = true;
-                toggle.isOn = toggleOn;
+                myBtn.interactable = true;
+                isEnd = true;
             }
         }
+        else isEnd = true;
         
         /*ui info*/
         thumbnail.sprite = DataManager.Instance.GetSprites(false, hero.spriteIdx);
@@ -47,14 +46,12 @@ public class SlotHeroListBtn : MonoBehaviour
         lukTxt.text = $"LUK : {hero.status.LUK}";
     }
 
-    public void OnSlotToggle(bool input)
+    public void OnSlotClicked()
     {
-        if (popupClassSelect != null)
+        if (popupHeroSelect != null)
         {
-            if (input)
-            {
-                popupClassSelect.selectedHeroIdx = listIdx;
-            }
+            popupHeroSelect.OnSelectSlot(listIdx);
+            popupHeroSelect.gameObject.SetActive(false);
         }
     }
 }
