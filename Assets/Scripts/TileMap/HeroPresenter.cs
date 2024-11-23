@@ -3,33 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SampleHeroPresenter : Poolable
+public class HeroPresenter : Poolable
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float movementFrequency;
     [SerializeField] private float movementSpeed;
-    [SerializeField] private List<Vector2Int> moveCommand = new List<Vector2Int>();
+    [SerializeField] private List<Vector2Int> moveCommand;
 
     [SerializeField] private bool isMoving;
     [SerializeField] private float time;
     [SerializeField] private string texturePath;
-    [SerializeField] private Texture2D texture;
     [SerializeField] private CustomAnimator animator;
 
-    private Vector3 lastPosition;
-    private Vector3 targetPosition;
-    private float movementProgress;
-    private DirectionType direction;
+    private bool[,] tiles;
+    private Action onMoveComplete;
 
-    private void Start()
+    public Vector2Int Position
     {
-        animator = new CustomAnimator(texturePath, 9, 12);
+        get
+        {
+            return new Vector2Int((int)targetPosition.x, (int)-targetPosition.y);
+        }
     }
 
-    public void SetMoveCommand(List<Vector2Int> route)
+    private float movementProgress;
+    private Vector3 lastPosition;
+    private Vector3 targetPosition;
+    private DirectionType direction;
+
+    public void Initialize(string texturePath, bool[,] tiles)
+    {
+        this.texturePath = texturePath;
+        this.tiles = tiles;
+
+        animator = new CustomAnimator(texturePath, 9, true);
+    }
+
+    public void SetMoveCommand(List<Vector2Int> route, Action onMoveComplete = null)
     {
         moveCommand = route;
         time = movementFrequency;
+        this.onMoveComplete = onMoveComplete;
     }
 
     private void FixedUpdate()
@@ -44,7 +58,9 @@ public class SampleHeroPresenter : Poolable
             if (movementProgress > 1.0f)
             {
                 transform.localPosition = targetPosition;
+                movementProgress = 0.0f;
                 isMoving = false;
+                if (moveCommand != null && moveCommand.Count == 0) onMoveComplete?.Invoke();
             }
         }
         else
@@ -85,68 +101,7 @@ public class SampleHeroPresenter : Poolable
 
     private void UpdateAnimation()
     {
-        animator.SetMoving(isMoving);
+        animator.SetPlaying(isMoving);
         spriteRenderer.sprite = animator.GetSprite(Time.fixedDeltaTime);
     }
-}
-
-[Serializable]
-public class CustomAnimator
-{
-    private static readonly Dictionary<DirectionType, int> directionDictionary = new Dictionary<DirectionType, int>()
-    {
-        { DirectionType.Up, 0 },
-        { DirectionType.Left, 1 },
-        { DirectionType.Down, 2 },
-        { DirectionType.Right, 3 },
-    };
-
-    private int direction;
-    public int CurrentFrame;
-    public int FrameSpeed;
-    private float frameDuration;
-    private float framePerSecond;
-    private float currentDuration;
-    private bool isMoving;
-
-    [SerializeField] private Sprite[] sprites;
-    [SerializeField] private int maxFrame;
-
-    public CustomAnimator(string path, int maxFrame, int framePerSecond)
-    {
-        sprites = Resources.LoadAll<Sprite>(path);
-        frameDuration = 1.0f / framePerSecond;
-        this.framePerSecond = framePerSecond;
-        this.maxFrame = maxFrame;
-        Debug.Log($"{path}의 스프라이트 개수 : {sprites.Length}");
-    }
-
-    public void SetDirection(DirectionType directionType)
-    {
-        direction = directionDictionary[directionType];
-    }
-
-    public void SetMoving(bool value)
-    {
-        isMoving = value;
-    }
-
-    public Sprite GetSprite(float deltaTime)
-    {
-        currentDuration += deltaTime;
-        int addFrame = (int)(currentDuration * framePerSecond);
-        if (addFrame > 0)
-        {
-            CurrentFrame += addFrame;
-            CurrentFrame %= maxFrame;
-            currentDuration -= addFrame * frameDuration;
-        }
-        CurrentFrame = (isMoving) ? CurrentFrame : 0; 
-        return sprites[direction * maxFrame + CurrentFrame];
-    }
-}
-
-public class EventLocation : MonoBehaviour
-{
-    [SerializeField] private DirectionType direction;
 }

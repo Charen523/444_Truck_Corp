@@ -1360,6 +1360,23 @@ MonoBehaviour:
   - {fileID: -2701272435505640833, guid: f9e65a1ba4ecda94c92eb97406f0c1ee, type: 3}
   - {fileID: -2701272435505640833, guid: 6ea8b6632d1bc6d428d63a059f97a727, type: 3}
   - {fileID: -2701272435505640833, guid: 784d7f4035b5708408036d0500e8547c, type: 3}
+  characterSheetPaths:
+  - "Textures/CharacterSheet/\uAD81\uC0AC1"
+  - "Textures/CharacterSheet/\uAD81\uC0AC2"
+  - "Textures/CharacterSheet/\uAE30\uC0AC1"
+  - "Textures/CharacterSheet/\uAE30\uC0AC2"
+  - "Textures/CharacterSheet/\uB3C4\uC8011"
+  - "Textures/CharacterSheet/\uB3C4\uC8012"
+  - "Textures/CharacterSheet/\uB9C8\uBC95\uC0AC1"
+  - "Textures/CharacterSheet/\uB9C8\uBC95\uC0AC2"
+  - "Textures/CharacterSheet/\uC131\uC9C1\uC7901"
+  - "Textures/CharacterSheet/\uC131\uC9C1\uC7902"
+  - "Textures/CharacterSheet/\uC6D0\uC18C\uC220\uC0AC1"
+  - "Textures/CharacterSheet/\uC6D0\uC18C\uC220\uC0AC2"
+  - "Textures/CharacterSheet/\uC804\uC0AC1"
+  - "Textures/CharacterSheet/\uC804\uC0AC2"
+  - "Textures/CharacterSheet/\uCD1D\uC0AC1"
+  - "Textures/CharacterSheet/\uCD1D\uC0AC2"
 --- !u!4 &2064686453
 Transform:
   m_ObjectHideFlags: 0

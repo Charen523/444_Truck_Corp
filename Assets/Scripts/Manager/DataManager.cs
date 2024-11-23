@@ -8,6 +8,7 @@ public class DataManager : Singleton<DataManager>
     private Dictionary<string, List<object>> dataDics = new(); //Resources/Json으로부터 자동 로딩
     [SerializeField] private List<Sprite> thumbnails; //StartScene에서 수동캐싱
     [SerializeField] private List<Sprite> standUIs; //StartScene에서 수동캐싱
+    [SerializeField] private List<string> characterSheetPaths; //StartScene에서 수동캐싱
 
     protected override void Awake()
     {
@@ -51,5 +52,10 @@ public class DataManager : Singleton<DataManager>
     {
         if (isStand) return standUIs[idx];
         else return thumbnails[idx];
+    }
+
+    public string GetCharacterSheetPath(int idx)
+    {
+        return characterSheetPaths[idx];
     }
 }
