@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class Status
@@ -94,7 +93,7 @@ public class HeroData
         spriteType = UnityEngine.Random.Range(0, 2) == 0;
 
         spriteIdx = classData.id * 2;
-        spriteIdx = (spriteType) ? spriteIdx - 1 : spriteIdx - 2;
+        spriteIdx -= (spriteType) ? 1 : 2;
     }
 
     public void GetExp(int delta)
