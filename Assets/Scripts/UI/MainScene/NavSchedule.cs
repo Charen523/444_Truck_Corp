@@ -15,6 +15,8 @@ public class NavSchedule : MonoBehaviour
     [SerializeField] SlotScheduleQuest scheduledQuestSlot;
     [SerializeField] Button questStartBtn;
 
+    [SerializeField] PotionToggleGroup toggleGroup;
+
     public int[] QuestSlotIdx { get; private set; } = new int[4];
 
     private bool[] isSelected = new bool[4];
@@ -127,6 +129,9 @@ public class NavSchedule : MonoBehaviour
 
     public void OnQuestStartBtn()
     {
+        GameManager.Instance.UsePotion(toggleGroup.GetSelectedIndices());
+        GameManager.Instance.OnPotionActionEvent();
+
         scheduledQuestSlot.ReturnScheduleInfo(out List<int> heroIdx, out QuestData qData, out int successRate);
 
         HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, GameManager.Instance.Day + qData.needTime, successRate);

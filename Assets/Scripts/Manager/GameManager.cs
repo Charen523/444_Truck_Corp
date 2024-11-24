@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     public Action<int> GoldChangeAction;
     public Action FoodChangeAction;
     public Action<int> DayChangeAction;
+    public Action PotionAction;
 
     private Transform warnParent;
     private Transform dialogParent;
@@ -80,6 +81,11 @@ public class GameManager : Singleton<GameManager>
             Ending = eEnding.Lose;
             SceneManager.LoadScene(2);
         }
+    }
+
+    public void OnPotionActionEvent()
+    {
+        PotionAction?.Invoke();
     }
     #endregion
 

@@ -7,16 +7,7 @@ public class PotionToggleGroup : MonoBehaviour
     public List<ImageToggle> toggles = new(); 
     public List<int> selectedIndices = new(); 
 
-    private void Start()
-    {
-        for (int i = 0; i < toggles.Count; i++)
-        {
-            int index = i; 
-            toggles[i].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => OnToggleClicked(index));
-        }
-    }
-
-    private void OnToggleClicked(int index)
+    public void OnToggleClicked(int index)
     {
         var toggle = toggles[index];
 
@@ -36,9 +27,9 @@ public class PotionToggleGroup : MonoBehaviour
         }
     }
 
-    public List<int> GetSelectedIndices()
+    public int[] GetSelectedIndices()
     {
-        return new List<int>(selectedIndices); 
+        return selectedIndices.ToArray(); 
     }
 
     public List<ImageToggle> GetSelectedItems()
