@@ -100,6 +100,7 @@ public class UIMain : MonoBehaviour
 
     private void OnFoodChange()
     {//히어로 스케줄 
+        foodCost = 0;
         for (int i = 0; i < HeroManager.Instance.heroStates.Count; i++)
         {
             if (HeroManager.Instance.heroStates[i] != eHeroState.QUEST)
