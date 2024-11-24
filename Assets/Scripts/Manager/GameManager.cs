@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     public void Init()
     {
         Day = -100;
-        Gold = 10000000;
+        Gold = 0;
 
         for (int i = 0; i < Potions.Length; i++)
         {
@@ -108,10 +108,10 @@ public class GameManager : Singleton<GameManager>
             }
 
             Debug.Log($"최종 스탯 합산 정보 : STR = {_str}, DEX = {_dex}, INT = {_int}, LUK = {_luk}");
-            float baseStr = Mathf.Min(_str / 2000);
-            float baseDex = Mathf.Min(_dex / 2000);
-            float baseInt = Mathf.Min(_int / 2000);
-            float baseLuk = Mathf.Min(_luk / 2000);
+            float baseStr = Mathf.Min(_str / 1500);
+            float baseDex = Mathf.Min(_dex / 1500);
+            float baseInt = Mathf.Min(_int / 1500);
+            float baseLuk = Mathf.Min(_luk / 1500);
 
             baseRate = baseStr * baseDex * baseInt * baseLuk;
             baseRate = Mathf.RoundToInt(baseRate * 100);
