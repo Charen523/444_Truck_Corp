@@ -25,14 +25,25 @@ public class GameManager : Singleton<GameManager>
 
     public int Day { get; private set; }
     public int Gold { get; private set; }
+    public int[] Potions { get; private set; } = new int[4];
     public eEnding Ending { get; set; }
-
     public bool FirstQuest { get; set; }
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         Day = -100;
         Gold = 500;
+
+        for (int i = 0; i < Potions.Length; i++)
+        {
+            Potions[i] = 5;
+        }
+
         FirstQuest = false;
     }
 
@@ -71,6 +82,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
     #endregion
+
+    public void UsePotion(int[] potionIdxs)
+    {
+        for (int i = 0; i < potionIdxs.Length; i++)
+        {
+            Potions[potionIdxs[i]]--;
+        }
+    }
 
     #region warning and dialog
     public void SetWarnParent(Transform t)
