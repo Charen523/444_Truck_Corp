@@ -5747,7 +5747,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4331412374139428462}
         m_TargetAssemblyTypeName: NavSchedule, Assembly-CSharp
         m_MethodName: OnQuestStartBtn
         m_Mode: 1
