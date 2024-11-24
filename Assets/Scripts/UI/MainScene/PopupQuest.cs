@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PopupQuest : MonoBehaviour
 {
     [SerializeField] private NavSchedule navSchedule;
     [SerializeField] private List<SlotQuestSelect> QuestSlots = new();
-    
+
     private void OnEnable()
     {
         for (int i = 0; i < QuestSlots.Count; i++)

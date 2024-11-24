@@ -118,8 +118,7 @@ public class GameFlowDisplay : MonoBehaviour
         {
             GameFlowEvent gameFlowEvent = queue.Dequeue();
             // UI에 추가
-            var toast = PoolManager.Instance.Get<ToastMessage>("Prefabs/ToastMessage", null);
-            toast.transform.SetParent(toastParent);
+            var toast = PoolManager.Instance.Get<ToastMessage>("Prefabs/ToastMessage", toastParent);
             toast.Initialize(gameFlowEvent.Message);
             time = displayDelayTime;
             return;

@@ -24,6 +24,7 @@ public class ToastMessage : Poolable
         if (time > 0.0f)
         {
             time -= Time.fixedDeltaTime;
+            return;
         }
         isInitialized = false;
         Pool.Return(this);

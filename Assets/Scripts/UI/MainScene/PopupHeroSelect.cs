@@ -9,7 +9,7 @@ public class PopupHeroSelect : MonoBehaviour
 
     public List<SlotHeroListBtn> HeroSlots { get; private set; } = new();//영웅 슬롯 캐싱.
     private bool isEnabled; //남은 영웅 찾기
-    
+
     private void OnEnable()
     {
         isEnabled = false;
