@@ -28,7 +28,7 @@ public class SlotQuestSelect : MonoBehaviour
         if (quest.rewardValues[0] != 0)
         {
             rewardTxt.text += $"{quest.rewardValues[0]} 골드";
-            if (quest.rewardValues.Length > 1)
+            if (quest.rewardValues[1] != 0)
             {
                 rewardTxt.text += $", {quest.rewardValues[1]} EXP";
             }
