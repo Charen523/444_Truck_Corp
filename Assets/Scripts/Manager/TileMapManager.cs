@@ -20,6 +20,8 @@ public class TileMapManager : Singleton<TileMapManager>
         astar = new AStar();
         doorPosition = new Vector2Int((int)entryPointObject.transform.localPosition.x, -(int)entryPointObject.transform.localPosition.y);
         heroes = new Dictionary<int, HeroPresenter>();
+
+        GameManager.Instance.OnHeroSpawnEvent += OnHeroEntered;
     }
 
     private void Start()

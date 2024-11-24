@@ -38,8 +38,7 @@ public class HeroManager : Singleton<HeroManager>
         heroStates.Add(eHeroState.FREE);
         GameManager.Instance.OnFoodChangeEvent();
 
-        // 타일맵에 등장
-        TileMapManager.Instance.OnHeroEntered(data);
+        GameManager.Instance.OnHeroSpawnEvent?.Invoke(data);
         return data;
     }
 
@@ -84,15 +83,15 @@ public class HeroManager : Singleton<HeroManager>
     {
         while (scheduleList.Count != 0 && scheduleList[0].dDay <= GameManager.Instance.Day)
         {
-            string message = "";
             Schedule s = scheduleList[0];
             bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; // 성공 여부
+            QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
+
+            var heroes = heroList.Where((hero) => s.heroIdxs.Contains(hero.id));
+            GameManager.Instance.OnQuestEndEvent?.Invoke(heroes, q, isSuccess);
             // 퀘스트 성공
-            heroList.Select((hero) => s.heroIdxs.Contains(hero.id));
             if (isSuccess)
             {
-                QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
-
                 GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
                 for (int i = 0; i < s.heroIdxs.Count; i++)
                 {
@@ -102,7 +101,11 @@ public class HeroManager : Singleton<HeroManager>
             // 퀘스트 실패
             else
             {
-
+                // 용사 사망 처리
+                for (int i = 0; i < s.heroIdxs.Count; i++)
+                {
+                    heroList[s.heroIdxs[i]].Dead();
+                }
             }
 
             // 용사 상태 해제
