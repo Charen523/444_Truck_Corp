@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,9 +119,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 99
-        width: 49
-        height: 9
+        y: 112
+        width: 304
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Projectile01_1
       rect:
         serializedVersion: 2
-        x: 12
-        y: 80
-        width: 127
-        height: 15
+        x: 0
+        y: 96
+        width: 304
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: Projectile01_2
       rect:
         serializedVersion: 2
-        x: 93
-        y: 64
-        width: 99
-        height: 14
+        x: 0
+        y: 80
+        width: 304
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Projectile01_3
       rect:
         serializedVersion: 2
-        x: 154
-        y: 50
-        width: 80
-        height: 11
+        x: 0
+        y: 64
+        width: 304
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: Projectile01_4
       rect:
         serializedVersion: 2
-        x: 213
-        y: 35
-        width: 64
-        height: 9
+        x: 0
+        y: 48
+        width: 304
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: Projectile01_5
       rect:
         serializedVersion: 2
-        x: 257
-        y: 20
-        width: 47
-        height: 7
+        x: 0
+        y: 32
+        width: 304
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,11 +246,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Projectile01_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 304
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a5a94b2f7b72643941e3ec85bfefae
+      internalID: 1699697341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile01_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 304
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1885aff226b767241866714719375a8b
+      internalID: -1165551701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 211a365e71f998c46948394099293d68
     internalID: 0
     vertices: []
     indices: 
@@ -259,7 +303,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Projectile01_0: 3274981867238563342
+      Projectile01_1: 14679232290216982
+      Projectile01_2: 8522956162587781214
+      Projectile01_3: -3655245901621483236
+      Projectile01_4: 7458081878630998983
+      Projectile01_5: -3302479630604912880
+      Projectile01_6: 1699697341
+      Projectile01_7: -1165551701
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

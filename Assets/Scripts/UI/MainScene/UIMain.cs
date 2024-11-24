@@ -7,12 +7,12 @@ public class UIMain : MonoBehaviour
 {
     [Header("Warning")]
     [SerializeField] Transform warningParent;
-    
+
     [Header("UIs")]
     [SerializeField] GameObject navHeroList;
     [SerializeField] GameObject navSchedule;
     [SerializeField] GameObject navTraining;
-    
+
     [Header("volume Setting")]
     [SerializeField] private Slider volumeSlider;
 

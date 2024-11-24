@@ -10,7 +10,7 @@ public class NavSchedule : MonoBehaviour
 
     [SerializeField] PopupHeroSelect popupHeroSelect; //용사 선택창
     [SerializeField] PopupQuest popupQuest; //퀘스트 선택창
-    
+
     [SerializeField] SlotScheduleHero[] scheduleHeroSlots = new SlotScheduleHero[3];
     [SerializeField] SlotScheduleQuest scheduledQuestSlot;
     [SerializeField] Button questStartBtn;

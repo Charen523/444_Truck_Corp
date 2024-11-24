@@ -58,7 +58,7 @@ public class HeroManager : Singleton<HeroManager>
         };
         scheduleList.Add(newS);
 
-        foreach (int idx in heroIdxs) 
+        foreach (int idx in heroIdxs)
         {
             heroStates[idx] = eHeroState.QUEST;
 
@@ -83,8 +83,10 @@ public class HeroManager : Singleton<HeroManager>
     {
         while (scheduleList.Count != 0 && scheduleList[0].dDay <= GameManager.Instance.Day)
         {
-            Schedule s = scheduleList[0];   
-            bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; //성공 여부
+            string message = "";
+            Schedule s = scheduleList[0];
+            bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; // 성공 여부
+            // 퀘스트 성공
             if (isSuccess)
             {
                 QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
@@ -95,13 +97,20 @@ public class HeroManager : Singleton<HeroManager>
                     heroList[s.heroIdxs[i]].GetExp(q.rewardValues[1]);
                 }
             }
+            // 퀘스트 실패
+            else
+            {
 
+            }
+
+            // 용사 상태 해제
             for (int i = 0; i < s.heroIdxs.Count; i++)
             {
                 TileMapManager.Instance.OnHeroEntered(heroList[s.heroIdxs[i]]);
                 heroStates[s.heroIdxs[i]] = eHeroState.FREE;
-                
             }
+
+            // 스케쥴 삭제
             scheduleList.Remove(s);
         }
         GameManager.Instance.OnFoodChangeEvent();

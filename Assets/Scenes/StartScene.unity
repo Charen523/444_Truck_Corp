@@ -177,10 +177,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press any key to start
+  m_text: "\uC544\uBB34 \uD0A4\uB098 \uB20C\uB7EC \uC2DC\uC791"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3f0ff09d37173134ab712467a2aaad7b, type: 2}
-  m_sharedMaterial: {fileID: -4307079721867833646, guid: 3f0ff09d37173134ab712467a2aaad7b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8d75316e435eeb24eaf1d0d0cce0fa0c, type: 2}
+  m_sharedMaterial: {fileID: -4307079721867833646, guid: 8d75316e435eeb24eaf1d0d0cce0fa0c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -765,6 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f409f7ddee07fc4a845cfb9f0df20c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroList: []
   heroStates: 
 --- !u!4 &924644484
 Transform:
@@ -815,7 +816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -950, y: 0}
+  m_AnchoredPosition: {x: -1250, y: 0}
   m_SizeDelta: {x: 2000, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1290716884
@@ -905,10 +906,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1007,7 +1008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -950, y: 0}
+  m_AnchoredPosition: {x: -800, y: 0}
   m_SizeDelta: {x: 2000, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1811341033
@@ -1103,7 +1104,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ddfef0f7e96de4f42af2db670a89b4c0, type: 3}
   - {fileID: 8300000, guid: d13803679883ebe4b8fc4840cc977df8, type: 3}
   - {fileID: 8300000, guid: 318cb91e8a8fb0646845b06943beeab9, type: 3}
-  sfxClips: []
+  sfxClips:
+  - {fileID: 8300000, guid: 2c61021ade66a8e4081471a58624d25e, type: 3}
+  - {fileID: 8300000, guid: b80e803781c6b024f9bf56a4174ab1bf, type: 3}
+  - {fileID: 8300000, guid: c16364ebb480e224b9343a6cfaf896e8, type: 3}
+  - {fileID: 8300000, guid: ed01b1152bf4a7d4ca8a8b4dfe41a388, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!82 &1949745003
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1379,22 +1387,22 @@ MonoBehaviour:
   - "Textures/CharacterSheet/\uCD1D\uC0AC1"
   - "Textures/CharacterSheet/\uCD1D\uC0AC2"
   damageVFXPaths:
+  - Textures/MadangVFX/DotEffectPack/Arrow01
+  - Textures/MadangVFX/DotEffectPack/Arrow01
   - Textures/MadangVFX/DotEffectPack/Slash01
   - Textures/MadangVFX/DotEffectPack/Slash01
   - Textures/MadangVFX/DotEffectPack/Slash01
   - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
-  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Magic03
+  - Textures/MadangVFX/DotEffectPack/Magic04
+  - Textures/MadangVFX/DotEffectPack/Magic02
+  - Textures/MadangVFX/DotEffectPack/Magic02
+  - Textures/MadangVFX/DotEffectPack/Magic01
+  - Textures/MadangVFX/DotEffectPack/Magic01
+  - Textures/MadangVFX/DotEffectPack/Slash02
+  - Textures/MadangVFX/DotEffectPack/Slash02
+  - Textures/MadangVFX/DotEffectPack/Projectile01
+  - Textures/MadangVFX/DotEffectPack/Projectile01
 --- !u!4 &2064686453
 Transform:
   m_ObjectHideFlags: 0
