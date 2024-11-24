@@ -27,9 +27,9 @@ public class SlotScheduleHero : MonoBehaviour
 
         img.sprite = DataManager.Instance.GetSprites(true, hero.spriteIdx);
         heroName.text = hero.name;
-        strTxt.text = $"<size=14>STR</size> {hero.status.STR}";
-        dexTxt.text = $"<size=14>DEX</size> {hero.status.DEX}";
-        intTxt.text = $"<size=14>INT</size> {hero.status.INT}";
-        lukTxt.text = $"<size=14>LUK</size> {hero.status.LUK}";
+        strTxt.text = $"<color=#FF4C4C><size=14>STR</size></color>\n{hero.status.STR}";
+        dexTxt.text = $"<color=#4CAF50><size=14>DEX</size></color>\n{hero.status.DEX}";
+        intTxt.text = $"<color=#4C79FF><size=14>INT</size></color>\n{hero.status.INT}";
+        lukTxt.text = $"<color=#FFD54F><size=14>LUK</size></color>\n{hero.status.LUK}";
     }
 }

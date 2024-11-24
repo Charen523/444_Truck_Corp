@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EndScene2Bankrupt.unity
-    guid: e9da6135cc20db846ad39b6900624bb2
+    path: Assets/Scenes/StartScene.unity
+    guid: 6720540feab180a4f9e3aa78a9e3e039
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: c88b11dc8ef35274c93fb7c52b4f5a8c
