@@ -5,6 +5,8 @@ using UnityEngine.Purchasing;
 
 public class SlotScheduleQuest : MonoBehaviour
 {
+    [SerializeField] private PotionToggleGroup p;
+
     [SerializeField] private GameObject nullBtn;
     [SerializeField] private GameObject info;
 
@@ -66,10 +68,11 @@ public class SlotScheduleQuest : MonoBehaviour
     {
         if (selectedQuest != null)
         {
-            float rate = 0;
+            float baseRate = 0;
+            float rateWithPotion = 0;
             float _str = 0, _dex = 0, _int = 0, _luk = 0;
 
-            //TODO: 성공률 계산식.
+            // 선택된 영웅의 스탯 합산
             for (int i = 0; i < selectedHero.Length; i++)
             {
                 if (selectedHero[i] != null)
@@ -80,15 +83,56 @@ public class SlotScheduleQuest : MonoBehaviour
                     _luk += selectedHero[i].status.LUK;
                 }
             }
-            _str = Mathf.Min(_str / selectedQuest.needSpecs[0], 1);
-            _dex = Mathf.Min(_dex / selectedQuest.needSpecs[1], 1);
-            _int = Mathf.Min(_int / selectedQuest.needSpecs[2], 1);
-            _luk = Mathf.Min(_luk / selectedQuest.needSpecs[3], 1);
 
-            rate = _str * _dex * _int;
-            rate = Mathf.RoundToInt(rate * 100);
-            successRate = (int)rate;
-            successRateTxt.text = $"{successRate}%";
+            // 포션 효과 전 기본 성공률 계산
+            float baseStr = Mathf.Min(_str / selectedQuest.needSpecs[0], 1);
+            float baseDex = Mathf.Min(_dex / selectedQuest.needSpecs[1], 1);
+            float baseInt = Mathf.Min(_int / selectedQuest.needSpecs[2], 1);
+            float baseLuk = Mathf.Min(_luk / selectedQuest.needSpecs[3], 1);
+
+            baseRate = baseStr * baseDex * baseInt * baseLuk;
+            baseRate = Mathf.RoundToInt(baseRate * 100);
+
+            // 포션 효과 적용
+            float pStr = _str, pDex = _dex, pInt = _int, pLuk = _luk;
+            int[] potionIdxs = p.GetSelectedIndices();
+
+            for (int i = 0; i < potionIdxs.Length; i++)
+            {
+                switch (potionIdxs[i])
+                {
+                    case 0:
+                        pStr += 5;
+                        break;
+                    case 1:
+                        pDex += 5;
+                        break;
+                    case 2:
+                        pInt += 5;
+                        break;
+                    case 3:
+                        pLuk += 5;
+                        break;
+                }
+            }
+
+            // 포션 효과 후 성공률 계산
+            pStr = Mathf.Min(pStr / selectedQuest.needSpecs[0], 1);
+            pDex = Mathf.Min(pDex / selectedQuest.needSpecs[1], 1);
+            pInt = Mathf.Min(pInt / selectedQuest.needSpecs[2], 1);
+            pLuk = Mathf.Min(pLuk / selectedQuest.needSpecs[3], 1);
+
+            rateWithPotion = pStr * pDex * pInt * pLuk;
+            rateWithPotion = Mathf.RoundToInt(rateWithPotion * 100);
+
+            // 성공률 텍스트 출력
+            successRateTxt.text = $"{baseRate}%";
+
+            if (rateWithPotion > baseRate)
+            {
+                int bonusRate = Mathf.RoundToInt(rateWithPotion - baseRate);
+                successRateTxt.text += $" <color=#0BFF00><size=18>+{bonusRate}%</size></color>";
+            }
         }
     }
 

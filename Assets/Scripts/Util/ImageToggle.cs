@@ -3,6 +3,10 @@ using UnityEngine.UI;
 
 public class ImageToggle : MonoBehaviour
 {
+    public SlotScheduleQuest q;
+    public PotionToggleGroup p;
+    public int idx;
+
     [Header("Images")]
     public Sprite imageOn; 
     public Sprite imageOff;
@@ -35,6 +39,8 @@ public class ImageToggle : MonoBehaviour
     {
         isOn = !isOn; 
         UpdateImage();
+        p.OnToggleClicked(idx);
+        q.CalculateSuccessRate();
     }
 
     private void UpdateImage()
