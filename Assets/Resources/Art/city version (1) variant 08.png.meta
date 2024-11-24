@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fdca620f6d12d8340badf18f03cb8815
+guid: 1b7b3d2aa3f4dcc448c19846325f3c33
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 33990980966822088
-    second: coin_large_03_0
+      213: -6573997744308825542
+    second: city version (1) variant 08_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,30 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coin_large_03_0
+      name: city version (1) variant 08_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 54
-        height: 54
+        width: 1024
+        height: 576
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c0381afd92c87000800000000000000
-      internalID: 33990980966822088
+      spriteID: a32d040d1e774c4a0800000000000000
+      internalID: -6573997744308825542
       vertices: []
       indices: 
       edges: []
@@ -160,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      coin_large_03_0: 33990980966822088
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
