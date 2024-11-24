@@ -134,8 +134,8 @@ TextureImporter:
         width: 244
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 45, z: 10, w: 29}
       customData: 
       outline: []
       physicsShape: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e59459254fed0494b833f0dcc53567de
     internalID: 0
     vertices: []
     indices: 
@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      talkBox_list_0: -7930131825629626861
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

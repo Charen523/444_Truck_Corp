@@ -9,7 +9,10 @@ public class SlotScheduleQuest : MonoBehaviour
     [SerializeField] private GameObject info;
 
     [SerializeField] private TextMeshProUGUI questNameTxt;
-    [SerializeField] private TextMeshProUGUI neededStatTxt;
+    [SerializeField] private TextMeshProUGUI strTxt;
+    [SerializeField] private TextMeshProUGUI dexTxt;
+    [SerializeField] private TextMeshProUGUI intTxt;
+    [SerializeField] private TextMeshProUGUI conTxt;
     [SerializeField] private TextMeshProUGUI successRateTxt;
 
     /*스케줄 정보*/
@@ -51,7 +54,10 @@ public class SlotScheduleQuest : MonoBehaviour
         selectedQuest = quest;
 
         questNameTxt.text = selectedQuest.QuestName;
-        neededStatTxt.text = $"STR - {selectedQuest.needSpecs[0]}, DEF - {selectedQuest.needSpecs[1]}, INT - {selectedQuest.needSpecs[2]}";
+        strTxt.text = $"<size=18>STR </size>{quest.needSpec[0]}";
+        dexTxt.text = $"<size=18>DEX </size>{quest.needSpec[1]}";
+        intTxt.text = $"<size=18>INT </size>{quest.needSpec[2]}";
+        conTxt.text = $"<size=18>CON </size>{quest.needSpec[3]}";
 
         CalculateSuccessRate();
     }

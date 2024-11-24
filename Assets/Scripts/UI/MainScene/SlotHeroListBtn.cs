@@ -51,7 +51,6 @@ public class SlotHeroListBtn : MonoBehaviour
         if (popupHeroSelect != null)
         {
             popupHeroSelect.OnSelectSlot(listIdx);
-            popupHeroSelect.gameObject.SetActive(false);
         }
     }
 }

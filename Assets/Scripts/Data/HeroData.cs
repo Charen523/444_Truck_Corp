@@ -72,7 +72,7 @@ public class HeroData
     {
         id = characterCount;
         name = names[UnityEngine.Random.Range(0, names.Count)];
-        classData = (ClassData)DataManager.Instance.GetData("ClassData", UnityEngine.Random.Range(0, 8));
+        classData = DataManager.Instance.GetData<ClassData>(nameof(ClassData), UnityEngine.Random.Range(0, 8));
         status = new(classData.baseStr, classData.baseDex, classData.baseInt, classData.baseCon, classData.baseLuk);
         spriteType = UnityEngine.Random.Range(0, 2) == 0;
 
