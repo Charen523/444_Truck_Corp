@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,6 +39,8 @@ public class GameManager : Singleton<GameManager>
     public eEnding Ending { get; set; }
     public bool FirstQuest { get; set; }
 
+    public int[] TodayQuests { get; private set; } = new int[4];
+    
     private void Start()
     {
         Init();
@@ -120,6 +123,47 @@ public class GameManager : Singleton<GameManager>
             }
 
             SceneManager.LoadScene(2);
+        }
+
+        int todayDiff = Day switch
+        {
+            < -90 => 1,
+            < -80 => 2,
+            < -70 => 3,
+            < -60 => 4,
+            < -50 => 5,
+            < -40 => 6,
+            < -30 => 7,
+            < -20 => 8,
+            < -10 => 9,
+            _ => 10
+        };
+
+        for (int i =  0; i < TodayQuests.Length; i++)
+        {
+            int curDiff = UnityEngine.Random.Range(0, 200);
+            curDiff = curDiff switch
+            {
+                < 80 => todayDiff,
+                < 110 => todayDiff - 1,
+                < 140 => todayDiff + 1,
+                < 159 => todayDiff - 2,
+                < 178 => todayDiff + 2,
+                < 188 => todayDiff - 3,
+                < 198 => todayDiff + 3,
+                < 199 => todayDiff - 4,
+                _ => todayDiff + 4,
+            };
+
+            curDiff = Mathf.Clamp(curDiff, 1, 10);
+
+            var filteredQuests = DataManager.Instance.GetDataList<QuestData>("QuestData")
+                .Where(q => q.difficulty == curDiff)
+                .ToList();
+
+            int randIdx = UnityEngine.Random.Range(0, filteredQuests.Count);
+            TodayQuests[i] = filteredQuests[randIdx].id;
+            Debug.Log(DataManager.Instance.GetData<QuestData>(nameof(QuestData), TodayQuests[i]).target);
         }
     }
 
