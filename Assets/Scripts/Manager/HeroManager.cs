@@ -69,7 +69,7 @@ public class HeroManager : Singleton<HeroManager>
         GameManager.Instance.OnFoodChangeEvent();
     }
 
-    public void AddTrainingSchedule(int heroIdx, int dummy)
+    public void AddTrainingSchedule(int heroIdx)
     {
         heroStates[heroIdx] = eHeroState.TRAINING;
     }

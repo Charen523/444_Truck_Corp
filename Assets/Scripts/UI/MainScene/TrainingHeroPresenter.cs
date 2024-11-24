@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,16 +9,25 @@ public class TrainingHeroPresenter : MonoBehaviour
 
     public string Path;
 
-    private void Start()
+    private void Awake()
     {
-        Initialize(Path);
+        Initialize(Path, null);
     }
 
-    public void Initialize(string path)
+    public void Initialize(string path, Action action)
     {
         if (string.IsNullOrEmpty(path)) return;
-        animator = new CustomAnimator(path, 6, false, false, null);
-        animator.SetPlaying(true);
+        animator = new CustomAnimator(path, 10, false, false, action);
+    }
+
+    public void SetPlaying(bool value)
+    {
+        animator.SetPlaying(value);
+    }
+
+    public void SetOn(Action action)
+    {
+        animator.SetOnEndAnimation(action);
     }
 
     private void FixedUpdate()
