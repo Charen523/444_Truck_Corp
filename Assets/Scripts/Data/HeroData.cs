@@ -8,23 +8,20 @@ public class Status
     public int STR; // 근력
     public int DEX; // 민첩
     public int INT; // 지능
-    public int CON; // 건강
     public int LUK; // 행운
 
-    public Status(int _str, int _dex, int _int, int _con, int _luk)
+    public Status(int _str, int _dex, int _int, int _luk)
     {
         STR = _str;
         DEX = _dex;
         INT = _int;
-        CON = _con;
         LUK = _luk;
     }
-    public Status SetStatus(int _str, int _dex, int _int, int _con, int _luk)
+    public Status SetStatus(int _str, int _dex, int _int, int _luk)
     {
         STR = _str;
         DEX = _dex;
         INT = _int;
-        CON = _con;
         LUK = _luk;
         return this;
     }
@@ -35,7 +32,6 @@ public class Status
             a.STR + b.STR,
             a.DEX + b.DEX,
             a.INT + b.INT,
-            a.CON + b.CON,
             a.LUK + b.LUK
         );
     }

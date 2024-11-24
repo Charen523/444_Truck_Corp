@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: f7c495a73e542234087f2ceb0e29bedb
+guid: 8b6a5be8c7e7eaa4294e6a64a99a65f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8462755092931358259
-    second: ruins version  (1) variant 06_0
+      213: 402509764520048928
+    second: icon_food.png_0
+  - first:
+      213: 8549453739611907231
+    second: icon_food.png_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ruins version  (1) variant 06_0
+      name: icon_food.png_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 576
+        width: 12
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dc1d2b0a4114e8a80800000000000000
-      internalID: -8462755092931358259
+      spriteID: 029f7dc8f70069500800000000000000
+      internalID: 402509764520048928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_food.png_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 8
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f94e33511e2c5a670800000000000000
+      internalID: 8549453739611907231
       vertices: []
       indices: 
       edges: []
@@ -160,8 +185,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      ruins version  (1) variant 06_0: -8462755092931358259
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

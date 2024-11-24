@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f7c495a73e542234087f2ceb0e29bedb
+guid: 10b67829f94a71d49bab9d06447c4b62
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8462755092931358259
-    second: ruins version  (1) variant 06_0
+      213: 1312738293397490058
+    second: box_1.png_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ruins version  (1) variant 06_0
+      name: box_1.png_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 576
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 3, z: 3, w: 3}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dc1d2b0a4114e8a80800000000000000
-      internalID: -8462755092931358259
+      spriteID: a89820dc588c73210800000000000000
+      internalID: 1312738293397490058
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7918dac27d38c9b4188b6176e09af249
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ruins version  (1) variant 06_0: -8462755092931358259
+      box_1.png_0: 1312738293397490058
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
