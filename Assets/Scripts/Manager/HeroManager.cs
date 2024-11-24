@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public enum eHeroState
 {
@@ -87,6 +88,7 @@ public class HeroManager : Singleton<HeroManager>
             Schedule s = scheduleList[0];
             bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; // 성공 여부
             // 퀘스트 성공
+            heroList.Select((hero) => s.heroIdxs.Contains(hero.id));
             if (isSuccess)
             {
                 QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
