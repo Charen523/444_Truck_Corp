@@ -1,5 +1,3 @@
-using System.Drawing;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -17,7 +15,7 @@ public class SlotQuestSelect : MonoBehaviour
     public void SetQSlot(QuestData quest)
     {
         nameTxt.text = quest.QuestName;
-        statTxt.text = 
+        statTxt.text =
             $"<size=18>STR </size>{quest.needSpecs[0]}, " +
             $"<size=18>DEF </size>{quest.needSpecs[1]}, " +
             $"<size=18>INT </size>{quest.needSpecs[2]}, " +

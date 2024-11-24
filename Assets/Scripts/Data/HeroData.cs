@@ -106,7 +106,7 @@ public class HeroData
         }
 
         exp += delta;
-        while (exp > levelExpList[level])
+        while (exp >= levelExpList[level])
         {
             exp -= levelExpList[level++];
             status += classData.IncStat;

@@ -10,7 +10,7 @@ public class NavSchedule : MonoBehaviour
 
     [SerializeField] PopupHeroSelect popupHeroSelect; //용사 선택창
     [SerializeField] PopupQuest popupQuest; //퀘스트 선택창
-    
+
     [SerializeField] SlotScheduleHero[] scheduleHeroSlots = new SlotScheduleHero[3];
     [SerializeField] SlotScheduleQuest scheduledQuestSlot;
     [SerializeField] Button questStartBtn;
@@ -21,15 +21,11 @@ public class NavSchedule : MonoBehaviour
 
     private bool[] isSelected = new bool[4];
 
-
-    private void Awake()
+    private void OnEnable()
     {
         GameManager.Instance.HeroSelectAction = SetHeroSlot;
         GameManager.Instance.QuestSelectAction = SetQuestSlot;
-    }
 
-    private void OnEnable()
-    {
         clickedSlotIdx = -1;
         questStartBtn.interactable = false;
 
