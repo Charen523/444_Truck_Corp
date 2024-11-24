@@ -36,7 +36,8 @@ public class SlotScheduleQuest : MonoBehaviour
 
     public void HeroSelected(int idx, HeroData hero)
     { //스케줄표에 선택된 히어로 정보 저장.
-        nullBtn.SetActive(true);
+        if (!info.activeSelf)
+            nullBtn.SetActive(true);
         
         if (selectedHero[idx] != null)
         {//현재 스케줄에서 선택된 캐릭터 풀어주기
