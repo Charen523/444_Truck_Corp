@@ -36,7 +36,7 @@ public class UIMain : MonoBehaviour
         GameManager.Instance.GoldChangeAction += OnGoldChange;
         GameManager.Instance.FoodChangeAction += OnFoodChange;
         GameManager.Instance.DayChangeAction += OnDayChange;
-        GameManager.Instance.HeroSelectAction += OnPotionChange;
+        GameManager.Instance.PotionAction += OnPotionChange;
 
         GameManager.Instance.SetWarnParent(warningParent);
         GameManager.Instance.SetDialogParent(warningParent);
@@ -108,7 +108,7 @@ public class UIMain : MonoBehaviour
         FoodTxt.text = foodCost.ToString() + " 골드";
     }
 
-    private void OnPotionChange(int dummy)
+    private void OnPotionChange()
     {
         for (int i = 0; i < potionTxts.Length; i++)
         {

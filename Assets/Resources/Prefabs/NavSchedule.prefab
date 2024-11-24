@@ -861,6 +861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98287b0a6cb02534b93265b42181df96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  q: {fileID: 8167684415087148112}
+  p: {fileID: 2810552000131309128}
+  idx: 2
   imageOn: {fileID: 21300000, guid: 2fcf4625768fcc747a41422dedbf1626, type: 3}
   imageOff: {fileID: 21300000, guid: a1c619ba266d8f343a7c27c3752bdcb1, type: 3}
   targetImage: {fileID: 7714011393508315749}
@@ -3012,6 +3015,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98287b0a6cb02534b93265b42181df96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  q: {fileID: 8167684415087148112}
+  p: {fileID: 2810552000131309128}
+  idx: 0
   imageOn: {fileID: 21300000, guid: 2fcf4625768fcc747a41422dedbf1626, type: 3}
   imageOff: {fileID: 21300000, guid: a1c619ba266d8f343a7c27c3752bdcb1, type: 3}
   targetImage: {fileID: 6524895959743680016}
@@ -3608,6 +3614,7 @@ MonoBehaviour:
   - {fileID: 6769421320479663037}
   scheduledQuestSlot: {fileID: 8167684415087148112}
   questStartBtn: {fileID: 129567861986799090}
+  toggleGroup: {fileID: 2810552000131309128}
 --- !u!1 &4123945507096045226
 GameObject:
   m_ObjectHideFlags: 0
@@ -5544,6 +5551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec346c2191fe7514e931474dec172408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  p: {fileID: 2810552000131309128}
   nullBtn: {fileID: 221378014380315252}
   info: {fileID: 491827242434837298}
   questNameTxt: {fileID: 4487537687643365129}
@@ -7004,6 +7012,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98287b0a6cb02534b93265b42181df96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  q: {fileID: 8167684415087148112}
+  p: {fileID: 2810552000131309128}
+  idx: 1
   imageOn: {fileID: 21300000, guid: 2fcf4625768fcc747a41422dedbf1626, type: 3}
   imageOff: {fileID: 21300000, guid: a1c619ba266d8f343a7c27c3752bdcb1, type: 3}
   targetImage: {fileID: 8572720475764046446}
@@ -8043,6 +8054,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98287b0a6cb02534b93265b42181df96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  q: {fileID: 8167684415087148112}
+  p: {fileID: 2810552000131309128}
+  idx: 3
   imageOn: {fileID: 21300000, guid: 2fcf4625768fcc747a41422dedbf1626, type: 3}
   imageOff: {fileID: 21300000, guid: a1c619ba266d8f343a7c27c3752bdcb1, type: 3}
   targetImage: {fileID: 5007542622891307636}

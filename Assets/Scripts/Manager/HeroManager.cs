@@ -92,7 +92,7 @@ public class HeroManager : Singleton<HeroManager>
                 GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
                 for (int i = 0; i < s.heroIdxs.Count; i++)
                 {
-                    heroList[s.heroIdxs[i]].GetExp(q.rewardValues[i]);
+                    heroList[s.heroIdxs[i]].GetExp(q.rewardValues[1]);
                 }
             }
 
