@@ -133,6 +133,7 @@ public class SlotScheduleQuest : MonoBehaviour
                 int bonusRate = Mathf.RoundToInt(rateWithPotion - baseRate);
                 successRateTxt.text += $" <color=#0BFF00><size=18>+{bonusRate}%</size></color>";
             }
+            successRate = Mathf.RoundToInt(rateWithPotion);
         }
     }
 

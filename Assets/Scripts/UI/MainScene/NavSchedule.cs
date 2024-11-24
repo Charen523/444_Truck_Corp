@@ -134,7 +134,7 @@ public class NavSchedule : MonoBehaviour
 
         scheduledQuestSlot.ReturnScheduleInfo(out List<int> heroIdx, out QuestData qData, out int successRate);
 
-        HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, GameManager.Instance.Day + qData.needTime, successRate);
+        HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, qData.needTime, successRate);
 
         if (qData.id == 0) { GameManager.Instance.FirstQuest = true; }
         gameObject.SetActive(false);
