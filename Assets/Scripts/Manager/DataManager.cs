@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
-    private Dictionary<string, List<object>> dataDics = new(); //Resources/Json으로부터 자동 로딩
+    public Dictionary<string, List<object>> DataDics { get; private set; } = new(); //Resources/Json으로부터 자동 로딩
+
     [SerializeField] private List<Sprite> thumbnails; //StartScene에서 수동캐싱
     [SerializeField] private List<Sprite> standUIs; //StartScene에서 수동캐싱
     [SerializeField] private List<string> characterSheetPaths; //StartScene에서 수동캐싱
@@ -28,11 +29,11 @@ public class DataManager : Singleton<DataManager>
                 {
                     foreach (var obj in objectList)
                     {
-                        if (!dataDics.ContainsKey(fileName))
+                        if (!DataDics.ContainsKey(fileName))
                         {
-                            dataDics[fileName] = new List<object>();
+                            DataDics[fileName] = new List<object>();
                         }
-                        dataDics[fileName].Add(obj);
+                        DataDics[fileName].Add(obj);
                     }
                 }
             }
@@ -43,9 +44,27 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    public object GetData(string className, int index)
+    public T GetData<T>(string className, int index)
     {
-        return dataDics[className][index];
+        return (T)DataDics[className][index];
+    }
+
+    public List<T> GetDataList<T> (string key) where T : class
+    {
+        if (!DataDics.TryGetValue(key, out var objectList))
+        {
+            Debug.LogWarning($"{key} 클래스 존재하지 않음.");
+            return new List<T>();
+        }
+
+        var dataList = new List<T>();
+        foreach (var obj in objectList)
+        {
+            if (obj is T data) dataList.Add(data);
+            else Debug.LogWarning($"객체를 {typeof(T)}로 변환 불가.");
+        }
+
+        return dataList;
     }
 
     public Sprite GetSprites(bool isStand, int idx)

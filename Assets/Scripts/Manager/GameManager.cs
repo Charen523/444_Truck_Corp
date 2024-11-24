@@ -12,6 +12,8 @@ public enum eEnding
 public class GameManager : Singleton<GameManager>
 {
     public Action<int> HeroSelectAction;
+    public Action<int> QuestSelectAction;
+
     public Action<int> GoldChangeAction;
     public Action<int> FoodChangeAction;
     public Action<int> DayChangeAction;
@@ -35,6 +37,11 @@ public class GameManager : Singleton<GameManager>
     public void OnHeroSelectEvent(int idx)
     {
         HeroSelectAction?.Invoke(idx);
+    }
+
+    public void OnQuestSelectEvent(int idx)
+    {
+        QuestSelectAction?.Invoke(idx);
     }
 
     public void OnGoldChangeEvent(int delta)

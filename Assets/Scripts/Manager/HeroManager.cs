@@ -107,7 +107,7 @@ public class HeroManager : Singleton<HeroManager>
                 bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; //성공 여부
                 if (isSuccess)
                 {
-                    QuestData q = (QuestData)DataManager.Instance.GetData("QuestData", s.scheduleType);
+                    QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
 
                     //골드 보상
                     GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
