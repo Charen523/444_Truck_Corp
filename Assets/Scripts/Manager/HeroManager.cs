@@ -17,7 +17,7 @@ public class HeroManager : Singleton<HeroManager>
         public int successRate;
     }
 
-    private List<HeroData> heroList = new();
+    public List<HeroData> heroList = new();
     public List<eHeroState> heroStates = new();
     private List<Schedule> scheduleList = new();
 

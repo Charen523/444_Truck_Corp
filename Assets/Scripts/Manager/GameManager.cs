@@ -77,8 +77,39 @@ public class GameManager : Singleton<GameManager>
 
         if (Day == 0)
         {
-            //TODO: 엔딩 분기 계산
             Ending = eEnding.Lose;
+
+            float baseRate = 0;
+            float _str = 0, _dex = 0, _int = 0, _luk = 0;
+
+            // 선택된 영웅의 스탯 합산
+            for (int i = 0; i < HeroManager.Instance.heroStates.Count; i++)
+            {
+                HeroData data = HeroManager.Instance.GetHero(i);
+
+                if (data != null)
+                {
+                    _str += data.status.STR;
+                    _dex += data.status.DEX;
+                    _int += data.status.INT;
+                    _luk += data.status.LUK;
+                }
+            }
+
+            float baseStr = Mathf.Min(_str / 300);
+            float baseDex = Mathf.Min(_dex / 300);
+            float baseInt = Mathf.Min(_int / 300);
+            float baseLuk = Mathf.Min(_luk / 300);
+
+            baseRate = baseStr * baseDex * baseInt * baseLuk;
+            baseRate = Mathf.RoundToInt(baseRate * 100);
+
+            bool isSuccess = UnityEngine.Random.Range(0, 100) < baseRate; //성공 여부
+            if (isSuccess)
+            {
+                Ending = eEnding.Win;
+            }
+
             SceneManager.LoadScene(2);
         }
     }
