@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class Status
@@ -10,7 +11,6 @@ public class Status
     public int CON; // 건강
     public int LUK; // 행운
 
-    public Status() { }
     public Status(int _str, int _dex, int _int, int _con, int _luk)
     {
         STR = _str;
@@ -18,6 +18,26 @@ public class Status
         INT = _int;
         CON = _con;
         LUK = _luk;
+    }
+    public Status SetStatus(int _str, int _dex, int _int, int _con, int _luk)
+    {
+        STR = _str;
+        DEX = _dex;
+        INT = _int;
+        CON = _con;
+        LUK = _luk;
+        return this;
+    }
+
+    public static Status operator +(Status a, Status b)
+    {
+        return new Status(
+            a.STR + b.STR,
+            a.DEX + b.DEX,
+            a.INT + b.INT,
+            a.CON + b.CON,
+            a.LUK + b.LUK
+        );
     }
 }
 
@@ -44,6 +64,7 @@ public class HeroData
             "사샤", "쉐리", "실키", "소니아", "소피", "스텔라", "써니", "슈가", "실비아", "트리샤",
             "트루디아", "바네사", "벨리카", "베라", "베로니카", "빅토리아", "바이올렛", "제키", "제나", "지나"
         };
+    private readonly List<int> levelExpList = new() { 0, 5, 30, 210, 495, 560, 800, 1000, 1300, 1500, 1700 };
 
     public int id;
     public string name;
@@ -73,10 +94,26 @@ public class HeroData
         id = characterCount;
         name = names[UnityEngine.Random.Range(0, names.Count)];
         classData = DataManager.Instance.GetData<ClassData>(nameof(ClassData), UnityEngine.Random.Range(0, 8));
-        status = new(classData.baseStr, classData.baseDex, classData.baseInt, classData.baseCon, classData.baseLuk);
+        status = classData.BaseStat;
         spriteType = UnityEngine.Random.Range(0, 2) == 0;
 
         spriteIdx = classData.id * 2;
         spriteIdx = (spriteType) ? spriteIdx - 1 : spriteIdx - 2;
+    }
+
+    public void GetExp(int delta)
+    {
+        if (level == 11)
+        {
+            Debug.LogWarning("과레벨업. 버그.");
+            return;
+        }
+
+        exp += delta;
+        while (exp > levelExpList[level])
+        {
+            exp -= levelExpList[level++];
+            status += classData.IncStat;
+        }
     }
 }

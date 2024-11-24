@@ -49,7 +49,7 @@ public class UIMain : MonoBehaviour
     private void Start()
     {
         OnGoldChange(GameManager.Instance.Gold);
-        OnFoodChange(0);
+        OnFoodChange();
         OnDayChange(GameManager.Instance.Day); ;
     }
 
@@ -93,8 +93,15 @@ public class UIMain : MonoBehaviour
         curGoldTxt.text = curGold.ToString() + " 골드";
     }
 
-    private void OnFoodChange(int heroCount)
+    private void OnFoodChange()
     {//히어로 스케줄 변화
+        int heroCount = 0;
+        foreach (var h in HeroManager.Instance.heroStates)
+        {
+            if (h != eHeroState.QUEST)
+                heroCount++;
+        }
+
         foodCost = heroCount * 50;
         FoodTxt.text = foodCost.ToString() + " 골드";
     }
@@ -123,7 +130,15 @@ public class UIMain : MonoBehaviour
 
     public void ChangeDate()
     {
-        GameManager.Instance.OnGoldChangeEvent(-foodCost);
+        GameManager.Instance.OnGoldChangeEvent(-foodCost * skipCount);
+
+        int trainCount = 0;
+        foreach (var h in HeroManager.Instance.heroStates)
+        {
+            if (h == eHeroState.TRAINING) trainCount++;
+        }
+        GameManager.Instance.OnGoldChangeEvent(trainCount * skipCount);
+
         if (GameManager.Instance.Gold < 0)
         {
             GameManager.Instance.Ending = eEnding.Bankrupt;

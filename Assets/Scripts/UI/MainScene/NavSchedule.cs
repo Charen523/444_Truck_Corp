@@ -54,6 +54,12 @@ public class NavSchedule : MonoBehaviour
         {
             QuestSlotIdx[i] = GetRandomQuest(maxDiff);
         }
+
+        if (!GameManager.Instance.IsFirstQuest)
+        {
+            QuestSlotIdx[0] = 0;
+            GameManager.Instance.IsFirstQuest = true;
+        }
     }
 
     #region Select Hero
