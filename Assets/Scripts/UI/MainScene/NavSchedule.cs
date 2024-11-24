@@ -38,25 +38,18 @@ public class NavSchedule : MonoBehaviour
         scheduledQuestSlot.InitSlot();
         isSelected[3] = false;
 
-        StartCoroutine(EnableQuestStart());
-
-        int maxDiff = GameManager.Instance.Day switch
+        for (int i = 0; i < GameManager.Instance.TodayQuests.Length; i++)
         {
-            < -75 => 1,
-            < -50 => 2,
-            < -25 => 3,
-            _ => 4
-        };
-
-        for (int i = 0; i < QuestSlotIdx.Length; i++)
-        {
-            QuestSlotIdx[i] = GetRandomQuest(maxDiff);
+            QuestSlotIdx[i] = GameManager.Instance.TodayQuests[i];
         }
 
         if (!GameManager.Instance.FirstQuest)
         {
+            Debug.Log("지원금 수령 퀘");
             QuestSlotIdx[0] = 0;
         }
+
+        StartCoroutine(EnableQuestStart());
     }
 
     #region Select Hero
@@ -85,22 +78,6 @@ public class NavSchedule : MonoBehaviour
     #endregion
 
     #region Select Quest
-    private int GetRandomQuest(int maxDiff)
-    {
-        var filteredQuests = DataManager.Instance.GetDataList<QuestData>("QuestData")
-            .Where(q => q.difficulty >= 1 && q.difficulty <= maxDiff)
-            .ToList();
-
-        if (filteredQuests.Count == 0)
-        {
-            Debug.LogWarning("조건에 맞는 퀘스트 난이도 오류");
-            return -1;
-        }
-
-        int randomIndex = Random.Range(0, filteredQuests.Count);
-        return randomIndex;
-    }
-
     public void OnQuestSelectBtn()
     {
         popupQuest.gameObject.SetActive(true);
