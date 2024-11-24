@@ -57,7 +57,7 @@ public class SlotScheduleQuest : MonoBehaviour
         strTxt.text = $"<size=18>STR </size>{quest.needSpec[0]}";
         dexTxt.text = $"<size=18>DEX </size>{quest.needSpec[1]}";
         intTxt.text = $"<size=18>INT </size>{quest.needSpec[2]}";
-        lukTxt.text = $"<size=18>CON </size>{quest.needSpec[3]}";
+        lukTxt.text = $"<size=18>LUK </size>{quest.needSpec[3]}";
 
         CalculateSuccessRate();
     }
