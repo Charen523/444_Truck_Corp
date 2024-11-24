@@ -19,6 +19,7 @@ public class UIMain : MonoBehaviour
     [Header("Status")]
     [SerializeField] private TextMeshProUGUI curGoldTxt;
     [SerializeField] private TextMeshProUGUI FoodTxt;
+    [SerializeField] private TextMeshProUGUI[] potionTxts;
     private int foodCost = 0;
 
     [Header("Time Skip")]
@@ -35,6 +36,7 @@ public class UIMain : MonoBehaviour
         GameManager.Instance.GoldChangeAction += OnGoldChange;
         GameManager.Instance.FoodChangeAction += OnFoodChange;
         GameManager.Instance.DayChangeAction += OnDayChange;
+        GameManager.Instance.HeroSelectAction += OnPotionChange;
 
         GameManager.Instance.SetWarnParent(warningParent);
         GameManager.Instance.SetDialogParent(warningParent);
@@ -104,6 +106,14 @@ public class UIMain : MonoBehaviour
 
         foodCost = heroCount * 50;
         FoodTxt.text = foodCost.ToString() + " 골드";
+    }
+
+    private void OnPotionChange(int dummy)
+    {
+        for (int i = 0; i < potionTxts.Length; i++)
+        {
+            potionTxts[i].text = GameManager.Instance.Potions[i] + "개";
+        }
     }
     #endregion
 

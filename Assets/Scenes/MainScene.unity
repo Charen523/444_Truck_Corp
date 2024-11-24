@@ -10544,6 +10544,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3729940712133016547, guid: 882934913889e14499e6546bb793b3f7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5893155096876668954, guid: 882934913889e14499e6546bb793b3f7, type: 3}
       propertyPath: m_text
       value: "76\uC77C"
