@@ -19,15 +19,11 @@ public class NavSchedule : MonoBehaviour
 
     private bool[] isSelected = new bool[4];
 
-
-    private void Awake()
+    private void OnEnable()
     {
         GameManager.Instance.HeroSelectAction = SetHeroSlot;
         GameManager.Instance.QuestSelectAction = SetQuestSlot;
-    }
 
-    private void OnEnable()
-    {
         clickedSlotIdx = -1;
         questStartBtn.interactable = false;
 
