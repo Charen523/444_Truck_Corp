@@ -99,15 +99,16 @@ public class UIMain : MonoBehaviour
     }
 
     private void OnFoodChange()
-    {//히어로 스케줄 변화
-        int heroCount = 0;
-        foreach (var h in HeroManager.Instance.heroStates)
+    {//히어로 스케줄 
+        for (int i = 0; i < HeroManager.Instance.heroStates.Count; i++)
         {
-            if (h != eHeroState.QUEST)
-                heroCount++;
+            if (HeroManager.Instance.heroStates[i] != eHeroState.QUEST)
+                foodCost += 50 * HeroManager.Instance.heroList[i].level;
+            else
+            {
+                foodCost += 10 * HeroManager.Instance.heroList[i].level;
+            }
         }
-
-        foodCost = heroCount * 50;
         FoodTxt.text = foodCost.ToString() + " 골드";
     }
 
