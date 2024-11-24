@@ -1378,6 +1378,23 @@ MonoBehaviour:
   - "Textures/CharacterSheet/\uC804\uC0AC2"
   - "Textures/CharacterSheet/\uCD1D\uC0AC1"
   - "Textures/CharacterSheet/\uCD1D\uC0AC2"
+  damageVFXPaths:
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
+  - Textures/MadangVFX/DotEffectPack/Slash01
 --- !u!4 &2064686453
 Transform:
   m_ObjectHideFlags: 0
