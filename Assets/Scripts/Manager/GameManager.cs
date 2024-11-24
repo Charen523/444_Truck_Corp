@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     public Action<int> QuestSelectAction;
 
     public Action<int> GoldChangeAction;
-    public Action<int> FoodChangeAction;
+    public Action FoodChangeAction;
     public Action<int> DayChangeAction;
 
     private Transform warnParent;
@@ -27,10 +27,13 @@ public class GameManager : Singleton<GameManager>
     public int Gold { get; private set; }
     public eEnding Ending { get; set; }
 
+    public bool IsFirstQuest { get; set; }
+
     private void Start()
     {
         Day = -100;
         Gold = 500;
+        IsFirstQuest = false;
     }
 
     #region event invoker
@@ -50,9 +53,9 @@ public class GameManager : Singleton<GameManager>
         GoldChangeAction?.Invoke(Gold);
     }
 
-    public void OnFoodChangeEvent(int heroCount)
+    public void OnFoodChangeEvent()
     {
-        FoodChangeAction?.Invoke(heroCount);
+        FoodChangeAction?.Invoke();
     }
 
     public void OnDayChangeEvent(int delta)
