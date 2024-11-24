@@ -20,4 +20,7 @@ public class ClassData
     public int incInt;
     public int incCon;
     public int incLuk;
+
+    public Status BaseStat => new Status(baseStr, baseDex, baseInt, baseCon, baseLuk);
+    public Status IncStat => new Status(incStr, incDex, incInt, incCon, incLuk);
 }

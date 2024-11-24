@@ -1,16 +1,23 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PopupQuest : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private NavSchedule navSchedule;
+    [SerializeField] private List<SlotQuestSelect> QuestSlots = new();
+    
+    private void OnEnable()
     {
-        
+        for (int i = 0; i < QuestSlots.Count; i++)
+        {
+            QuestSlots[i].SetQSlot(DataManager.Instance.GetData<QuestData>(nameof(QuestData), navSchedule.QuestSlotIdx[i]));
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnSelectSlot(int listIdx)
     {
-        
+        GameManager.Instance.OnQuestSelectEvent(listIdx);
+        gameObject.SetActive(false);
     }
 }

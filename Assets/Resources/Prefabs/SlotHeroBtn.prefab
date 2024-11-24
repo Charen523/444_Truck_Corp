@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4748b5cae9442c43aae8827fc251c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupHeroSelect: {fileID: 0}
   myBtn: {fileID: 2828986785693890454}
   listIdx: 0
   thumbnail: {fileID: 2531594280959999446}

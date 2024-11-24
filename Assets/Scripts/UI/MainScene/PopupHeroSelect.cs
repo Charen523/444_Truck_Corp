@@ -21,7 +21,6 @@ public class PopupHeroSelect : MonoBehaviour
                 SlotHeroListBtn newSlot = Instantiate(ListPrefab, ListParent).GetComponent<SlotHeroListBtn>();
                 HeroSlots.Add(newSlot);
                 newSlot.InitHeroSlot(i, this);
-                Debug.Log("생성");
             }
             HeroSlots[i].SetHeroSlot(HeroManager.Instance.GetHero(i), ref isEnabled);
         }

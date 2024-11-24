@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +15,15 @@ public class NavSchedule : MonoBehaviour
     [SerializeField] SlotScheduleQuest scheduledQuestSlot;
     [SerializeField] Button questStartBtn;
 
+    public int[] QuestSlotIdx { get; private set; } = new int[4];
+
     private bool[] isSelected = new bool[4];
+
 
     private void Awake()
     {
-        GameManager.Instance.HeroSelectAction += SetCharacterSlot;
+        GameManager.Instance.HeroSelectAction += SetHeroSlot;
+        GameManager.Instance.QuestSelectAction += SetQuestSlot;
     }
 
     private void OnEnable()
@@ -34,7 +39,26 @@ public class NavSchedule : MonoBehaviour
 
         scheduledQuestSlot.InitSlot();
         isSelected[3] = false;
+
         StartCoroutine(EnableQuestStart());
+
+        int maxDiff = GameManager.Instance.Day switch
+        {
+            < -75 => 1,
+            < -50 => 2,
+            < -25 => 3,
+            _ => 4
+        };
+
+        for (int i = 0; i < QuestSlotIdx.Length; i++)
+        {
+            QuestSlotIdx[i] = GetRandomQuest(maxDiff);
+        }
+
+        if (!GameManager.Instance.FirstQuest)
+        {
+            QuestSlotIdx[0] = 0;
+        }
     }
 
     #region Select Hero
@@ -44,7 +68,7 @@ public class NavSchedule : MonoBehaviour
         popupHeroSelect.gameObject.SetActive(true);
     }
 
-    public void SetCharacterSlot(int heroIdx)
+    public void SetHeroSlot(int heroIdx)
     {
         if (clickedSlotIdx == -1)
         {//방어코드
@@ -63,15 +87,33 @@ public class NavSchedule : MonoBehaviour
     #endregion
 
     #region Select Quest
+    private int GetRandomQuest(int maxDiff)
+    {
+        var filteredQuests = DataManager.Instance.GetDataList<QuestData>("QuestData")
+            .Where(q => q.difficulty >= 1 && q.difficulty <= maxDiff)
+            .ToList();
+
+        if (filteredQuests.Count == 0)
+        {
+            Debug.LogWarning("조건에 맞는 퀘스트 난이도 오류");
+            return -1;
+        }
+
+        int randomIndex = Random.Range(0, filteredQuests.Count);
+        return randomIndex;
+    }
+
     public void OnQuestSelectBtn()
     {
         popupQuest.gameObject.SetActive(true);
     }
 
-    public void SetQuestSlot(QuestData data)
+    public void SetQuestSlot(int questIdx)
     {
+        QuestData questData = DataManager.Instance.GetData<QuestData>(nameof(QuestData), questIdx);
+
         isSelected[3] = true;
-        scheduledQuestSlot.SetScheduleSlot(data);
+        scheduledQuestSlot.SetScheduleSlot(questData);
     }
     #endregion
 
@@ -88,6 +130,8 @@ public class NavSchedule : MonoBehaviour
         scheduledQuestSlot.ReturnScheduleInfo(out List<int> heroIdx, out QuestData qData, out int successRate);
 
         HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, GameManager.Instance.Day + qData.needTime, successRate);
+
+        if (qData.id == 0) { GameManager.Instance.FirstQuest = true; }
         gameObject.SetActive(false);
     }
     #endregion

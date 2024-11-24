@@ -9,7 +9,10 @@ public class SlotScheduleQuest : MonoBehaviour
     [SerializeField] private GameObject info;
 
     [SerializeField] private TextMeshProUGUI questNameTxt;
-    [SerializeField] private TextMeshProUGUI neededStatTxt;
+    [SerializeField] private TextMeshProUGUI strTxt;
+    [SerializeField] private TextMeshProUGUI dexTxt;
+    [SerializeField] private TextMeshProUGUI intTxt;
+    [SerializeField] private TextMeshProUGUI conTxt;
     [SerializeField] private TextMeshProUGUI successRateTxt;
 
     /*스케줄 정보*/
@@ -51,7 +54,10 @@ public class SlotScheduleQuest : MonoBehaviour
         selectedQuest = quest;
 
         questNameTxt.text = selectedQuest.QuestName;
-        neededStatTxt.text = $"STR - {selectedQuest.needSpecs[0]}, DEF - {selectedQuest.needSpecs[1]}, INT - {selectedQuest.needSpecs[2]}";
+        strTxt.text = $"<size=18>STR </size>{quest.needSpec[0]}";
+        dexTxt.text = $"<size=18>DEX </size>{quest.needSpec[1]}";
+        intTxt.text = $"<size=18>INT </size>{quest.needSpec[2]}";
+        conTxt.text = $"<size=18>CON </size>{quest.needSpec[3]}";
 
         CalculateSuccessRate();
     }
@@ -61,7 +67,7 @@ public class SlotScheduleQuest : MonoBehaviour
         if (selectedQuest != null)
         {
             float rate = 0;
-            float _str = 0, _dex = 0, _int = 0;
+            float _str = 0, _dex = 0, _int = 0, _con = 0;
 
             //TODO: 성공률 계산식.
             for (int i = 0; i < selectedHero.Length; i++)
@@ -71,11 +77,13 @@ public class SlotScheduleQuest : MonoBehaviour
                     _str += selectedHero[i].status.STR;
                     _dex += selectedHero[i].status.DEX;
                     _int += selectedHero[i].status.INT;
+                    _con += selectedHero[i].status.CON;
                 }
             }
-            _str = Mathf.Min(_str / selectedQuest.needSpec[0], 1);
-            _dex = Mathf.Min(_dex / selectedQuest.needSpec[1], 1);
-            _int = Mathf.Min(_int / selectedQuest.needSpec[2], 1);
+            _str = Mathf.Min(_str / selectedQuest.needSpecs[0], 1);
+            _dex = Mathf.Min(_dex / selectedQuest.needSpecs[1], 1);
+            _int = Mathf.Min(_int / selectedQuest.needSpecs[2], 1);
+            _con = Mathf.Min(_con / selectedQuest.needSpecs[3], 1);
 
             rate = _str * _dex * _int;
             rate = Mathf.RoundToInt(rate * 100);
@@ -89,6 +97,7 @@ public class SlotScheduleQuest : MonoBehaviour
         list = new();
         for (int i = 0; i < selectedHero.Length; i++)
         {
+            if (selectedHero[i] == null) continue;
             list.Add(selectedHero[i].id);
         }
         qData = selectedQuest;

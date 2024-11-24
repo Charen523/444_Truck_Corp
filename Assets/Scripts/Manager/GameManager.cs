@@ -12,8 +12,10 @@ public enum eEnding
 public class GameManager : Singleton<GameManager>
 {
     public Action<int> HeroSelectAction;
+    public Action<int> QuestSelectAction;
+
     public Action<int> GoldChangeAction;
-    public Action<int> FoodChangeAction;
+    public Action FoodChangeAction;
     public Action<int> DayChangeAction;
 
     private Transform warnParent;
@@ -25,10 +27,13 @@ public class GameManager : Singleton<GameManager>
     public int Gold { get; private set; }
     public eEnding Ending { get; set; }
 
+    public bool FirstQuest { get; set; }
+
     private void Start()
     {
         Day = -100;
         Gold = 500;
+        FirstQuest = false;
     }
 
     #region event invoker
@@ -37,15 +42,20 @@ public class GameManager : Singleton<GameManager>
         HeroSelectAction?.Invoke(idx);
     }
 
+    public void OnQuestSelectEvent(int idx)
+    {
+        QuestSelectAction?.Invoke(idx);
+    }
+
     public void OnGoldChangeEvent(int delta)
     {
         Gold += delta;
         GoldChangeAction?.Invoke(Gold);
     }
 
-    public void OnFoodChangeEvent(int heroCount)
+    public void OnFoodChangeEvent()
     {
-        FoodChangeAction?.Invoke(heroCount);
+        FoodChangeAction?.Invoke();
     }
 
     public void OnDayChangeEvent(int delta)

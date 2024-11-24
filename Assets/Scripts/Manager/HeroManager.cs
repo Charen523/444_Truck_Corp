@@ -23,12 +23,19 @@ public class HeroManager : Singleton<HeroManager>
 
     private int heroCount = 0;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        GameManager.Instance.DayChangeAction += CheckScheduleDone;
+    }
+
     public HeroData MakeNewHero()
     {
         HeroData data = new();
         data.Initialize(heroCount++);
         heroList.Add(data);
         heroStates.Add(eHeroState.FREE);
+        GameManager.Instance.OnFoodChangeEvent();
 
         // 타일맵에 등장
         TileMapManager.Instance.OnHeroEntered(data);
@@ -40,13 +47,13 @@ public class HeroManager : Singleton<HeroManager>
         return heroList[index];
     }
 
-    public void AddQuestSchedule(List<int> heroIdxs, int questIdx, int dDay, int successRate)
+    public void AddQuestSchedule(List<int> heroIdxs, int questIdx, int needTime, int successRate)
     {
         Schedule newS = new()
         {
             scheduleType = questIdx,
             heroIdxs = heroIdxs,
-            dDay = dDay,
+            dDay = GameManager.Instance.Day + needTime,
             successRate = successRate
         };
         scheduleList.Add(newS);
@@ -59,29 +66,11 @@ public class HeroManager : Singleton<HeroManager>
             TileMapManager.Instance.OnHeroExit(heroList[idx]);
         }
 
-        int leftHeroCount = 0;
-        for (int i = 0; i < heroStates.Count; i++)
-        {
-            if (heroStates[i] != eHeroState.QUEST)
-            {
-                leftHeroCount++;
-            }
-        }
-
-        GameManager.Instance.OnFoodChangeEvent(leftHeroCount);
+        GameManager.Instance.OnFoodChangeEvent();
     }
 
-    // 실제로는 스케쥴링 하지 않음
-    public void AddTrainingSchedule(int heroIdx, int startDay)
+    public void AddTrainingSchedule(int heroIdx, int dummy)
     {
-        Schedule newS = new()
-        {
-            scheduleType = -1,
-            heroIdxs = new() { heroIdx },
-            dDay = startDay,
-        };
-        scheduleList.Add(newS);
-
         heroStates[heroIdx] = eHeroState.TRAINING;
     }
 
@@ -90,46 +79,31 @@ public class HeroManager : Singleton<HeroManager>
         heroStates[heroIdx] = eHeroState.FREE;
     }
 
-    //TODO: 날짜 스킵과 연결.
-    public void CheckScheduleDone(int today)
+    public void CheckScheduleDone(int skipDay)
     {
-        foreach (Schedule s in scheduleList)
+        while (scheduleList.Count != 0 && scheduleList[0].dDay <= GameManager.Instance.Day)
         {
-            if (s.dDay > today) break; //날짜 안지남
-
-            /*보상 로직.*/
-            if (s.scheduleType == -1)
+            Schedule s = scheduleList[0];   
+            bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; //성공 여부
+            if (isSuccess)
             {
-                //훈련 보상
-            }
-            else
-            {//퀘스트 보상
-                bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; //성공 여부
-                if (isSuccess)
+                QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
+
+                GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
+                for (int i = 0; i < s.heroIdxs.Count; i++)
                 {
-                    QuestData q = (QuestData)DataManager.Instance.GetData("QuestData", s.scheduleType);
-
-                    //골드 보상
-                    GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
-
-                    //경험치 보상
-                    if (q.rewardValues.Length == 2)
-                    {
-                        for (int i = 0; i < s.heroIdxs.Count; i++)
-                        {
-                            heroList[s.heroIdxs[i]].exp += q.rewardValues[i];
-                        }
-                    }
+                    heroList[s.heroIdxs[i]].GetExp(q.rewardValues[i]);
                 }
             }
 
             for (int i = 0; i < s.heroIdxs.Count; i++)
             {
-                heroStates[s.heroIdxs[i]] = eHeroState.FREE;
-                // 타일맵에 재입장
                 TileMapManager.Instance.OnHeroEntered(heroList[s.heroIdxs[i]]);
+                heroStates[s.heroIdxs[i]] = eHeroState.FREE;
+                
             }
             scheduleList.Remove(s);
         }
+        GameManager.Instance.OnFoodChangeEvent();
     }
 }
