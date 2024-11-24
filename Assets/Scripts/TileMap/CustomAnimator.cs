@@ -13,14 +13,14 @@ public class CustomAnimator
         { DirectionType.Right, 3 },
     };
 
-    private bool isPlaying;
-    private bool isLooping;
-    private int direction;
-    private int currentFrame;
-    private float frameDuration;
-    private float framePerSecond;
-    private float currentDuration;
-    private Action onEndAnimation;
+    [SerializeField] private bool isPlaying;
+    [SerializeField] private bool isLooping;
+    [SerializeField] private int direction;
+    [SerializeField] private int currentFrame;
+    [SerializeField] private float frameDuration;
+    [SerializeField] private float framePerSecond;
+    [SerializeField] private float currentDuration;
+    [SerializeField] private Action onEndAnimation;
 
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private int maxFrame;
@@ -28,13 +28,18 @@ public class CustomAnimator
     public CustomAnimator(string path, int framePerSecond, bool isDirectional, bool isLooping, Action onEndAnimation)
     {
         this.framePerSecond = framePerSecond;
-        this.isLooping = isLooping; 
+        this.isLooping = isLooping;
         this.onEndAnimation = onEndAnimation;
         frameDuration = 1.0f / framePerSecond;
         direction = 0;
         sprites = Resources.LoadAll<Sprite>(path);
         if (sprites == null) return;
         maxFrame = isDirectional ? (sprites.Length >> 2) : sprites.Length;
+    }
+
+    public void SetOnEndAnimation(Action action)
+    {
+        onEndAnimation = action;
     }
 
     public void SetDirection(DirectionType directionType)
@@ -47,6 +52,7 @@ public class CustomAnimator
         if (isPlaying != value)
         {
             currentFrame = 0;
+            currentDuration = 0;
         }
         isPlaying = value;
     }
@@ -62,6 +68,7 @@ public class CustomAnimator
             currentFrame += addFrame;
             if (currentFrame >= maxFrame)
             {
+                Debug.Log("호출");
                 onEndAnimation?.Invoke();
                 if (isLooping)
                 {
@@ -69,7 +76,8 @@ public class CustomAnimator
                 }
                 else
                 {
-                    currentFrame = maxFrame - 1;
+                    currentFrame = 0;
+                    isPlaying = false;
                 }
             }
             currentDuration -= addFrame * frameDuration;

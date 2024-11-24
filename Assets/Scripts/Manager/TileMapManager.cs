@@ -12,7 +12,7 @@ public class TileMapManager : Singleton<TileMapManager>
     private Vector2Int doorPosition;
     private AStar astar;
     private Dictionary<int, HeroPresenter> heroes;
-    private List<EventLocation> locations;
+    [SerializeField] private List<EventLocation> locations;
 
     protected override void Awake()
     {
