@@ -99,17 +99,19 @@ public class HeroData
 
     public void GetExp(int delta)
     {
-        if (level == 11)
-        {
-            Debug.LogWarning("과레벨업. 버그.");
-            return;
-        }
-
         exp += delta;
-        while (exp >= levelExpList[level])
+        GameManager.Instance.OnGetExpEvent?.Invoke(this, delta);
+        while (exp >= levelExpList[level] && level < 10)
         {
             exp -= levelExpList[level++];
             status += classData.IncStat;
+            GameManager.Instance.OnHeroLevelUpEvent?.Invoke(this, level);
+            GameManager.Instance.OnHeroStatUpEvent?.Invoke(this, classData.IncStat);
         }
+    }
+
+    public void Dead()
+    {
+        GameManager.Instance.OnHeroDeadEvent?.Invoke(this);
     }
 }

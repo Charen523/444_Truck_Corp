@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,13 @@ public class GameManager : Singleton<GameManager>
     public Action FoodChangeAction;
     public Action<int> DayChangeAction;
     public Action PotionAction;
+
+    public Action<HeroData, int> OnGetExpEvent;
+    public Action<HeroData, int> OnHeroLevelUpEvent;
+    public Action<HeroData, Status> OnHeroStatUpEvent;
+    public Action<IEnumerable<HeroData>, QuestData, bool> OnQuestEndEvent;
+    public Action<HeroData> OnHeroDeadEvent;
+    public Action<HeroData> OnHeroSpawnEvent;
 
     private Transform warnParent;
     private Transform dialogParent;
@@ -96,10 +104,11 @@ public class GameManager : Singleton<GameManager>
                 }
             }
 
-            float baseStr = Mathf.Min(_str / 300);
-            float baseDex = Mathf.Min(_dex / 300);
-            float baseInt = Mathf.Min(_int / 300);
-            float baseLuk = Mathf.Min(_luk / 300);
+            Debug.Log($"최종 스탯 합산 정보 : STR = {_str}, DEX = {_dex}, INT = {_int}, LUK = {_luk}");
+            float baseStr = Mathf.Min(_str / 2000);
+            float baseDex = Mathf.Min(_dex / 2000);
+            float baseInt = Mathf.Min(_int / 2000);
+            float baseLuk = Mathf.Min(_luk / 2000);
 
             baseRate = baseStr * baseDex * baseInt * baseLuk;
             baseRate = Mathf.RoundToInt(baseRate * 100);

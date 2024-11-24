@@ -13,7 +13,7 @@ public class UIMain : MonoBehaviour
     [SerializeField] GameObject navSchedule;
     [SerializeField] GameObject navTraining;
 
-    [Header("volume Setting")]
+    [Header("Volume Setting")]
     [SerializeField] private Slider volumeSlider;
 
     [Header("Status")]
@@ -52,7 +52,10 @@ public class UIMain : MonoBehaviour
     {
         OnGoldChange(GameManager.Instance.Gold);
         OnFoodChange();
-        OnDayChange(GameManager.Instance.Day); ;
+        OnDayChange(GameManager.Instance.Day);
+
+        // 초기 용사 한 명 소환
+        HeroManager.Instance.MakeNewHero();
     }
 
     #region Btns
