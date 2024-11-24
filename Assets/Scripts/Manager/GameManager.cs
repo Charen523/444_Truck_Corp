@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
     public int Day { get; private set; }
     public int Gold { get; private set; }
     public int[] Potions { get; private set; } = new int[4];
-    public eEnding Ending { get; set; }
+    public eEnding Ending { get; set; } = 0;
     public bool FirstQuest { get; set; }
 
     public int[] TodayQuests { get; private set; } = new int[4];
@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     public void Init()
     {
         Day = -100;
-        Gold = 500;
+        Gold = 10000000;
 
         for (int i = 0; i < Potions.Length; i++)
         {
@@ -163,7 +163,6 @@ public class GameManager : Singleton<GameManager>
 
             int randIdx = UnityEngine.Random.Range(0, filteredQuests.Count);
             TodayQuests[i] = filteredQuests[randIdx].id;
-            Debug.Log(DataManager.Instance.GetData<QuestData>(nameof(QuestData), TodayQuests[i]).target);
         }
     }
 

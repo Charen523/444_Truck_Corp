@@ -5,7 +5,30 @@ public class PotionToggleGroup : MonoBehaviour
 {
     [Header("Image Toggles")]
     public List<ImageToggle> toggles = new(); 
-    public List<int> selectedIndices = new(); 
+    public List<int> selectedIndices = new();
+
+    private void OnEnable()
+    {
+        for (int i = 0; i < toggles.Count; i++)
+        {
+            if (GameManager.Instance.Potions[i] == 0)
+            {
+                toggles[i].transform.parent.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < toggles.Count; i++)
+        {
+            if (toggles[i].isOn) 
+            {
+                toggles[i].Toggle();
+                selectedIndices.Clear();
+            }
+        }
+    }
 
     public void OnToggleClicked(int index)
     {
