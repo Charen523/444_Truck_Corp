@@ -12,7 +12,6 @@ public class SlotScheduleHero : MonoBehaviour
     [SerializeField] private TextMeshProUGUI strTxt;
     [SerializeField] private TextMeshProUGUI dexTxt;
     [SerializeField] private TextMeshProUGUI intTxt;
-    [SerializeField] private TextMeshProUGUI conTxt;
     [SerializeField] private TextMeshProUGUI lukTxt;
 
     public void InitSlot()
@@ -31,7 +30,6 @@ public class SlotScheduleHero : MonoBehaviour
         strTxt.text = $"<size=14>STR</size> {hero.status.STR}";
         dexTxt.text = $"<size=14>DEX</size> {hero.status.DEX}";
         intTxt.text = $"<size=14>INT</size> {hero.status.INT}";
-        conTxt.text = $"<size=14>CON</size> {hero.status.CON}";
         lukTxt.text = $"<size=14>LUK</size> {hero.status.LUK}";
     }
 }
