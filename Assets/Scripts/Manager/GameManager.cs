@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     public void Init()
     {
         Day = -100;
-        Gold = 100000;
+        Gold = 500;
 
         for (int i = 0; i < Potions.Length; i++)
         {
