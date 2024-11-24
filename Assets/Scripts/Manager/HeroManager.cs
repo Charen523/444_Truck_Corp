@@ -47,13 +47,13 @@ public class HeroManager : Singleton<HeroManager>
         return heroList[index];
     }
 
-    public void AddQuestSchedule(List<int> heroIdxs, int questIdx, int dDay, int successRate)
+    public void AddQuestSchedule(List<int> heroIdxs, int questIdx, int needTime, int successRate)
     {
         Schedule newS = new()
         {
             scheduleType = questIdx,
             heroIdxs = heroIdxs,
-            dDay = dDay,
+            dDay = GameManager.Instance.Day + needTime,
             successRate = successRate
         };
         scheduleList.Add(newS);
@@ -81,23 +81,18 @@ public class HeroManager : Singleton<HeroManager>
 
     public void CheckScheduleDone(int skipDay)
     {
-        foreach (Schedule s in scheduleList)
+        while (scheduleList.Count != 0 && scheduleList[0].dDay <= GameManager.Instance.Day)
         {
+            Schedule s = scheduleList[0];   
             bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; //성공 여부
             if (isSuccess)
             {
                 QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
 
-                //골드 보상
                 GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
-
-                //경험치 보상
-                if (q.rewardValues.Length == 2)
+                for (int i = 0; i < s.heroIdxs.Count; i++)
                 {
-                    for (int i = 0; i < s.heroIdxs.Count; i++)
-                    {
-                        heroList[s.heroIdxs[i]].GetExp(q.rewardValues[i]);
-                    }
+                    heroList[s.heroIdxs[i]].GetExp(q.rewardValues[i]);
                 }
             }
 

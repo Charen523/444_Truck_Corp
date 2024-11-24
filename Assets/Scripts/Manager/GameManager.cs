@@ -27,13 +27,13 @@ public class GameManager : Singleton<GameManager>
     public int Gold { get; private set; }
     public eEnding Ending { get; set; }
 
-    public bool IsFirstQuest { get; set; }
+    public bool FirstQuest { get; set; }
 
     private void Start()
     {
         Day = -100;
         Gold = 500;
-        IsFirstQuest = false;
+        FirstQuest = false;
     }
 
     #region event invoker

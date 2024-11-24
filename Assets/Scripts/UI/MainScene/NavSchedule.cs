@@ -55,10 +55,9 @@ public class NavSchedule : MonoBehaviour
             QuestSlotIdx[i] = GetRandomQuest(maxDiff);
         }
 
-        if (!GameManager.Instance.IsFirstQuest)
+        if (!GameManager.Instance.FirstQuest)
         {
             QuestSlotIdx[0] = 0;
-            GameManager.Instance.IsFirstQuest = true;
         }
     }
 
@@ -131,6 +130,8 @@ public class NavSchedule : MonoBehaviour
         scheduledQuestSlot.ReturnScheduleInfo(out List<int> heroIdx, out QuestData qData, out int successRate);
 
         HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, GameManager.Instance.Day + qData.needTime, successRate);
+
+        if (qData.id == 0) { GameManager.Instance.FirstQuest = true; }
         gameObject.SetActive(false);
     }
     #endregion
