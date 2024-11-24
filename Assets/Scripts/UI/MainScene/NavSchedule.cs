@@ -22,8 +22,8 @@ public class NavSchedule : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.HeroSelectAction += SetHeroSlot;
-        GameManager.Instance.QuestSelectAction += SetQuestSlot;
+        GameManager.Instance.HeroSelectAction = SetHeroSlot;
+        GameManager.Instance.QuestSelectAction = SetQuestSlot;
     }
 
     private void OnEnable()

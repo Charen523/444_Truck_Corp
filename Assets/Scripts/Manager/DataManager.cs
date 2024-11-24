@@ -10,6 +10,7 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] private List<Sprite> thumbnails; //StartScene에서 수동캐싱
     [SerializeField] private List<Sprite> standUIs; //StartScene에서 수동캐싱
     [SerializeField] private List<string> characterSheetPaths; //StartScene에서 수동캐싱
+    [SerializeField] private List<string> damageVFXPaths; //StartScene에서 수동캐싱
 
     protected override void Awake()
     {
@@ -76,5 +77,10 @@ public class DataManager : Singleton<DataManager>
     public string GetCharacterSheetPath(int idx)
     {
         return characterSheetPaths[idx];
+    }
+
+    public string GetDamageVFXPath(int idx)
+    {
+        return damageVFXPaths[idx];
     }
 }

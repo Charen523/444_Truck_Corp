@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -49,8 +47,8 @@ public class AudioManager : Singleton<AudioManager>
 
     public void SetVolume()
     {
-        float volume = (volumeSlider == null)? 1f : volumeSlider.value;
-        myMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
+        float volume = (volumeSlider == null) ? 1f : volumeSlider.value;
+        myMixer.SetFloat("Master", Mathf.Min(Mathf.Log10(volume) * 20, 0.001f));
     }
 
     public void RegisterSlider(Slider slider)
