@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -20,13 +21,12 @@ public class SlotQuestSelect : MonoBehaviour
             $"<size=18>STR </size>{quest.needSpecs[0]}, " +
             $"<size=18>DEF </size>{quest.needSpecs[1]}, " +
             $"<size=18>INT </size>{quest.needSpecs[2]}, " +
-            $"<size=18>CON </size>{quest.needSpecs[3]}";
+            $"<size=18>LUK </size>{quest.needSpecs[3]}";
 
         timeTxt.text = $"{quest.needTime}일";
 
         rewardTxt.text =
-            $"<size=18><color=#EABA00>보상 : </color></size>";
-
+            $"<size=18><color=#AC7500>보상 : </color></size>";
         if (quest.rewardValues[0] != 0)
         {
             rewardTxt.text += $"{quest.rewardValues[0]} 골드";
