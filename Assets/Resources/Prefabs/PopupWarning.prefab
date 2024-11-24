@@ -66,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Warning
+  m_text: "\uACBD\uACE0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4e014c5176d7f3d4dbf9a4f604727b34, type: 2}
-  m_sharedMaterial: {fileID: 5104748533445016886, guid: 4e014c5176d7f3d4dbf9a4f604727b34, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3f0ff09d37173134ab712467a2aaad7b, type: 2}
+  m_sharedMaterial: {fileID: -4307079721867833646, guid: 3f0ff09d37173134ab712467a2aaad7b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1029,4 +1029,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36bf1389cd6c8e439a74a55d442ee36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleTxt: {fileID: 7950945410804564863}
   warnTxt: {fileID: 671511210219748946}

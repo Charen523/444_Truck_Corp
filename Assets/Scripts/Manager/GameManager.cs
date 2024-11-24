@@ -73,11 +73,11 @@ public class GameManager : Singleton<GameManager>
         dialogParent = t;
     }
 
-    public void InvokeWarning(string msg)
+    public void InvokeWarning(string msg, string title = null)
     {
         Instantiate(popupWarning, warnParent)
                 .GetComponent<PopupWarning>()
-                .SetWarnTxt(msg);
+                .SetWarnTxt(msg, title);
     }
 
     public void InvokeDialog(string msg, Action<eDialogResult> action)

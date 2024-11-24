@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -21,23 +22,31 @@ public class HeroPresenter : Poolable
     {
         get
         {
-            return new Vector2Int((int)targetPosition.x, (int)-targetPosition.y);
+            return new Vector2Int((int)targetStepPosition.x, (int)-targetStepPosition.y);
         }
     }
 
     private float movementProgress;
     private DirectionType direction;
     private Vector3 lastPosition;
-    private Vector3 targetPosition;
+    private Vector3 targetStepPosition;
     private EventLocation targetLocation;
 
     public void Initialize(string texturePath)
     {
         this.texturePath = texturePath;
-
         animator = new CustomAnimator(texturePath, 9, true, true, null);
+        Clear();
+    }
+
+    public void Clear()
+    {
         direction = DirectionType.Down;
-        targetPosition = transform.localPosition;
+        targetStepPosition = transform.localPosition;
+        targetLocation = null;
+        moveCommand = null;
+        movementProgress = 0.0f;
+        animator.SetPlaying(false);
         UpdateAnimation();
     }
 
@@ -60,13 +69,20 @@ public class HeroPresenter : Poolable
         if (isMoving)
         {
             movementProgress += movementSpeed * Time.fixedDeltaTime;
-            transform.localPosition = Vector3.Lerp(lastPosition, targetPosition, movementProgress);
+            transform.localPosition = Vector3.Lerp(lastPosition, targetStepPosition, movementProgress);
             if (movementProgress > 1.0f)
             {
-                transform.localPosition = targetPosition;
+                transform.localPosition = targetStepPosition;
                 movementProgress = 0.0f;
                 isMoving = false;
-                if (moveCommand != null && moveCommand.Count == 0) onMoveComplete?.Invoke();
+                if (moveCommand != null && moveCommand.Count == 0)
+                {
+                    onMoveComplete?.Invoke();
+                    time = UnityEngine.Random.Range(0.0f, 3.0f);
+                    TileMapManager.Instance.ReturnLocation(targetLocation);
+                    targetLocation = null;
+                    animator.SetPlaying(false);
+                }
             }
         }
         else
@@ -99,7 +115,7 @@ public class HeroPresenter : Poolable
         movementProgress = 0;
         lastPosition = transform.localPosition;
         direction = directionDictionary[moveCommand[0]];
-        targetPosition = transform.localPosition + (Vector3)(Vector2)moveCommand[0];
+        targetStepPosition = transform.localPosition + (Vector3)(Vector2)moveCommand[0];
         moveCommand.RemoveAt(0);
         isMoving = true;
         animator.SetPlaying(true);
@@ -107,6 +123,12 @@ public class HeroPresenter : Poolable
 
     private void FindNewTargetLocation()
     {
+        if (time > 0)
+        {
+            time -= Time.fixedDeltaTime;
+            return;
+        }
+
         var target = TileMapManager.Instance.GetEmptyLocation();
         if (target != null)
         {

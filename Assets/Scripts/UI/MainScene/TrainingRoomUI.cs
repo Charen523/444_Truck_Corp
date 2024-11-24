@@ -31,7 +31,7 @@ public class TrainingRoomUI : MonoBehaviour
         trainingUI.SetActive(isTraining);
         if (isTraining)
         {
-            dayText.text = $"{GameManager.Instance.Day - startedDay}일차";
+            dayText.text = $"{GameManager.Instance.Day - startedDay + 1}일차";
         }
         else
         {
@@ -48,7 +48,7 @@ public class TrainingRoomUI : MonoBehaviour
                 "훈련을 중지합니까?",
                 (result) =>
                 {
-                    if (result == eDialogResult.Yes) 
+                    if (result == eDialogResult.Yes)
                     {
                         EndTraining();
                     }
@@ -125,6 +125,27 @@ public class TrainingRoomUI : MonoBehaviour
     // 시작 경험치, 마지막 경험치, 스탯 업 횟수
     private void OpenStatUpPopup(int start, int end, int count)
     {
-        GameManager.Instance.InvokeWarning($"{hero.name}의 스탯이 {count * 3}만큼 상승했다!");
+        GameManager.Instance.InvokeWarning($"{hero.name}의 {GetStatString()}이 {count * 3}만큼 상승했다!", "알림");
+    }
+
+    private string GetStatString()
+    {
+        if (RoomId == 0)
+        {
+            return "STR";
+        }
+        else if (RoomId == 1)
+        {
+            return "DEX";
+        }
+        else if (RoomId == 2)
+        {
+            return "INT";
+        }
+        else if (RoomId == 3)
+        {
+            return "LUK";
+        }
+        return "";
     }
 }

@@ -141,7 +141,7 @@ public class UIMain : MonoBehaviour
     #region Date
     private void OnDayChange(int today)
     {
-        dDayTxt.text = today.ToString();
+        dDayTxt.text = $"{-today}일";
     }
     #endregion
 }

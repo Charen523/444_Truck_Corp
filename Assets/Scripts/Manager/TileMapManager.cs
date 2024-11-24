@@ -5,10 +5,10 @@ using UnityEngine;
 public class TileMapManager : Singleton<TileMapManager>
 {
     [SerializeField] private TileMapData wallTileMap;
-    [SerializeField] private TileMapData locationTileMap;
     [SerializeField] private Transform heroParent;
     [SerializeField] private GameObject entryPointObject;
 
+    public bool[,] Tiles => wallTileMap.Tiles;
     private Vector2Int doorPosition;
     private AStar astar;
     private Dictionary<int, HeroPresenter> heroes;
@@ -48,7 +48,10 @@ public class TileMapManager : Singleton<TileMapManager>
 
     public void ReturnLocation(EventLocation location)
     {
-        locations.Add(location);
+        if (!locations.Contains(location))
+        {
+            locations.Add(location);
+        }
     }
 
     public List<Vector2Int> GetRoute(Vector2Int start, Vector2Int end)
@@ -65,6 +68,11 @@ public class TileMapManager : Singleton<TileMapManager>
             string path = DataManager.Instance.GetCharacterSheetPath(heroData.spriteIdx);
             hero.Initialize(path);
             heroes[heroData.id] = hero;
+        }
+        else
+        {
+            hero.transform.localPosition = entryPointObject.transform.localPosition;
+            hero.Clear();
         }
 
         hero.gameObject.SetActive(true);

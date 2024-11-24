@@ -24,5 +24,6 @@ public class TrainingHeroPresenter : MonoBehaviour
     {
         if (animator == null) return;
         image.sprite = animator.GetSprite(Time.fixedDeltaTime);
+        image.rectTransform.sizeDelta = new Vector2(image.sprite.rect.width * 1.5625f, image.sprite.rect.height * 1.5625f);
     }
 }
