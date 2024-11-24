@@ -48,7 +48,8 @@ public class AudioManager : Singleton<AudioManager>
     public void SetVolume()
     {
         float volume = (volumeSlider == null) ? 1f : volumeSlider.value;
-        myMixer.SetFloat("Master", Mathf.Min(Mathf.Log10(volume) * 20, 0.001f));
+        volume = Mathf.Clamp(volume, 0.0001f, 1f);
+        myMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     }
 
     public void RegisterSlider(Slider slider)

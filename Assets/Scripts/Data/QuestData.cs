@@ -15,5 +15,5 @@ public class QuestData
     public string QuestName => description.Replace("N", target);
     public string[] rewardTypes => rewardType.Split('|');
     public int[] rewardValues => Array.ConvertAll(rewardValue.Split('|'), int.Parse);
-    public int[]needSpecs => Array.ConvertAll(needSpec.Split('|'), int.Parse);
+    public int[] needSpecs => Array.ConvertAll(needSpec.Split('|'), int.Parse);
 }

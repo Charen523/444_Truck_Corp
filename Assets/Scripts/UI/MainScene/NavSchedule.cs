@@ -133,6 +133,7 @@ public class NavSchedule : MonoBehaviour
         HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, qData.needTime, successRate);
 
         if (qData.id == 0) { GameManager.Instance.FirstQuest = true; }
+        // TODO : 여기에서 퀘스트가 셔플되어야 함
         gameObject.SetActive(false);
     }
     #endregion

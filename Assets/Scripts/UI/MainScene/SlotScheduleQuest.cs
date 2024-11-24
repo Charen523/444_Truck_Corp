@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Purchasing;
 
 public class SlotScheduleQuest : MonoBehaviour
 {
@@ -56,10 +55,10 @@ public class SlotScheduleQuest : MonoBehaviour
         selectedQuest = quest;
 
         questNameTxt.text = selectedQuest.QuestName;
-        strTxt.text = $"<size=18>STR </size>{quest.needSpec[0]}";
-        dexTxt.text = $"<size=18>DEX </size>{quest.needSpec[1]}";
-        intTxt.text = $"<size=18>INT </size>{quest.needSpec[2]}";
-        lukTxt.text = $"<size=18>LUK </size>{quest.needSpec[3]}";
+        strTxt.text = $"<size=18>STR </size>{quest.needSpecs[0]}";
+        dexTxt.text = $"<size=18>DEX </size>{quest.needSpecs[1]}";
+        intTxt.text = $"<size=18>INT </size>{quest.needSpecs[2]}";
+        lukTxt.text = $"<size=18>LUK </size>{quest.needSpecs[3]}";
 
         CalculateSuccessRate();
     }
