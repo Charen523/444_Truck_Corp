@@ -68,7 +68,6 @@ public class CustomAnimator
             currentFrame += addFrame;
             if (currentFrame >= maxFrame)
             {
-                Debug.Log("호출");
                 onEndAnimation?.Invoke();
                 if (isLooping)
                 {
@@ -83,7 +82,6 @@ public class CustomAnimator
             currentDuration -= addFrame * frameDuration;
         }
         currentFrame = (isPlaying) ? currentFrame : 0;
-        //Debug.Log($"currentFrame : {currentFrame}\n 현재프레임 : {direction * maxFrame + currentFrame}\n 방향 : {direction} \n 최대프레임 : {maxFrame}");
         return sprites[direction * maxFrame + currentFrame];
     }
 }

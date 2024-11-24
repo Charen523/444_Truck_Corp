@@ -9,6 +9,7 @@ public class TrainingRoomUI : MonoBehaviour
     [SerializeField] private GameObject trainingUI;
     [SerializeField] private TrainingHeroPresenter heroPresenter;
     [SerializeField] private TrainingHeroPresenter dummyPresenter;
+    [SerializeField] private TrainingHeroPresenter dummyDamageVFXPresenter;
     [SerializeField] private TextMeshProUGUI dayText; // 일차 표시 텍스트
 
     [Header("External Popup")]
@@ -86,9 +87,11 @@ public class TrainingRoomUI : MonoBehaviour
         UpdateUIs();
 
         hero = HeroManager.Instance.GetHero(id);
-        string path = DataManager.Instance.GetCharacterSheetPath(hero.spriteIdx);
-        heroPresenter.Initialize(path + "_Attack", () => dummyPresenter.SetPlaying(true));
-        heroPresenter.SetOn(() => dummyPresenter.SetPlaying(true));
+        string heroPath = DataManager.Instance.GetCharacterSheetPath(hero.spriteIdx);
+        string vfxPath = DataManager.Instance.GetDamageVFXPath(hero.spriteIdx);
+        heroPresenter.Initialize(heroPath + "_Attack", () => dummyPresenter.SetPlaying(true));
+        dummyDamageVFXPresenter.Initialize(vfxPath, null);
+        heroPresenter.SetOn(() => { dummyPresenter.SetPlaying(true); dummyDamageVFXPresenter.SetPlaying(true); });
         dummyPresenter.SetOn(() => heroPresenter.SetPlaying(true));
         heroPresenter.SetPlaying(true);
 
