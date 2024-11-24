@@ -13,7 +13,7 @@ public class ToastMessage : Poolable
     public void Initialize(string message)
     {
         text.text = message;
-        time = 5.0f;
+        time = 20.0f;
         isInitialized = true;
     }
 

@@ -60,7 +60,7 @@ public class HeroData
             "사샤", "쉐리", "실키", "소니아", "소피", "스텔라", "써니", "슈가", "실비아", "트리샤",
             "트루디아", "바네사", "벨리카", "베라", "베로니카", "빅토리아", "바이올렛", "제키", "제나", "지나"
         };
-    private readonly List<int> levelExpList = new() { 0, 5, 30, 210, 495, 560, 800, 1000, 1300, 1500, 1700 };
+    private readonly List<int> levelExpList = new() { 1, 2, 5, 6, 6, 8, 8, 10, 11, 12, 12 };
 
     public int id;
     public string name;
@@ -79,7 +79,7 @@ public class HeroData
         classData = null;
         status = null;
         spriteType = false;
-        level = 1;
+        level = 0;
         exp = 0;
         spriteIdx = 0;
         remainDay = new int[4];
