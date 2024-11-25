@@ -98,6 +98,7 @@ public class HeroData
 
     public void GetExp(int delta)
     {
+        if (delta == 0) return;
         exp += delta;
         GameManager.Instance.OnGetExpEvent?.Invoke(this, delta);
         while (exp >= levelExpList[level] && level < 10)
@@ -107,10 +108,5 @@ public class HeroData
             GameManager.Instance.OnHeroLevelUpEvent?.Invoke(this, level);
             GameManager.Instance.OnHeroStatUpEvent?.Invoke(this, classData.IncStat);
         }
-    }
-
-    public void Dead()
-    {
-        GameManager.Instance.OnHeroDeadEvent?.Invoke(this);
     }
 }

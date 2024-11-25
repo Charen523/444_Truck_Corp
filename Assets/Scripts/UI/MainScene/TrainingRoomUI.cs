@@ -22,14 +22,6 @@ public class TrainingRoomUI : MonoBehaviour
     private int startedDay;
     private HeroData hero;
 
-    private readonly (string StatName, Action<Status, int> IncreaseMethod)[] statusTuple =
-    {
-        ("STR", (Status status, int value) => { status.STR += value; }),
-        ("DEX", (Status status, int value) => { status.DEX += value; }),
-        ("INT", (Status status, int value) => { status.INT += value; }),
-        ("LUK", (Status status, int value) => { status.LUK += value; }),
-    };
-
     private void OnEnable()
     {
         UpdateUIs();
@@ -95,7 +87,7 @@ public class TrainingRoomUI : MonoBehaviour
         dummyPresenter.SetOn(() => heroPresenter.SetPlaying(true));
         heroPresenter.SetPlaying(true);
 
-        HeroManager.Instance.AddTrainingSchedule(hero.id);
+        HeroManager.Instance.AddTrainingSchedule(hero.id, startedDay, RoomId);
     }
 
     public void EndTraining()
@@ -103,29 +95,8 @@ public class TrainingRoomUI : MonoBehaviour
         isTraining = false;
         UpdateUIs();
 
-        // 계산
-        int remainDay = hero.remainDay[RoomId];
-        int dayDifference = remainDay + GameManager.Instance.Day - startedDay;
-        int count = dayDifference / 5; // 5일당 3스탯씩 상승
-
-        hero.remainDay[RoomId] = dayDifference - count * 5;
-        statusTuple[RoomId].IncreaseMethod(hero.status, count * 3);
-
-        OpenStatUpPopup(remainDay, hero.remainDay[RoomId], count);
         HeroManager.Instance.CheckTrainingScheduleDone(hero.id);
+        GameManager.Instance.InvokeWarning($"훈련을 중지했습니다.", "알림");
         hero = null;
-    }
-
-    // 시작 경험치, 마지막 경험치, 스탯 업 횟수
-    private void OpenStatUpPopup(int start, int end, int count)
-    {
-        if (count == 0)
-        {
-            GameManager.Instance.InvokeWarning($"훈련을 중지했습니다.", "알림");
-        }
-        else
-        {
-            GameManager.Instance.InvokeWarning($"{hero.name}의 {statusTuple[RoomId].StatName}이 {count * 3}만큼 상승했다!", "알림");
-        }
     }
 }

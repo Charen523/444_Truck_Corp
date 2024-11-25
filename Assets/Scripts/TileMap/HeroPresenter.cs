@@ -42,6 +42,7 @@ public class HeroPresenter : Poolable
     {
         direction = DirectionType.Down;
         targetStepPosition = transform.localPosition;
+        if (targetLocation != null) TileMapManager.Instance.ReturnLocation(targetLocation);
         targetLocation = null;
         moveCommand = null;
         movementProgress = 0.0f;

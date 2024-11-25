@@ -21,7 +21,10 @@ public class TileMapManager : Singleton<TileMapManager>
         doorPosition = new Vector2Int((int)entryPointObject.transform.localPosition.x, -(int)entryPointObject.transform.localPosition.y);
         heroes = new Dictionary<int, HeroPresenter>();
 
-        GameManager.Instance.OnHeroSpawnEvent += OnHeroEntered;
+        GameManager.Instance.OnHeroSpawnEvent += OnHeroSpawn;
+        GameManager.Instance.OnHeroDeadEvent += OnHeroDead;
+        GameManager.Instance.OnQuestEndEvent += OnQuestEnd;
+        GameManager.Instance.OnQuestStartEvent += OnQuestStart;
     }
 
     private void Start()
@@ -61,31 +64,51 @@ public class TileMapManager : Singleton<TileMapManager>
         return astar.GetRouteMovementValue(start, end);
     }
 
-    public void OnHeroEntered(HeroData heroData)
+    private void OnHeroDead(HeroData heroData)
     {
-        // 없다면 새로 지정
-        if (!heroes.TryGetValue(heroData.id, out HeroPresenter hero))
+        if (heroes.TryGetValue(heroData.id, out HeroPresenter hero))
         {
-            hero = PoolManager.Instance.Get<HeroPresenter>("Prefabs/HeroPresenter", heroParent, entryPointObject.transform.localPosition);
-            string path = DataManager.Instance.GetCharacterSheetPath(heroData.spriteIdx);
-            hero.Initialize(path);
-            heroes[heroData.id] = hero;
-        }
-        else
-        {
-            hero.transform.localPosition = entryPointObject.transform.localPosition;
+            heroes[heroData.id] = null;
             hero.Clear();
+            PoolManager.Instance.Return(hero);
         }
+    }
 
+    private void OnHeroSpawn(HeroData heroData)
+    {
+        HeroPresenter hero = PoolManager.Instance.Get<HeroPresenter>("Prefabs/HeroPresenter", heroParent, entryPointObject.transform.localPosition);
+        string path = DataManager.Instance.GetCharacterSheetPath(heroData.spriteIdx);
+        hero.Initialize(path);
+        heroes[heroData.id] = hero;
+    }
+
+    private void OnQuestStart(IEnumerable<HeroData> heroDatas, QuestData quest)
+    {
+        foreach (HeroData heroData in heroDatas)
+        {
+            OnHeroExit(heroData);
+        }
+    }
+
+    private void OnQuestEnd(IEnumerable<HeroData> heroDatas, QuestData quest, bool isSuccess)
+    {
+        foreach (HeroData heroData in heroDatas)
+        {
+            OnHeroEntered(heroData);
+        }
+    }
+
+    private void OnHeroEntered(HeroData heroData)
+    {
+        var hero = heroes[heroData.id];
+        hero.transform.localPosition = entryPointObject.transform.localPosition;
+        hero.Clear();
         hero.gameObject.SetActive(true);
     }
 
-    public void OnHeroExit(HeroData heroData)
+    private void OnHeroExit(HeroData heroData)
     {
-        if (!heroes.TryGetValue(heroData.id, out HeroPresenter hero))
-        {
-            return;
-        }
+        if (!heroes.TryGetValue(heroData.id, out HeroPresenter hero)) return;
         List<Vector2Int> route = astar.GetRouteMovementValue(hero.Position, doorPosition);
         hero.SetMoveCommand(route, () => hero.gameObject.SetActive(false));
     }

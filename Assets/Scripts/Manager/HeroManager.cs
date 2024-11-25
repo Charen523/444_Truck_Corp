@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,18 +43,24 @@ public class HeroManager : Singleton<HeroManager>
         return data;
     }
 
+    //public void RemoveHero(HeroData hero)
+    //{
+    //    heroList.Remove(hero);
+    //    heroStates.Remove(eHeroState.FREE);
+    //}
+
     public HeroData GetHero(int index)
     {
         return heroList[index];
     }
 
-    public void AddQuestSchedule(List<int> heroIdxs, int questIdx, int needTime, int successRate)
+    public void AddQuestSchedule(List<int> heroIdxs, QuestData quest, int successRate)
     {
         Schedule newS = new()
         {
-            scheduleType = questIdx,
+            scheduleType = quest.id,
             heroIdxs = heroIdxs,
-            dDay = GameManager.Instance.Day + needTime,
+            dDay = GameManager.Instance.Day + quest.needTime,
             successRate = successRate
         };
         scheduleList.Add(newS);
@@ -61,16 +68,23 @@ public class HeroManager : Singleton<HeroManager>
         foreach (int idx in heroIdxs)
         {
             heroStates[idx] = eHeroState.QUEST;
-
-            // 타일맵 퇴장
-            TileMapManager.Instance.OnHeroExit(heroList[idx]);
         }
 
+        var heroes = heroList.Where((hero) => heroIdxs.Contains(hero.id));
+        GameManager.Instance.OnQuestStartEvent?.Invoke(heroes, quest);
         GameManager.Instance.OnFoodChangeEvent();
     }
 
-    public void AddTrainingSchedule(int heroIdx)
+    public void AddTrainingSchedule(int heroIdx, int day, int roomId)
     {
+        Schedule schedule = new()
+        {
+            scheduleType = -1,
+            heroIdxs = new() { heroIdx },
+            dDay = day,
+            successRate = roomId
+        };
+
         heroStates[heroIdx] = eHeroState.TRAINING;
     }
 
@@ -79,45 +93,74 @@ public class HeroManager : Singleton<HeroManager>
         heroStates[heroIdx] = eHeroState.FREE;
     }
 
+
+    private readonly (string StatName, Action<Status, int> IncreaseMethod)[] statusTuple =
+    {
+        ("STR", (Status status, int value) => { status.STR += value; }),
+        ("DEX", (Status status, int value) => { status.DEX += value; }),
+        ("INT", (Status status, int value) => { status.INT += value; }),
+        ("LUK", (Status status, int value) => { status.LUK += value; }),
+    };
+
     public void CheckScheduleDone(int skipDay)
     {
-        while (scheduleList.Count != 0 && scheduleList[0].dDay <= GameManager.Instance.Day)
+        for (int index = scheduleList.Count - 1; index >= 0; index--)
         {
-            Schedule s = scheduleList[0];
-            bool isSuccess = UnityEngine.Random.Range(0, 100) < s.successRate; // 성공 여부
-            QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), s.scheduleType);
-
-            var heroes = heroList.Where((hero) => s.heroIdxs.Contains(hero.id));
-            GameManager.Instance.OnQuestEndEvent?.Invoke(heroes, q, isSuccess);
-            // 퀘스트 성공
-            if (isSuccess)
+            Schedule schedule = scheduleList[index];
+            // 훈련일 때
+            if (schedule.scheduleType == -1)
             {
-                GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
-                for (int i = 0; i < s.heroIdxs.Count; i++)
+                var hero = heroList[schedule.heroIdxs[0]];
+                int roomId = schedule.successRate;
+                int remainDay = hero.remainDay[roomId];
+                int dayDifference = remainDay + GameManager.Instance.Day - schedule.dDay;
+                int count = dayDifference / 5; // 5일당 3스탯씩 상승
+
+                hero.remainDay[roomId] = dayDifference - count * 5;
+                statusTuple[roomId].IncreaseMethod(hero.status, count * 3);
+
+                if (count > 0)
                 {
-                    heroList[s.heroIdxs[i]].GetExp(q.rewardValues[1]);
+                    GameManager.Instance.OnHeroTrainingStatUpEvent?.Invoke(hero, statusTuple[roomId].StatName, count * 3);
                 }
             }
-            // 퀘스트 실패
-            else
+            // 퀘스트일 때
+            else if (schedule.dDay <= GameManager.Instance.Day)
             {
-                // 용사 사망 처리
-                for (int i = 0; i < s.heroIdxs.Count; i++)
+                bool isSuccess = UnityEngine.Random.Range(0, 100) < schedule.successRate; // 성공 여부
+                QuestData q = DataManager.Instance.GetData<QuestData>(nameof(QuestData), schedule.scheduleType);
+
+                // 스케쥴 삭제
+                scheduleList.RemoveAt(index);
+
+                var heroes = heroList.Where(hero => schedule.heroIdxs.Contains(hero.id));
+                GameManager.Instance.OnQuestEndEvent?.Invoke(heroes, q, isSuccess);
+
+                if (isSuccess)
                 {
-                    heroList[s.heroIdxs[i]].Dead();
+                    GameManager.Instance.OnGoldChangeEvent(q.rewardValues[0]);
+                    for (int i = 0; i < schedule.heroIdxs.Count; i++)
+                    {
+                        heroList[schedule.heroIdxs[i]].GetExp(q.rewardValues[1]);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < schedule.heroIdxs.Count; i++)
+                    {
+                        //var hero = heroList[schedule.heroIdxs[i]];
+                        //GameManager.Instance.OnHeroDeadEvent?.Invoke(hero);
+                        //RemoveHero(hero);
+                    }
+                }
+
+                for (int i = 0; i < schedule.heroIdxs.Count; i++)
+                {
+                    heroStates[schedule.heroIdxs[i]] = eHeroState.FREE;
                 }
             }
-
-            // 용사 상태 해제
-            for (int i = 0; i < s.heroIdxs.Count; i++)
-            {
-                TileMapManager.Instance.OnHeroEntered(heroList[s.heroIdxs[i]]);
-                heroStates[s.heroIdxs[i]] = eHeroState.FREE;
-            }
-
-            // 스케쥴 삭제
-            scheduleList.Remove(s);
         }
+
         GameManager.Instance.OnFoodChangeEvent();
     }
 }

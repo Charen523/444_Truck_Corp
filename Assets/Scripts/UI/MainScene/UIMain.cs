@@ -26,6 +26,7 @@ public class UIMain : MonoBehaviour
     [SerializeField] private TextMeshProUGUI skipTxt;
     [SerializeField] private Button decreaseBtn;
     [SerializeField] private Button increaseBtn;
+    [SerializeField] private Button skipBtn;
     private int skipCount = 1;
 
     [Header("Date")]
@@ -68,8 +69,9 @@ public class UIMain : MonoBehaviour
         }
         else
         {
-            HeroManager.Instance.MakeNewHero();
+            GameManager.Instance.OnGetGoldEvent?.Invoke(-100);
             GameManager.Instance.OnGoldChangeEvent(-100);
+            HeroManager.Instance.MakeNewHero();
         }
     }
 
@@ -143,28 +145,44 @@ public class UIMain : MonoBehaviour
         }
     }
 
+    // 시간을 바꾸는 곳
     public void ChangeDate()
     {
-        GameManager.Instance.OnGoldChangeEvent(-foodCost * skipCount);
+        GameManager.Instance.OnDayChangeButtonEvent?.Invoke(skipCount);
+        skipCount = 1;
+        skipTxt.text = $"{skipCount}일";
+        decreaseBtn.interactable = false;
+        skipBtn.interactable = false;
+        increaseBtn.interactable = true;
+    }
+
+    public void SetSkipButtonInteraction(bool value)
+    {
+        skipBtn.interactable = value;
+    }
+
+    public void ChangeOneDay()
+    {
+        // 정산
+        GameManager.Instance.OnHeroFeedEvent?.Invoke(foodCost);
+        GameManager.Instance.OnGoldChangeEvent(-foodCost);
 
         int trainCount = 0;
         foreach (var h in HeroManager.Instance.heroStates)
         {
             if (h == eHeroState.TRAINING) trainCount++;
         }
-        GameManager.Instance.OnGoldChangeEvent(trainCount * skipCount);
+        GameManager.Instance.OnHeroTrainingGoldEvent?.Invoke(trainCount);
+        GameManager.Instance.OnGoldChangeEvent(-trainCount);
 
+        GameManager.Instance.OnDayChangeEvent(1);
+
+        // 정산 후 파산 확인
         if (GameManager.Instance.Gold < 0)
         {
             GameManager.Instance.Ending = eEnding.Bankrupt;
             SceneManager.LoadScene(2);
         }
-
-        GameManager.Instance.OnDayChangeEvent(skipCount);
-        skipCount = 1;
-        skipTxt.text = $"{skipCount}일";
-        decreaseBtn.interactable = false;
-        increaseBtn.interactable = true;
     }
     #endregion
 
