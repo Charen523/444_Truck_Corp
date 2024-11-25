@@ -52,14 +52,17 @@ public class EndScene : MonoBehaviour
             case eEnding.Bankrupt:
                 BGs[0].gameObject.SetActive(true);
                 currentEnding = End1;
+                AudioManager.Instance.PlayBGM(6);
                 break;
             case eEnding.Lose:
                 BGs[1].gameObject.SetActive(true);
                 currentEnding = End2;
+                AudioManager.Instance.PlayBGM(6);
                 break;
             case eEnding.Win:
                 BGs[2].gameObject.SetActive(true);
                 currentEnding = End3;
+                AudioManager.Instance.PlayBGM(5);
                 break;
         }
 

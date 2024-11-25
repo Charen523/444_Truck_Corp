@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,8 +14,14 @@ public class ToastMessage : Poolable
     public void Initialize(string message)
     {
         text.text = message;
-        time = 20.0f;
+        time = 15.0f;
         isInitialized = true;
+        Color color = image.color;
+        color.a = 1.0f;
+        image.DOColor(color, 0.0f);
+        color = text.color;
+        color.a = 1.0f;
+        text.DOColor(color, 0.0f);
     }
 
     private void FixedUpdate()
@@ -26,6 +33,15 @@ public class ToastMessage : Poolable
             time -= Time.fixedDeltaTime;
             return;
         }
+
+        Color color = image.color;
+        color.a = 0.0f;
+        image.DOColor(color, 0.5f);
+
+        color = text.color;
+        color.a = 0.0f;
+        text.DOColor(color, 0.5f);
+
         isInitialized = false;
         Pool.Return(this);
     }

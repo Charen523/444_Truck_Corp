@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,7 @@ public class GameStart : MonoBehaviour
         if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
             ChangeScene();
+            AudioManager.Instance.PlaySFX(0);
         }
     }
 

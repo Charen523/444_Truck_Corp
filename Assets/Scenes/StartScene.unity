@@ -1104,6 +1104,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ddfef0f7e96de4f42af2db670a89b4c0, type: 3}
   - {fileID: 8300000, guid: d13803679883ebe4b8fc4840cc977df8, type: 3}
   - {fileID: 8300000, guid: 318cb91e8a8fb0646845b06943beeab9, type: 3}
+  - {fileID: 8300000, guid: f2c63dfd147eaad47a62238ea88c6e6f, type: 3}
+  - {fileID: 8300000, guid: 017004c08dc72694791eed9512f3909c, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: 2c61021ade66a8e4081471a58624d25e, type: 3}
   - {fileID: 8300000, guid: b80e803781c6b024f9bf56a4174ab1bf, type: 3}

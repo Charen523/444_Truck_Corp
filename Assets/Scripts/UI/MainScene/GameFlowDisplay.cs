@@ -48,7 +48,7 @@ public class GameFlowDisplay : MonoBehaviour
     private void OnHeroTrainingStatUp(HeroData hero, string statText, int value)
     {
         string message = $"훈련의 성과로 \"{hero.name}\"의 {statText}이 {value} 상승했다!";
-
+        queue.Enqueue(new GameFlowEvent(GameFlowEventType.HeroTrainingStatUp, message));
     }
 
     private void OnQuestStart(IEnumerable<HeroData> heroes, QuestData questData)
@@ -144,6 +144,7 @@ public class GameFlowDisplay : MonoBehaviour
     {
         // 화면 페이드 아웃
         screenCover.DOFade(1.0f, 1.0f);
+        time = changingDayDelayTime;
         remainDays = delta;
     }
 
