@@ -172,8 +172,9 @@ public class UIMain : MonoBehaviour
         {
             if (h == eHeroState.TRAINING) trainCount++;
         }
+        trainCount *= 20;
         if (trainCount != 0) GameManager.Instance.OnHeroTrainingGoldEvent?.Invoke(trainCount);
-        GameManager.Instance.OnGoldChangeEvent(-trainCount * 20);
+        GameManager.Instance.OnGoldChangeEvent(-trainCount);
 
         GameManager.Instance.OnDayChangeEvent(1);
 
