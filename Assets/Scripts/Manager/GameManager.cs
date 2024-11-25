@@ -145,7 +145,9 @@ public class GameManager : Singleton<GameManager>
             _ => 10
         };
 
-        for (int i =  0; i < TodayQuests.Length; i++)
+        HashSet<int> selectedQuestIds = new HashSet<int>(); // 중복 방지용 집합
+
+        for (int i = 0; i < TodayQuests.Length; i++)
         {
             int curDiff = UnityEngine.Random.Range(0, 200);
             curDiff = curDiff switch
@@ -164,13 +166,23 @@ public class GameManager : Singleton<GameManager>
             curDiff = Mathf.Clamp(curDiff, 1, 10);
 
             var filteredQuests = DataManager.Instance.GetDataList<QuestData>("QuestData")
-                .Where(q => q.difficulty == curDiff)
+                .Where(q => q.difficulty == curDiff && !selectedQuestIds.Contains(q.id)) // 중복 방지 조건 추가
                 .ToList();
+
+            // 가능한 퀘스트가 없으면 다른 난이도로 대체
+            if (filteredQuests.Count == 0)
+            {
+                Debug.LogWarning($"No quests available for difficulty {curDiff}. Skipping...");
+                TodayQuests[i] = -1; // 비어있음을 의미하는 값 (-1) 설정
+                continue;
+            }
 
             int randIdx = UnityEngine.Random.Range(0, filteredQuests.Count);
             TodayQuests[i] = filteredQuests[randIdx].id;
+            selectedQuestIds.Add(TodayQuests[i]); // 선택된 ID 추가
         }
     }
+
 
     public void OnPotionActionEvent()
     {
