@@ -47,20 +47,20 @@ public class GameFlowDisplay : MonoBehaviour
 
     private void OnHeroTrainingStatUp(HeroData hero, string statText, int value)
     {
-        string message = $"훈련의 성과로 {hero.name}의 {statText}이 {value} 상승했다!";
+        string message = $"훈련의 성과로 \"{hero.name}\"의 {statText}이 {value} 상승했다!";
 
     }
 
     private void OnQuestStart(IEnumerable<HeroData> heroes, QuestData questData)
     {
-        string message = string.Join(", ", heroes.Select((hero) => hero.name))
+        string message = string.Join(", ", heroes.Select((hero) => $"\"{hero.name}\""))
             + $"이(가) {questData.QuestName}을(를) 시작했습니다.";
         queue.Enqueue(new GameFlowEvent(GameFlowEventType.QuestStart, message));
     }
 
     private void OnQuestEnd(IEnumerable<HeroData> heroes, QuestData questData, bool isSuccess)
     {
-        string message = string.Join(", ", heroes.Select((hero) => hero.name))
+        string message = string.Join(", ", heroes.Select((hero) => $"\"{hero.name}\""))
             + $"이(가) {questData.QuestName}을(를) ";
         message += (isSuccess) ? "성공했습니다!" : "실패했습니다.";
 
@@ -159,6 +159,10 @@ public class GameFlowDisplay : MonoBehaviour
             return;
         }
 
+        if (queue.Count == 0 && remainDays == 0)
+        {
+            screenCover.DOFade(0.0f, 1.0f);
+        }
         if (queue.Count > 0)
         {
             GameFlowEvent gameFlowEvent = queue.Dequeue();
@@ -175,7 +179,6 @@ public class GameFlowDisplay : MonoBehaviour
             remainDays--;
             uiMain.ChangeOneDay();
             time = changingDayDelayTime;
-            screenCover.DOFade(0.0f, 1.0f);
             if (remainDays == 0) uiMain.SetSkipButtonInteraction(true);
         }
     }
