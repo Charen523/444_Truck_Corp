@@ -25,8 +25,14 @@ public class GameManager : Singleton<GameManager>
     public Action<HeroData, int> OnHeroLevelUpEvent;
     public Action<HeroData, Status> OnHeroStatUpEvent;
     public Action<IEnumerable<HeroData>, QuestData, bool> OnQuestEndEvent;
+    public Action<IEnumerable<HeroData>, QuestData> OnQuestStartEvent;
     public Action<HeroData> OnHeroDeadEvent;
     public Action<HeroData> OnHeroSpawnEvent;
+    public Action<int> OnGetGoldEvent;
+    public Action<int> OnHeroFeedEvent;
+    public Action<int> OnHeroTrainingGoldEvent;
+    public Action<HeroData, string, int> OnHeroTrainingStatUpEvent;
+    public Action<int> OnDayChangeButtonEvent;
 
     private Transform warnParent;
     private Transform dialogParent;

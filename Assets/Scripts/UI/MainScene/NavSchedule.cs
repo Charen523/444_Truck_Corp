@@ -107,7 +107,7 @@ public class NavSchedule : MonoBehaviour
 
         scheduledQuestSlot.ReturnScheduleInfo(out List<int> heroIdx, out QuestData qData, out int successRate);
 
-        HeroManager.Instance.AddQuestSchedule(heroIdx, qData.id, qData.needTime, successRate);
+        HeroManager.Instance.AddQuestSchedule(heroIdx, qData, successRate);
 
         if (qData.id == 0) { GameManager.Instance.FirstQuest = true; }
         // TODO : 여기에서 퀘스트가 셔플되어야 함

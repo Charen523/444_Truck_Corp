@@ -1,5 +1,8 @@
+using DG.Tweening;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameFlowEventType
 {
@@ -9,11 +12,18 @@ public enum GameFlowEventType
     StatUp,
     GetGold,
     HeroDead,
+    HeroFeed,
+    QuestEnd,
+    QuestStart,
+    HeroTrainingGold,
+    HeroTrainingStatUp,
 }
 
 public class GameFlowDisplay : MonoBehaviour
 {
     [SerializeField] private Transform toastParent;
+    [SerializeField] private Image screenCover;
+    [SerializeField] private UIMain uiMain;
 
     private int remainDays;
     private Queue<GameFlowEvent> queue = new Queue<GameFlowEvent>();
@@ -23,14 +33,55 @@ public class GameFlowDisplay : MonoBehaviour
         GameManager.Instance.OnHeroLevelUpEvent += OnHeroLevelUp;
         GameManager.Instance.OnGetExpEvent += OnHeroGetExp;
         GameManager.Instance.OnHeroStatUpEvent += OnHeroStatUp;
-        GameManager.Instance.GoldChangeAction += OnGoldChange;
+        GameManager.Instance.OnGetGoldEvent += OnGetGold;
         GameManager.Instance.OnHeroDeadEvent += OnHeroDead;
         GameManager.Instance.OnHeroSpawnEvent += OnHeroSpawn;
+        GameManager.Instance.OnHeroFeedEvent += OnHeroFeed;
+        GameManager.Instance.OnQuestStartEvent += OnQuestStart;
+        GameManager.Instance.OnQuestEndEvent += OnQuestEnd;
+        GameManager.Instance.OnHeroTrainingGoldEvent += OnHeroTraining;
+        GameManager.Instance.OnHeroTrainingStatUpEvent += OnHeroTrainingStatUp;
+
+        GameManager.Instance.OnDayChangeButtonEvent += OnDayChanged;
+    }
+
+    private void OnHeroTrainingStatUp(HeroData hero, string statText, int value)
+    {
+        string message = $"훈련의 성과로 {hero.name}의 {statText}이 {value} 상승했다!";
+
+    }
+
+    private void OnQuestStart(IEnumerable<HeroData> heroes, QuestData questData)
+    {
+        string message = string.Join(", ", heroes.Select((hero) => hero.name))
+            + $"이(가) {questData.QuestName}을(를) 시작했습니다.";
+        queue.Enqueue(new GameFlowEvent(GameFlowEventType.QuestStart, message));
+    }
+
+    private void OnQuestEnd(IEnumerable<HeroData> heroes, QuestData questData, bool isSuccess)
+    {
+        string message = string.Join(", ", heroes.Select((hero) => hero.name))
+            + $"이(가) {questData.QuestName}을(를) ";
+        message += (isSuccess) ? "성공했습니다!" : "실패했습니다.";
+
+        queue.Enqueue(new GameFlowEvent(GameFlowEventType.QuestEnd, message));
+    }
+
+    private void OnHeroFeed(int value)
+    {
+        string message = $"식비로 {value} 골드를 지불했습니다.";
+        queue.Enqueue(new GameFlowEvent(GameFlowEventType.HeroFeed, message));
+    }
+
+    private void OnHeroTraining(int value)
+    {
+        string message = $"훈련비로 {value} 골드를 지불했습니다.";
+        queue.Enqueue(new GameFlowEvent(GameFlowEventType.HeroFeed, message));
     }
 
     private void OnHeroSpawn(HeroData hero)
     {
-        string message = $"{hero.classData.className} \"{hero.name}\"이(가) 소환했습니다.";
+        string message = $"{hero.classData.className} \"{hero.name}\"이(가) 소환되었습니다.";
         queue.Enqueue(new GameFlowEvent(GameFlowEventType.HeroSpawn, message));
     }
 
@@ -75,15 +126,11 @@ public class GameFlowDisplay : MonoBehaviour
             message += "증가했습니다.";
             queue.Enqueue(new GameFlowEvent(GameFlowEventType.StatUp, message));
         }
-        //else
-        //{
-        //    message = " 스탯 변화가 없습니다.";
-        //}
     }
 
-    private void OnGoldChange(int gold)
+    private void OnGetGold(int gold)
     {
-        string message = $"{gold} 골드를 " + ((gold > 0) ? "획득했습니다." : "지불했습니다.");
+        string message = $"{Mathf.Abs(gold)} 골드를 " + ((gold > 0) ? "획득했습니다." : "지불했습니다.");
         queue.Enqueue(new GameFlowEvent(GameFlowEventType.GetGold, message));
     }
 
@@ -96,10 +143,8 @@ public class GameFlowDisplay : MonoBehaviour
     public void OnDayChanged(int delta)
     {
         // 화면 페이드 아웃
-        // 
+        screenCover.DOFade(1.0f, 1.0f);
         remainDays = delta;
-
-        //
     }
 
     private float changingDayDelayTime = 1.0f;
@@ -128,17 +173,11 @@ public class GameFlowDisplay : MonoBehaviour
         if (remainDays > 0)
         {
             remainDays--;
+            uiMain.ChangeOneDay();
             time = changingDayDelayTime;
+            screenCover.DOFade(0.0f, 1.0f);
+            if (remainDays == 0) uiMain.SetSkipButtonInteraction(true);
         }
-
-        // 이벤트 종류
-
-        // 퀘스트
-        // - 성공
-        // - 실패
-
-        // 훈련장
-        // - 스탯업
     }
 }
 
