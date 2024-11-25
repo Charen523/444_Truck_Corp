@@ -164,7 +164,7 @@ public class UIMain : MonoBehaviour
     public void ChangeOneDay()
     {
         // 정산
-        GameManager.Instance.OnHeroFeedEvent?.Invoke(foodCost);
+        if (foodCost != 0) GameManager.Instance.OnHeroFeedEvent?.Invoke(foodCost);
         GameManager.Instance.OnGoldChangeEvent(-foodCost);
 
         int trainCount = 0;
@@ -172,7 +172,7 @@ public class UIMain : MonoBehaviour
         {
             if (h == eHeroState.TRAINING) trainCount++;
         }
-        GameManager.Instance.OnHeroTrainingGoldEvent?.Invoke(trainCount);
+        if (trainCount != 0) GameManager.Instance.OnHeroTrainingGoldEvent?.Invoke(trainCount);
         GameManager.Instance.OnGoldChangeEvent(-trainCount);
 
         GameManager.Instance.OnDayChangeEvent(1);
