@@ -95,24 +95,28 @@ public class UIMain : MonoBehaviour
     #endregion
 
     #region Status
+    // 골드 변화
     private void OnGoldChange(int curGold)
-    {//골드 변화
-        curGoldTxt.text = curGold.ToString() + " 골드";
+    {
+        curGoldTxt.text = curGold.ToString();
     }
 
+    // 히어로 스케줄
     private void OnFoodChange()
-    {//히어로 스케줄 
+    {
         foodCost = 0;
         for (int i = 0; i < HeroManager.Instance.heroStates.Count; i++)
         {
             if (HeroManager.Instance.heroStates[i] != eHeroState.QUEST)
+            {
                 foodCost += 50 * HeroManager.Instance.heroList[i].level;
+            }
             else
             {
                 foodCost += 10 * HeroManager.Instance.heroList[i].level;
             }
         }
-        FoodTxt.text = foodCost.ToString() + " 골드";
+        FoodTxt.text = foodCost.ToString();
     }
 
     private void OnPotionChange()
@@ -145,7 +149,7 @@ public class UIMain : MonoBehaviour
         }
     }
 
-    // 시간을 바꾸는 곳
+    // 시간 변경
     public void ChangeDate()
     {
         GameManager.Instance.OnDayChangeButtonEvent?.Invoke(skipCount);
@@ -163,17 +167,25 @@ public class UIMain : MonoBehaviour
 
     public void ChangeOneDay()
     {
-        // 정산
-        if (foodCost != 0) GameManager.Instance.OnHeroFeedEvent?.Invoke(foodCost);
-        GameManager.Instance.OnGoldChangeEvent(-foodCost);
-
+        // 식비 정산
+        if (foodCost != 0) 
+        {
+            GameManager.Instance.OnGoldChangeEvent(-foodCost);
+            GameManager.Instance.OnHeroFeedEvent?.Invoke(foodCost);
+        }
+        
+        // 훈련비 정산
         int trainCount = 0;
         foreach (var h in HeroManager.Instance.heroStates)
         {
-            if (h == eHeroState.TRAINING) trainCount++;
+            if (h == eHeroState.TRAINING) trainCount += 20;
         }
-        if (trainCount != 0) GameManager.Instance.OnHeroTrainingGoldEvent?.Invoke(trainCount);
-        GameManager.Instance.OnGoldChangeEvent(-trainCount);
+
+        if (trainCount != 0)
+        {
+            GameManager.Instance.OnGoldChangeEvent(-trainCount);
+            GameManager.Instance.OnHeroTrainingGoldEvent?.Invoke(trainCount);
+        }
 
         GameManager.Instance.OnDayChangeEvent(1);
 
