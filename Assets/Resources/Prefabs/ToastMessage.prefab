@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2256537862670065011}
   - component: {fileID: 668632935103967323}
   - component: {fileID: 4332279064627350190}
-  - component: {fileID: 2935476676153960543}
   - component: {fileID: 4124895808481504075}
+  - component: {fileID: 4183213590547368543}
   m_Layer: 5
   m_Name: ToastMessage
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -0, y: 16}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2256537862670065011
 CanvasRenderer:
@@ -105,20 +105,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2935476676153960543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3624563577841865186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
 --- !u!114 &4124895808481504075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +123,24 @@ MonoBehaviour:
   Pool: {fileID: 0}
   image: {fileID: 668632935103967323}
   text: {fileID: 6536640758149712494}
+  sizeFitter: {fileID: 4183213590547368543}
+--- !u!114 &4183213590547368543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624563577841865186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c197ec228059744a025190fa3fb774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizontalFit: 1
+  VerticalFit: 1
+  HorizontalPadding: 0
+  VerticalPadding: 0
+  targetRect: {fileID: 3444177048512815729}
 --- !u!1 &3892991442846281603
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +177,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 212.01, y: 36.01}
+  m_SizeDelta: {x: 68.01, y: 16}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1429199588410158202
 CanvasRenderer:
@@ -203,7 +207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD1A0\uC2A4\uD2B8 \uBA54\uC2DC\uC9C0"
+  m_text: "\uD1A0\uC2A4\uD2B8 \uBA54\uC2DC\uC9C0\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d75316e435eeb24eaf1d0d0cce0fa0c, type: 2}
   m_sharedMaterial: {fileID: -4307079721867833646, guid: 8d75316e435eeb24eaf1d0d0cce0fa0c, type: 2}
@@ -230,8 +234,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -268,7 +272,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10, y: 0, z: 10, w: 0}
+  m_margin: {x: 2, y: 1, z: 2, w: 1}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

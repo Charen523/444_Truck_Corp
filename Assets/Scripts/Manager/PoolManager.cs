@@ -64,7 +64,7 @@ public class PoolManager : Singleton<PoolManager>
         aliveItems.Remove(item.PoolID);
     }
 
-    public void Clear()
+    public override void Clear()
     {
         foreach (Stack<GameObject> stack in pools.Values)
         {

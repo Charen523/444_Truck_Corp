@@ -20,22 +20,31 @@ public class TileMapManager : Singleton<TileMapManager>
         astar = new AStar();
         doorPosition = new Vector2Int((int)entryPointObject.transform.localPosition.x, -(int)entryPointObject.transform.localPosition.y);
         heroes = new Dictionary<int, HeroPresenter>();
+        locations = FindObjectsByType<EventLocation>(FindObjectsSortMode.None).ToList();
+        Clear();
+    }
 
+    public override void Clear()
+    {
+        foreach (var hero in heroes)
+        {
+            //hero.Clear();
+        }
+        heroes.Clear();
+
+        GameManager.Instance.OnHeroSpawnEvent -= OnHeroSpawn;
         GameManager.Instance.OnHeroSpawnEvent += OnHeroSpawn;
+        GameManager.Instance.OnHeroDeadEvent -= OnHeroDead;
         GameManager.Instance.OnHeroDeadEvent += OnHeroDead;
+        GameManager.Instance.OnQuestEndEvent -= OnQuestEnd;
         GameManager.Instance.OnQuestEndEvent += OnQuestEnd;
+        GameManager.Instance.OnQuestStartEvent -= OnQuestStart;
         GameManager.Instance.OnQuestStartEvent += OnQuestStart;
     }
 
     private void Start()
     {
-        InitializeEventLocations();
         astar.SetTiles(wallTileMap.Tiles);
-    }
-
-    private void InitializeEventLocations()
-    {
-        locations = FindObjectsByType<EventLocation>(FindObjectsSortMode.None).ToList();
     }
 
     public EventLocation GetEmptyLocation()

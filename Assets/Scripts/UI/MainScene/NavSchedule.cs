@@ -45,7 +45,6 @@ public class NavSchedule : MonoBehaviour
 
         if (!GameManager.Instance.FirstQuest)
         {
-            Debug.Log("지원금 수령 퀘");
             QuestSlotIdx[0] = 0;
         }
 

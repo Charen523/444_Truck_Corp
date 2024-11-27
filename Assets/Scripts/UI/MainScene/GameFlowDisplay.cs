@@ -26,10 +26,14 @@ public class GameFlowDisplay : MonoBehaviour
     [SerializeField] private UIMain uiMain;
 
     private int remainDays;
+    private RectTransform toastParentRect;
     private Queue<GameFlowEvent> queue = new Queue<GameFlowEvent>();
 
     private void Start()
     {
+        toastParentRect = (RectTransform)toastParent;
+
+        // 이벤트 등록
         GameManager.Instance.OnHeroLevelUpEvent += OnHeroLevelUp;
         GameManager.Instance.OnGetExpEvent += OnHeroGetExp;
         GameManager.Instance.OnHeroStatUpEvent += OnHeroStatUp;
@@ -63,7 +67,7 @@ public class GameFlowDisplay : MonoBehaviour
         string message = string.Join(", ", heroes.Select((hero) => hero.name))
             + $"이(가) {questData.QuestName}을(를) ";
         message += (isSuccess) ? "성공했습니다!" : "실패했습니다.";
-
+        // 스크롤, 확률, 자동편성, 정렬, 초기버그, 용사목록(일정, 정렬), 식대 표시, 다시하기, 저장
         queue.Enqueue(new GameFlowEvent(GameFlowEventType.QuestEnd, message));
     }
 
@@ -143,13 +147,16 @@ public class GameFlowDisplay : MonoBehaviour
     public void OnDayChanged(int delta)
     {
         // 화면 페이드 아웃
-        screenCover.DOFade(1.0f, 1.0f);
+        screenCover.DOFade(1.0f, 1.0f).OnComplete(() => isFading = false);
+        isFading = true;
         remainDays = delta;
     }
 
     private float changingDayDelayTime = 1.0f;
     private float displayDelayTime = 0.25f;
     private float time;
+    private float position;
+    private bool isFading;
 
     private void FixedUpdate()
     {
@@ -159,25 +166,52 @@ public class GameFlowDisplay : MonoBehaviour
             return;
         }
 
-        if (queue.Count > 0)
+        // 출력할 메세지가 있다면 출력
+        if (TryDisplayMessage())
         {
-            GameFlowEvent gameFlowEvent = queue.Dequeue();
-            // UI에 추가
-            var toast = PoolManager.Instance.Get<ToastMessage>("Prefabs/ToastMessage", toastParent);
-            toast.Initialize(gameFlowEvent.Message);
-            Canvas.ForceUpdateCanvases();
             time = displayDelayTime;
             return;
         }
 
-        if (remainDays > 0)
+        // 변경할 날짜가 남아있다면 변경
+        if (TryChangeDay())
         {
-            remainDays--;
-            uiMain.ChangeOneDay();
             time = changingDayDelayTime;
-            screenCover.DOFade(0.0f, 1.0f);
-            if (remainDays == 0) uiMain.SetSkipButtonInteraction(true);
+            return;
         }
+    }
+
+    private bool TryDisplayMessage()
+    {
+        if (queue.Count == 0) return false;
+
+        GameFlowEvent gameFlowEvent = queue.Dequeue();
+
+        // UI에 추가
+        var toast = PoolManager.Instance.Get<ToastMessage>("Prefabs/ToastMessage", toastParent, new Vector2(-384.0f, -position));
+        toastParent.DOLocalMoveY(position, 0.125f, true).SetEase(Ease.OutQuad);
+        toast.transform.DOLocalMoveX(0.0f, 0.25f).SetEase(Ease.OutQuad);
+        position += 16.0f;
+        toast.Initialize(gameFlowEvent.Message);
+
+        return true;
+    }
+
+    private bool TryChangeDay()
+    {
+        if (isFading || remainDays == 0) return false;
+        remainDays--;
+        uiMain.ChangeOneDay();
+        screenCover.DOFade(0.0f, 1.0f).OnComplete
+        (() =>
+            {
+                isFading = false;
+                if (remainDays == 0) uiMain.SetSkipButtonInteraction(true);
+            }
+        );
+        isFading = true;
+
+        return true;
     }
 }
 

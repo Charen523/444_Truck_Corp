@@ -45,6 +45,10 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
+    public override void Clear()
+    {
+    }
+
     public T GetData<T>(string className, int index)
     {
         return (T)DataDics[className][index];

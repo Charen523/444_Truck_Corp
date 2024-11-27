@@ -18,6 +18,7 @@ public class SlotScheduleHero : MonoBehaviour
     {
         nullBtn.SetActive(true);
         info.SetActive(false);
+        img.gameObject.SetActive(false);
     }
 
     public void SetScheduleSlot(HeroData hero)
@@ -25,11 +26,12 @@ public class SlotScheduleHero : MonoBehaviour
         nullBtn.SetActive(false);
         info.SetActive(true);
 
+        img.gameObject.SetActive(true);
         img.sprite = DataManager.Instance.GetSprites(true, hero.spriteIdx);
         heroName.text = hero.name;
-        strTxt.text = $"<color=#FF4C4C><size=14>STR</size></color>\n{hero.status.STR}";
-        dexTxt.text = $"<color=#4CAF50><size=14>DEX</size></color>\n{hero.status.DEX}";
-        intTxt.text = $"<color=#4C79FF><size=14>INT</size></color>\n{hero.status.INT}";
-        lukTxt.text = $"<color=#FFD54F><size=14>LUK</size></color>\n{hero.status.LUK}";
+        strTxt.text = $"<color=#FF4C4C>STR</color>\n{hero.status.STR}";
+        dexTxt.text = $"<color=#4CAF50>DEX</color>\n{hero.status.DEX}";
+        intTxt.text = $"<color=#4C79FF>INT</color>\n{hero.status.INT}";
+        lukTxt.text = $"<color=#FFD54F>LUK</color>\n{hero.status.LUK}";
     }
 }

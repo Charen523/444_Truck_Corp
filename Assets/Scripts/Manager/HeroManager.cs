@@ -20,15 +20,33 @@ public class HeroManager : Singleton<HeroManager>
     }
 
     public List<HeroData> heroList = new();
+    public Dictionary<int, HeroData> heroDict = new();
     public List<eHeroState> heroStates = new();
     private List<Schedule> scheduleList = new();
 
+    private static int heroIndex = 0;
     private int heroCount = 0;
 
     protected override void Awake()
     {
         base.Awake();
+        Clear();
+    }
+
+    public override void Clear()
+    {
+        // 이벤트 등록
+        GameManager.Instance.DayChangeAction -= CheckScheduleDone;
         GameManager.Instance.DayChangeAction += CheckScheduleDone;
+
+        heroDict.Clear();
+        foreach (HeroData hero in heroList)
+        {
+            //hero.Clear();
+        }
+        heroList.Clear();
+        heroStates.Clear();
+        scheduleList.Clear();
     }
 
     public HeroData MakeNewHero()
@@ -38,16 +56,15 @@ public class HeroManager : Singleton<HeroManager>
         heroList.Add(data);
         heroStates.Add(eHeroState.FREE);
         GameManager.Instance.OnFoodChangeEvent();
-
         GameManager.Instance.OnHeroSpawnEvent?.Invoke(data);
         return data;
     }
 
-    //public void RemoveHero(HeroData hero)
-    //{
-    //    heroList.Remove(hero);
-    //    heroStates.Remove(eHeroState.FREE);
-    //}
+    public void RemoveHero(HeroData hero)
+    {
+        heroList.Remove(hero);
+        heroStates.Remove(eHeroState.FREE);
+    }
 
     public HeroData GetHero(int index)
     {

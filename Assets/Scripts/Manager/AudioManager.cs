@@ -17,6 +17,11 @@ public class AudioManager : Singleton<AudioManager>
 
     private int lastPlayedIndex = -1;
 
+    public override void Clear()
+    {
+
+    }
+
     private void Start()
     {
         SetVolume();
@@ -80,7 +85,7 @@ public class AudioManager : Singleton<AudioManager>
 
         do
         {
-            randomIndex = UnityEngine.Random.Range(1, bgmClips.Length);
+            randomIndex = UnityEngine.Random.Range(1, 2);
         } while (randomIndex == lastPlayedIndex);
 
         bgmSource.clip = bgmClips[randomIndex];

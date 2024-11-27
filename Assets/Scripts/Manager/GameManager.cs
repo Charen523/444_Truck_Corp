@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
 
     private Transform warnParent;
     private Transform dialogParent;
+
     [SerializeField] private GameObject popupWarning;
     [SerializeField] private GameObject popupDialog;
 
@@ -49,10 +50,10 @@ public class GameManager : Singleton<GameManager>
     
     private void Start()
     {
-        Init();
+        Clear();
     }
 
-    public void Init()
+    public override void Clear()
     {
         Day = -100;
         Gold = 0;

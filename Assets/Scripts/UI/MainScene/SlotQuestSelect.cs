@@ -16,15 +16,15 @@ public class SlotQuestSelect : MonoBehaviour
     {
         nameTxt.text = quest.QuestName;
         statTxt.text =
-            $"<size=18>STR </size>{quest.needSpecs[0]}, " +
-            $"<size=18>DEF </size>{quest.needSpecs[1]}, " +
-            $"<size=18>INT </size>{quest.needSpecs[2]}, " +
-            $"<size=18>LUK </size>{quest.needSpecs[3]}";
+            $"STR {quest.needSpecs[0]}, " +
+            $"DEF {quest.needSpecs[1]}, " +
+            $"INT {quest.needSpecs[2]}, " +
+            $"LUK {quest.needSpecs[3]}";
 
         timeTxt.text = $"{quest.needTime}일";
 
         rewardTxt.text =
-            $"<size=18><color=#AC7500>보상 : </color></size>";
+            $"<color=#AC7500>보상 : </color>";
         if (quest.rewardValues[0] != 0)
         {
             rewardTxt.text += $"{quest.rewardValues[0]} 골드";

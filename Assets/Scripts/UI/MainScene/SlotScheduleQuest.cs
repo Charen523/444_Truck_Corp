@@ -56,10 +56,10 @@ public class SlotScheduleQuest : MonoBehaviour
         selectedQuest = quest;
 
         questNameTxt.text = selectedQuest.QuestName;
-        strTxt.text = $"<size=18>STR </size>{quest.needSpecs[0]}";
-        dexTxt.text = $"<size=18>DEX </size>{quest.needSpecs[1]}";
-        intTxt.text = $"<size=18>INT </size>{quest.needSpecs[2]}";
-        lukTxt.text = $"<size=18>LUK </size>{quest.needSpecs[3]}";
+        strTxt.text = $"STR {quest.needSpecs[0]}";
+        dexTxt.text = $"DEX {quest.needSpecs[1]}";
+        intTxt.text = $"INT {quest.needSpecs[2]}";
+        lukTxt.text = $"LUK {quest.needSpecs[3]}";
 
         CalculateSuccessRate();
     }
@@ -131,7 +131,7 @@ public class SlotScheduleQuest : MonoBehaviour
             if (rateWithPotion > baseRate)
             {
                 int bonusRate = Mathf.RoundToInt(rateWithPotion - baseRate);
-                successRateTxt.text += $" <color=#0BFF00><size=18>+{bonusRate}%</size></color>";
+                successRateTxt.text += $" <color=#0BFF00>+{bonusRate}%</color>";
             }
             successRate = Mathf.RoundToInt(rateWithPotion);
         }
