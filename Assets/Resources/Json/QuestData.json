@@ -5,7 +5,7 @@
     "description": "지원금 수령",
     "target": "",
     "rewardType": "Gold|EXP",
-    "rewardValue": "100|1",
+    "rewardValue": "200|1",
     "needSpec": "1|1|1|1",
     "needTime": 1
   },
