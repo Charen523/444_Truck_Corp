@@ -184,6 +184,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+
     public void OnPotionActionEvent()
     {
         PotionAction?.Invoke();
