@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
     public bool FirstQuest { get; set; }
 
     public int[] TodayQuests { get; private set; } = new int[4];
-    
+
     private void Start()
     {
         Clear();
@@ -183,7 +183,6 @@ public class GameManager : Singleton<GameManager>
             selectedQuestIds.Add(TodayQuests[i]); // 선택된 ID 추가
         }
     }
-
 
     public void OnPotionActionEvent()
     {
